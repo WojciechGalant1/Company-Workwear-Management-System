@@ -26,7 +26,6 @@
   <li><a href="#configuration">Configuration</a></li>
   <li><a href="#usage">Usage</a></li>
   <li><a href="#code-architecture">Code Architecture</a></li>
-  <li><a href="#development-guidelines">Development Guidelines</a></li>
 </ul>
 
 <hr>
@@ -237,14 +236,9 @@ project/
 
 <div id="development-guidelines"></div>
 
-## Development Guidelines
+## 
 
-<ol>
-  <li>Add new routes in <code>app/config/RouteConfig.php</code></li>
-  <li>Register JavaScript modules in <code>app/config/modules.php</code></li>
-  <li>Follow existing code conventions</li>
-  <li>Update documentation when adding features</li>
-</ol>
+
 
 <hr>
 
