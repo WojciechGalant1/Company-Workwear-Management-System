@@ -29,7 +29,6 @@
 <li class="my-0"><a href="#testing">Code Architecture</a></li>
 </ul>
 
-
 <hr>
 <h2>Overview</h2>
 <p>The <strong>Company-Clothing-Management-System</strong> is a comprehensive web application designed to streamline the management and distribution of work clothing within a company environment. The system enables efficient inventory tracking, on-demand clothing distribution to employees, order management, and detailed reporting.</p>
@@ -44,43 +43,28 @@
 <li class="my-0"> <strong>Role-based access control</li>
 </ul>
 <hr>
-<h2>Getting Started</h2>
+<h2>Project Structur</h2>
 <h3>Prerequisites</h3>
 <p>This project requires the following dependencies:</p>
 <ul class="list-disc pl-4 my-0">
-<li class="my-0"><strong>Programming Language:</strong> JavaScript</li>
-<li class="my-0"><strong>Package Manager:</strong> Npm</li>
+
 </ul>
-<h3>Installation</h3>
-<p>Build Company-Clothing-Management-System from the source and intsall dependencies:</p>
+
 <ol>
 <li class="my-0">
-<p><strong>Clone the repository:</strong></p>
-<pre><code class="language-sh">❯ git clone https://github.com/WojciechGalant1/Company-Clothing-Management-System
-</code></pre>
+
+
 </li>
 <li class="my-0">
-<p><strong>Navigate to the project directory:</strong></p>
-<pre><code class="language-sh">❯ cd Company-Clothing-Management-System
-</code></pre>
+
 </li>
 <li class="my-0">
-<p><strong>Install the dependencies:</strong></p>
-</li>
-</ol>
-<p><strong>Using <a href="https://www.npmjs.com/">npm</a>:</strong></p>
-<pre><code class="language-sh">❯ npm install
-</code></pre>
+
 <h3>Usage</h3>
-<p>Run the project with:</p>
-<p><strong>Using <a href="https://www.npmjs.com/">npm</a>:</strong></p>
-<pre><code class="language-sh">npm start
-</code></pre>
-<h3>Testing</h3>
-<p>Company-clothing-management-system uses the {<strong>test_framework</strong>} test framework. Run the test suite with:</p>
-<p><strong>Using <a href="https://www.npmjs.com/">npm</a>:</strong></p>
-<pre><code class="language-sh">npm test
-</code></pre>
+
+
+
+
 <hr>
 <div align="left" class=""><a href="#top">⬆ Return</a></div>
 <hr></div></div></div>
