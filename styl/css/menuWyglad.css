@@ -1,0 +1,210 @@
+/*
+ * Wszelkie prawa zastrzeżone. 
+ * Kopiowanie, edytowanie, udostępnianie bez zgody autora zabronione !
+ *
+ * @author Krzysztof Wielgosz / Dugi / kawu07@gmail.com
+ */
+:root {
+    --kolor-tlo: #17232c;/*#17232c*/
+    --kolor-link: red;  /*#3c3c3c*/
+    --kolor-link-aktywny: red; /*#ffd500*/
+    --kolor-link-hover: red;
+    --first-color-light: #AFA5D9;  /*#AFA5D9*/
+    --header-height: 3rem;
+    --nav-width: 68px;
+    --body-font: "Roboto", sans-serif;
+    --normal-font-size: 1rem;
+    --z-fixed: 100;
+}
+*,
+::before,
+::after {
+    box-sizing: border-box
+}
+
+body {
+    /*position: relative;*/
+    /*margin: var(--header-height) 0 0 0;*/
+    /*padding: 0 1rem;*/
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+    /*transition: .5s;*/
+}
+
+a.nav_link {
+    text-decoration: none;
+}
+
+.header {
+    width: 100%;
+    height: var(--header-height);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    background-color: var(--kolor-tlo);
+    z-index: var(--z-fixed);
+    transition: .5s
+}
+
+.header_toggle {
+    color: var(--kolor-link);
+    font-size: 1.5rem;
+    cursor: pointer
+}
+
+.header_img {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.header_img img {
+    width: 40px;
+}
+
+.l-navbar {
+    position: fixed;
+    top: 0;
+    left: -30%;
+    width: var(--nav-width);
+    height: 100vh;
+    background-color: var(--kolor-tlo);
+    padding: .5rem 1rem 0 0;
+    transition: .5s;
+    z-index: var(--z-fixed)
+}
+
+.karta {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden
+}
+
+.nav_logo,
+.nav_link {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    align-items: center;
+    column-gap: 1rem;
+    padding: .1rem 0 .1rem 1.4rem;  /*ostatnie przesuwa od lewej */
+    text-decoration: none;
+}
+.sub{
+    padding: .1rem 0 .1rem 2.0rem !important;
+}
+
+.nav_logo {
+    margin-bottom: 2rem;
+    margin-top: .2rem;
+    font-size: 1.25rem;
+    
+}
+
+.nav_logo-icon {
+    width: 25px;
+    /*color: var(--kolor-link)*/
+    color: white;
+}
+
+.nav_logo-name {
+    font-weight: 700;
+    /*color: var(--kolor-link);*/
+    color: white;
+}
+
+
+.nav_link {
+    position: relative;
+    color: var(--first-color-light);
+    margin-bottom: 0.5rem;      /*dolny odstęp*/
+    transition: .3s
+}
+
+.nav_link:hover {
+    color: var(--kolor-link-hover)
+}
+
+.nav_icon {
+    font-size: 1.25rem
+}
+
+
+
+.aktywneMenu {
+    color: var(--kolor-link-aktywny)
+}
+
+/*kreska po prawej stronie*/
+.aktywneMenu::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 2px;
+    height: 32px;
+    background-color: var(--kolor-link-aktywny)
+}
+
+.height-100 {
+    height: 100vh
+}
+
+/* usunięte, żeby pokazywało ofcanvas*/
+/*.show {
+    left: 0
+}*/
+.body-pd {
+    padding-left: calc(var(--nav-width) + 5rem)
+}
+
+#osoba{
+    color:white;
+}
+
+.stronaMargines{
+    margin-top: 75px !important;
+    transition: 1.5s !important;
+}
+
+@media screen and (min-width: 768px) {
+    body {
+        margin: calc(var(--header-height) + 1rem) 0 0 0;
+        padding-left: calc(var(--nav-width) + 1rem);  /*Odsunięcie całego body od lewego menu po zwinięciu menu*/
+        padding-right: 0.7rem;
+    }
+
+    .header {
+        height: calc(var(--header-height) + 1rem);
+        padding: 0 2rem 0 calc(var(--nav-width) + 2rem)
+    }
+
+    .header_img {
+        width: 40px;
+        height: 40px
+    }
+
+    .header_img img {
+        width: 45px
+    }
+
+    .l-navbar {
+        left: 0;
+        padding: 1rem 1rem 0 0
+    }
+
+    .showMenu {
+        width: calc(var(--nav-width) + 156px)
+    }
+
+    .body-pd {
+        padding-left: calc(var(--nav-width) + 175px)
+    }
+}
