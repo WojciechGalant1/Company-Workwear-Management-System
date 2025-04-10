@@ -43,9 +43,8 @@
 <li class="my-0"> <strong>Role-based access control</li>
 </ul>
 <hr>
-<h2>Project Structur</h2>
-<h3>Prerequisites</h3>
-<p>This project requires the following dependencies:</p>
+<h2>Project Structure</h2>
+
 <ul class="list-disc pl-4 my-0">
 
 </ul>
