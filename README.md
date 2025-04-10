@@ -33,15 +33,16 @@
 <hr>
 <h2>Overview</h2>
 <p>The <strong>Company-Clothing-Management-System</strong> is a comprehensive web application designed to streamline the management and distribution of work clothing within a company environment. The system enables efficient inventory tracking, on-demand clothing distribution to employees, order management, and detailed reporting.</p>
-<p><strong>Why Company-Clothing-Management-System?</strong></p>
+<p><strong>Features</strong></p>
 <p>This project aims to simplify the complexities of clothing management while providing a robust user experience. The core features include:</p>
 <ul class="list-disc pl-4 my-0">
-<li class="my-0">🎯 <strong>Routing Mechanism:</strong> Simplifies navigation and error handling, ensuring a seamless user experience.</li>
-<li class="my-0">⚡ <strong>Dynamic Module Loading:</strong> Enhances performance by loading components as needed, improving responsiveness.</li>
-<li class="my-0">📊 <strong>DataTables Integration:</strong> Provides advanced data handling features like sorting and pagination, making data management intuitive.</li>
-<li class="my-0">🎨 <strong>Bootstrap Styling:</strong> Ensures a visually appealing and responsive design, enhancing user engagement.</li>
-<li class="my-0">🔒 <strong>User Authentication:</strong> Securely manages user sessions and access control, maintaining data integrity.</li>
-<li class="my-0">💡 <strong>Real-time Suggestions:</strong> Improves user interaction by providing instant feedback and suggestions based on input.</li>
+<li class="my-0"> <strong>Clothing inventory management with size tracking</li>
+<li class="my-0"> <strong>Employee profile management</li>
+<li class="my-0"> <strong>Clothing request and distribution workflow</li>
+<li class="my-0"> <strong>Real-time inventory status monitoring</li>
+<li class="my-0"> <strong>Automatic shortage notifications</li>
+<li class="my-0"> <strong>Historical distribution records and reporting.</li>
+<li class="my-0"> <strong>Role-based access control</li>
 </ul>
 <hr>
 <h2>Getting Started</h2>
