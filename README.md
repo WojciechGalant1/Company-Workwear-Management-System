@@ -149,7 +149,7 @@ project/
 <ol>
   <li>Clone the repository to your web server's document root</li>
   <li>Configure your web server to point to the project directory</li>
-  <li>Configure database settings in <code>app/database/config.php</code></li>
+  <li>Configure database settings in <code>app/database/Database.php</code></li>
   <li>Ensure the web server has appropriate permissions</li>
   <li>Access the application through your web browser</li>
 </ol>
