@@ -34,7 +34,6 @@
 <h2>Overview</h2>
 <p>The <strong>Company-Clothing-Management-System</strong> is a comprehensive web application designed to streamline the management and distribution of work clothing within a company environment. The system enables efficient inventory tracking, on-demand clothing distribution to employees, order management, and detailed reporting.</p>
 <p><strong>Features</strong></p>
-<p>This project aims to simplify the complexities of clothing management while providing a robust user experience. The core features include:</p>
 <ul class="list-disc pl-4 my-0">
 <li class="my-0"> <strong>Clothing inventory management with size tracking</li>
 <li class="my-0"> <strong>Employee profile management</li>
