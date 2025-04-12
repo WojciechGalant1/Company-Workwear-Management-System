@@ -104,8 +104,7 @@ project/
 
 <ul>
   <li><strong>Module System:</strong> Uses ES6 modules for code organization</li>
-  <li><strong>AlertManager:</strong> Provides user feedback through notifications</li>
-  <li><strong>UbraniaManager:</strong> Core module for clothing management</li>
+  <li><strong>Alerts:</strong> Provides user feedback through notifications</li>
   <li><strong>Form Handling:</strong> AJAX form submission with validation</li>
   <li><strong>Modal Dialogs:</strong> Interactive dialogs for user actions</li>
 </ul>
