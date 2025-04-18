@@ -1,14 +1,13 @@
 <?php
 header("Content-Type:text/html; charset=utf-8");
 
+include_once __DIR__ . '/../../layout/header.php';
+include_once __DIR__ . '/../../app/database/Auth.php';
+checkAccess(2);
 include_once __DIR__ . '/../controllers/StanMagazynuC.php';
 
 $stanMagazynuC = new StanMagazynuC();
 $ubrania = $stanMagazynuC->readAll();
-
-include_once __DIR__ . '/../../layout/header.php';
-include_once __DIR__ . '/../../app/database/auth.php';
-checkAccess(2);
 ?>
 
 <div id="alertContainer"></div>

@@ -7,6 +7,7 @@ echo '<!DOCTYPE html><html lang="pl"><head>
     <link rel="stylesheet" href="../styl/css/custom.css">
     <script type="module" src="../log/sesja/LoginValidator.js"></script>
     <link rel="stylesheet" href="../styl/bootstrap-select/css/bootstrap-select.css">
+    <link rel="stylesheet" href="../layout/login.css">
     <script src="../styl/js/jquery-3.3.1.min.js"></script>
     <script src="../styl/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../styl/bootstrap-select/js/bootstrap-select.js"></script>

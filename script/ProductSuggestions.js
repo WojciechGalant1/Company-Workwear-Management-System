@@ -1,4 +1,4 @@
-import { getBaseUrl } from './GetBaseUrl.js';
+import { GetBaseUrl } from './GetBaseUrl.js';
 
 export const ProductSuggestions = (function () {
     const debounce = (func, wait) => {
@@ -9,23 +9,22 @@ export const ProductSuggestions = (function () {
         };
     };
 
-    const fetchSuggestions = (query, suggestionsList, inputField, endpoint) => {
+    const fetchSuggestions = async (query, suggestionsList, inputField, endpoint) => {
         if (query.length < 2) {
             suggestionsList.style.display = 'none';
             suggestionsList.innerHTML = '';
             return;
         }
-        
-        const baseUrl = getBaseUrl();
 
-        fetch(`${baseUrl}/handlers/${endpoint}?query=${encodeURIComponent(query)}`)
-            .then(response => response.json())
-            .then(data => {
-                showSuggestions(data, suggestionsList, inputField);
-            })
-            .catch(error => {
-                console.error(`Error fetching ${endpoint} suggestions:`, error);
-            });
+        const baseUrl = GetBaseUrl();
+
+        try {
+            const response = await fetch(`${baseUrl}/handlers/${endpoint}?query=${encodeURIComponent(query)}`);
+            const data = await response.json();
+            showSuggestions(data, suggestionsList, inputField);
+        } catch (error) {
+            console.error(`Error fetching ${endpoint} suggestions:`, error);
+        }
     };
 
     const showSuggestions = (items, suggestionsList, inputField) => {

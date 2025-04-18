@@ -21,8 +21,16 @@ export const AlertManager = (function () {
 			this.alertElement.setAttribute('role', 'alert');
 			this.alertElement.innerHTML = `${message}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`;
 			this.alertContainer.appendChild(this.alertElement);
+
+			this.alertElement.style.position = 'fixed';
+            this.alertElement.style.top = '20%';
+            this.alertElement.style.left = '50%';
+            this.alertElement.style.transform = 'translateX(-50%)';
+            this.alertElement.style.zIndex = '9999';
+
 			const closeButton = this.alertElement.querySelector('.btn-close');
 			closeButton.addEventListener('click', () => this.removeAlert());
+
 			this.resetAlertTimer();
 		};
 

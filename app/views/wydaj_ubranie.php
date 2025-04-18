@@ -1,12 +1,11 @@
 <?php
 
 include_once __DIR__ . '/../../layout/header.php';
-include_once __DIR__ . '/../../app/database/auth.php';
+include_once __DIR__ . '/../../app/database/Auth.php';
 checkAccess(1);
 
 include_once __DIR__ . '/../../app/controllers/PracownikC.php';
 include_once __DIR__ . '/../../app/controllers/UbranieC.php';
-
 include_once __DIR__ . '/../../app/controllers/WydaniaC.php';
 include_once __DIR__ . '/../../app/controllers/WydaneUbraniaC.php';
 
@@ -48,8 +47,6 @@ if ($fromRaport) {
         }
     }
 }
-
-
 ?>
 
 <div id="alertContainer"></div>

@@ -1,0 +1,46 @@
+body {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+.login-container {
+    position: relative;
+    padding: 4rem 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.login-bg-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 50%;
+    background-color: #f0f4f8;
+    z-index: -1;
+    clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.login-logo {
+    max-width: 180px;
+}
+
+.feature-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-icon i {
+    font-size: 1.5rem;
+}
+
+@media (max-width: 992px) {
+    .login-bg-overlay {
+        width: 100%;
+        clip-path: none;
+    }
+}

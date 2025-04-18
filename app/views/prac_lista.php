@@ -1,14 +1,13 @@
 <?php
 header("Content-Type:text/html; charset=utf-8");
 
+include_once __DIR__ . '/../../layout/header.php';
+include_once __DIR__ . '/../../app/database/Auth.php';
+checkAccess(4);
 include_once __DIR__ . '/../controllers/PracownikC.php';
 
 $pracownikC = new PracownikC();
 $pracownicy = $pracownikC->getAll();
-
-include_once __DIR__ . '/../../layout/header.php';
-include_once __DIR__ . '/../../app/database/auth.php';
-checkAccess(4);
 ?>
 
 <div id="alertContainer"></div>

@@ -1,5 +1,5 @@
 import { UbraniaKod } from './UbraniaKod.js';
-import { getBaseUrl } from './GetBaseUrl.js';
+import { GetBaseUrl } from './GetBaseUrl.js';
 
 export const UbraniaManager = (function () {
     let ubraniaIndex = 1;
@@ -167,7 +167,7 @@ export const UbraniaManager = (function () {
         if (event.target.classList.contains('ubranie-select')) {
             const selectedUbranieId = event.target.value;
             const rozmiarSelect = event.target.closest('.ubranieRow').querySelector('.rozmiar-select');
-            const baseUrl = getBaseUrl();
+            const baseUrl = GetBaseUrl();
             
             if (selectedUbranieId) {
                 rozmiarSelect.disabled = false;

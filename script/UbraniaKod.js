@@ -1,9 +1,9 @@
 import { AlertManager } from './AlertManager.js';
-import { getBaseUrl } from './GetBaseUrl.js';
+import { GetBaseUrl } from './GetBaseUrl.js';
 
 export const UbraniaKod = (function () {
     const initializeKodInput = function(inputElement, alertManager) {
-        const baseUrl = getBaseUrl();
+        const baseUrl = GetBaseUrl();
         
         inputElement.addEventListener('keydown', function(event) {
             if (event.key === 'Enter') {

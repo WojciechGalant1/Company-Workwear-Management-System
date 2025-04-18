@@ -14,7 +14,6 @@ class Router {
     }
 
     public function dispatch($uri) {
-        // Use UrlHelper to clean the URI
         $uri = UrlHelper::getCleanUri();
         
         if (isset($this->routes[$uri])) {

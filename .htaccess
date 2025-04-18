@@ -1,4 +1,16 @@
+# Enable error display and set timezone
+php_value display_errors On
+php_value mbstring.http_input auto
+php_value date.timezone Europe/Warsaw
+
+# Enable rewrite engine
 RewriteEngine On
+
+# Set the base path - IMPORTANT: Adjust this to match your actual path 
+# If files are directly in htdocs, use this:
+# RewriteBase /
+
+# If files are in a subdirectory (like "ubrania"), use this instead:
 RewriteBase /ubrania/
 
 # If the requested resource exists as a file or directory, skip the rewrite rules

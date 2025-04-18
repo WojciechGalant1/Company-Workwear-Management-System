@@ -5,7 +5,6 @@ export const AlertManager = (function () {
         this.alertTimeout = null;
 
         this.createAlert = function (message, type = 'info') {
-
             if (this.alertElement) {
                 this.updateAlert(message, type);
                 return;

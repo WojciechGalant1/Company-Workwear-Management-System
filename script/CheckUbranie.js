@@ -1,9 +1,9 @@
-import { getBaseUrl } from './GetBaseUrl.js';
+import { GetBaseUrl } from './GetBaseUrl.js';
 
 export const CheckUbranie = (function () {
     const checkKod = function (inputElement, alertManager) {
         let suggestionClicked = false;
-        const baseUrl = getBaseUrl();
+        const baseUrl = GetBaseUrl();
     
         const validate = () => {
             const kod = inputElement.value.trim();
@@ -63,7 +63,7 @@ export const CheckUbranie = (function () {
 
     const checkNameSize = function (inputElement, alertManager) {
         let suggestionClicked = false;
-        const baseUrl = getBaseUrl();
+        const baseUrl = GetBaseUrl();
     
         const validate = () => {
             const row = inputElement.closest('.ubranieRow');

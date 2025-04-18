@@ -4,54 +4,23 @@ class ClassLogG {
 
     protected $minH = 14;
 
-    protected function panelLog() {
-        echo '
-        <div class="card position-relative" style="display: none;">
-            <div class="icon-container position-absolute" style=" right: -50px;">
-                <i class="loader mx-2" id="loadingSpinner" style="display: none; width: 35px; height: 35px; line-height: 35px; font-size: 35px; border-width: 5px;"></i>
-            </div>
-            <div class="card-header text-uppercase">
-                Logowanie
-            </div>
-            <div class="card-body">
-                <div class="input-group mb-3 mr-2 position-relative inputcontainer">
-                    <span class="input-group-text"><i class="bi bi-person-workspace"></i></span>
-                    <input type="text" class="form-control" maxlength="30" placeholder="Imię i nazwisko" id="username" pattern="[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]*" autocomplete="off" required>
-                    <ul id="suggestions" class="list-group position-absolute" style="display: none; z-index: 1000; width: 100%; top: 100%;"></ul>
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text"><i class="bi bi-key"></i></span>
-                    <input type="password" class="form-control" placeholder="Hasło" id="password">
-                </div>
-                <div class="text-end" style="margin-right:-1em">
-                    <button type="button" name="log" class="btn btn-secondary" id="loginButton">
-                        ZALOGUJ <i class="bi bi-box-arrow-in-right"></i>
-                    </button>
-                </div>
-            </div>
-        </div>';
-    }
+
 
     protected function panelScan() {
         echo '
-            <div class="card">
-            <div class="icon-container position-absolute" style=" right: -50px;">
-                <i class="loader mx-2" id="loadingSpinner" style="display: none; width: 35px; height: 35px; line-height: 35px; font-size: 35px; border-width: 5px;"></i>
-            </div>
-                <div class="card-header" style="font-weight:600;">
-                    ZESKANUJ KOD
+            <div class="card shadow-lg border-0">
+                <div class="icon-container position-absolute" style="right: -50px;">
+                    <i class="loader mx-2" id="loadingSpinner" style="display: none; width: 35px; height: 35px; line-height: 35px; font-size: 35px; border-width: 5px;"></i>
                 </div>
-                <div class="card-body">
-                    <input type="password" class="form-control" name="kodID" id="kodID" autocomplete="off">
-                    <br />
-                    Zeskanuj kod swojego identyfikatora.
-                    <!-- 
-                    <div class="text-end" style="margin-right:-1em">
-                        <button type="button" name="logKod" class="btn btn-secondary">
-                            ZALOGUJ <i class="bi bi-box-arrow-in-right"></i>
-                        </button>
+                <div class="card-header bg-primary text-white fw-bold py-3">
+                    <i class="bi bi-upc-scan me-2"></i> ZESKANUJ KOD
+                </div>
+                <div class="card-body p-4">
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control form-control-lg" name="kodID" id="kodID" autocomplete="off" placeholder="Kod identyfikatora">
+                        <label for="kodID">Kod identyfikatora</label>
                     </div>
-                    -->
+                    <p class="text-muted"><i class="bi bi-info-circle me-2"></i> Zeskanuj kod swojego identyfikatora.</p>
                 </div>
             </div>
             <script>document.getElementById("kodID").focus();</script>';
@@ -59,49 +28,84 @@ class ClassLogG {
     
     public function ekranLog() {
         echo'
-        <div class="container ">
-            <div class="row" style="margin-top:5em; margin-bottom:3em;">
-                <div class="col-12 text-end"><img src="" alt="" height="170"></div>
-            </div>
-            <br />
-            <div class="d-none alert text-center" id="logInfoError"></div>
-            <div class="alert-container"></div>
-            <div class="row d-flex justify-content-center bd-highlight">
-
-            <div class="row d-flex justify-content-center bd-highlight">
-                <div class="col-5 text-center mt-3 mx-3">';
-                $this->panelScan();
-                echo '</div>
-                </div>
-        <br /><br />
-       
-       <div class="text-end"></div>';
-       /*
-       <div class="col-5 text-center mt-3 mx-3">';
-                $this->panelLog();
-                echo '</div>
-                        <div class="col-5 text-center mt-3 mx-3">';
-                $this->panelScan();
-                echo '</div>
-       */
-        // modal wczytywanie
-        echo '
-            <div class="modal fade" id="modalSprawdzam" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalSprawdzam" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <div class="wait mt-4 mb-4"><div class="wczytuje" id="wczytuje"><div class="loader"></div></div></div>
+        <div class="login-container">
+            <div class="login-bg-overlay"></div>
+            <div class="container">
+                
+                
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="hero-section mb-5 mb-lg-0">
+                            <h1 class="display-4 fw-bold text-primary mb-3">System Zarządzania<br>Ubraniami</h1>
+                            <p class="lead text-muted mb-4">Zaloguj się, aby zarządzać wydaniami ubrań i monitorować stan magazynu.</p>
+                            <div class="d-none alert text-center" id="logInfoError"></div>
+                            <div class="alert-container"></div>
+                            
+                            <div class="features mt-5">
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="d-flex align-items-center">
+                                            <div class="feature-icon bg-primary bg-opacity-10 p-3 rounded-circle me-3">
+                                                <i class="bi bi-box-seam text-primary"></i>
+                                            </div>
+                                            <div>
+                                                <h5 class="mb-1">Magazyn</h5>
+                                                <p class="text-muted small mb-0">Zarządzaj stanem odzieży</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <div class="d-flex align-items-center">
+                                            <div class="feature-icon bg-primary bg-opacity-10 p-3 rounded-circle me-3">
+                                                <i class="bi bi-people text-primary"></i>
+                                            </div>
+                                            <div>
+                                                <h5 class="mb-1">Pracownicy</h5>
+                                                <p class="text-muted small mb-0">Monitoruj wydania</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-5 offset-lg-1">
+                        <div class="login-panel p-3 py-lg-5">';
+                        $this->panelScan();
+                        echo '
+                            <div class="text-center mt-4">
+                                <p class="text-muted small">© ' . date('Y') . ' System Zarządzania Ubraniami</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>';
+            </div>
+        </div>
         
-         //__________JS___________-
-        echo'
-            <script type="module" src="./sesja/LoginValidator.js"></script>
-            <script type="module" src="./sugestie/App.js"></script>
+   
+        <!-- modal wczytywanie -->
+        <div class="modal fade" id="modalSprawdzam" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalSprawdzam" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-sm">
+                <div class="modal-content border-0 shadow">
+                    <div class="modal-body p-4 text-center">
+                        <div class="spinner-border text-primary mb-3" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mb-0">Sprawdzanie danych...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scripts -->
+        <script type="module" src="./sesja/LoginValidator.js"></script>
+        <script type="module" src="./sugestie/App.js"></script>
         ';
     }
     
 }
+
 ?>
+
+

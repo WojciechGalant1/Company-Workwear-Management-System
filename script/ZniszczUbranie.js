@@ -1,4 +1,4 @@
-import { getBaseUrl } from './GetBaseUrl.js';
+import { GetBaseUrl } from './GetBaseUrl.js';
 
 export const ZniszczUbranie = (function () {
     let ubranieId = null;
@@ -23,18 +23,20 @@ export const ZniszczUbranie = (function () {
         
     };
 
-    const destroy = function () {
-        const baseUrl = getBaseUrl();
-        
-        fetch(`${baseUrl}/handlers/zniszcz_ubranie.php`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ id: ubranieId  })
-        })
-        .then(response => response.json())
-        .then(data => {
+    const destroy = async function () {
+        const baseUrl = GetBaseUrl();
+    
+        try {
+            const response = await fetch(`${baseUrl}/handlers/zniszcz_ubranie.php`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id: ubranieId })
+            });
+    
+            const data = await response.json();
+    
             if (data.success) {
                 selectedButton.disabled = true;
                 selectedButton.textContent = "Status zmieniony";
@@ -42,11 +44,10 @@ export const ZniszczUbranie = (function () {
             } else {
                 alert('Błąd podczas usuwania zniszczonego ubrania.');
             }
-        })
-        .catch(error => {
+        } catch (error) {
             console.error('Błąd:', error);
             alert('Wystąpił błąd podczas przesyłania żądania.');
-        });
+        }
     };
 
     return {

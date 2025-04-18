@@ -1,6 +1,9 @@
 <?php
 header("Content-Type:text/html; charset=utf-8");
 
+include_once __DIR__ . '/../../layout/header.php';
+include_once __DIR__ . '/../../app/database/Auth.php';
+checkAccess(5);
 include_once __DIR__ . '/../controllers/PracownikC.php';
 include_once __DIR__ . '/../controllers/WydaniaC.php';
 include_once __DIR__ . '/../controllers/WydaneUbraniaC.php';
@@ -8,10 +11,6 @@ include_once __DIR__ . '/../controllers/WydaneUbraniaC.php';
 $pracownikC = new PracownikC();
 $wydaniaC = new WydaniaC();
 $wydaneUbraniaC = new WydaneUbraniaC();
-
-include_once './layout/header.php';
-include_once './app/database/auth.php';
-checkAccess(5);
 
 $data = $wydaneUbraniaC->getWydaneUbraniaWithDetails();
 ?>

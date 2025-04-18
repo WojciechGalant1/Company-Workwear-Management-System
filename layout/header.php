@@ -21,9 +21,9 @@ echo '
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="base-url" content="' . $baseUrl . '">
     <title>Ubrania</title>
+    <link rel="icon" href="' . $baseUrl . '/img/protectve-equipment.png" type="image/png">
     <link rel="stylesheet" href="' . $baseUrl . '/styl/css/custom.css">
     <link rel="stylesheet" href="' . $baseUrl . '/layout/navbar.css">
-    
     <link rel="stylesheet" href="' . $baseUrl . '/styl/bootstrap-select/css/bootstrap-select.css">
 
     <script src="' . $baseUrl . '/styl/js/jquery-3.3.1.min.js"></script>

@@ -1,5 +1,5 @@
 import { AlertManager } from './AlertManager.js';
-import { getBaseUrl } from './GetBaseUrl.js';
+import { GetBaseUrl } from './GetBaseUrl.js';
 
 export const UserSuggestions = (function () {
     let UserSuggestions = function (usernameInput, suggestions, alertManager) {
@@ -8,7 +8,7 @@ export const UserSuggestions = (function () {
         this.alertManager = alertManager;
         this.loadingSpinnerName = document.getElementById('loadingSpinnerName');
         this.hiddenInput = document.getElementById('pracownikID');
-        this.baseUrl = getBaseUrl();
+        this.baseUrl = GetBaseUrl();
 
         this.debounce = function (func, wait) {
             let timeout;

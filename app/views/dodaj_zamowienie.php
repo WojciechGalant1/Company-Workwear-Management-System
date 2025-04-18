@@ -1,6 +1,6 @@
 <?php 
 include_once __DIR__ . '/../../layout/header.php';
-include_once __DIR__ . '/../../app/database/auth.php';
+include_once __DIR__ . '/../../app/database/Auth.php';
 checkAccess(2);
 ?>
 

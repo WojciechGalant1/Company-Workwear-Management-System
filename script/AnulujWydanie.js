@@ -1,4 +1,4 @@
-import { getBaseUrl } from './GetBaseUrl.js';
+import { GetBaseUrl } from './GetBaseUrl.js';
 
 export const AnulujWydanie = (function () {
     let ubranieId = null;
@@ -22,18 +22,20 @@ export const AnulujWydanie = (function () {
         });
     };
 
-    const cancel = function () {
-        const baseUrl = getBaseUrl();
+    const cancel = async function () {
+        const baseUrl = GetBaseUrl();
         
-        fetch(`${baseUrl}/handlers/anuluj_wydanie.php`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ id: ubranieId  })
-        })
-        .then(response => response.json())
-        .then(data => {
+        try { 
+            const response = await fetch(`${baseUrl}/handlers/anuluj_wydanie.php`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id: ubranieId  })
+            });
+            
+            const data = await response.json();
+
             if (data.success) {
                 selectedButton.disabled = true;
                 selectedButton.textContent = "Anulowano";
@@ -41,11 +43,13 @@ export const AnulujWydanie = (function () {
             } else {
                 alert('Błąd podczas anulowania wydania.');
             }
-        })
-        .catch(error => {
+
+        } catch (error) {
             console.error('Błąd:', error);
             alert('Wystąpił błąd podczas anulowania wydania.');
-        });
+
+        }
+        
     };
 
     return {
