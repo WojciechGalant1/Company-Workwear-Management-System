@@ -47,9 +47,49 @@ export const ProductSuggestions = (function () {
         });
     };
 
+    const attachSuggestionsToInput = (input, suggestionsList, endpoint, debounceTime) => {
+        input.addEventListener('input', debounce(() => {
+            if (input.value.length >= 2) {
+                fetchSuggestions(input.value, suggestionsList, input, endpoint);
+            } else {
+                suggestionsList.style.display = 'none';
+            }
+        }, debounceTime));
+
+        input.addEventListener('focus', () => {
+            if (input.value.length >= 2) {
+                suggestionsList.style.display = 'block';
+            }
+        });
+
+        input.addEventListener('blur', () => {
+            setTimeout(() => {
+                suggestionsList.style.display = 'none';
+            }, 200);
+        });
+    };
+
+    const init = (container) => {
+        const productNameInputs = container.querySelectorAll('input[name^="ubrania"][name$="[nazwa]"]');
+        productNameInputs.forEach(input => {
+            const suggestionsList = input.closest('.ubranieRow').querySelector('.productSuggestions');
+            if (suggestionsList) {
+                attachSuggestionsToInput(input, suggestionsList, 'fetchProductNames.php', 200);
+            }
+        });
+
+        const sizeInputs = container.querySelectorAll('input[name^="ubrania"][name$="[rozmiar]"]');
+        sizeInputs.forEach(input => {
+            const suggestionsList = input.closest('.ubranieRow').querySelector('.sizeSuggestions');
+            if (suggestionsList) {
+                attachSuggestionsToInput(input, suggestionsList, 'fetchSizesNames.php', 300);
+            }
+        });
+    };
+
     return {
-        fetchSuggestions,
+        init,
         showSuggestions,
-        debounce
+        fetchSuggestions
     };
 })();

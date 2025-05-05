@@ -64,11 +64,7 @@ export const AlertManager = (function () {
             setAlertContent(message, type);
         };
 
-        return {
-            createAlert,
-            updateAlert,
-            removeAlert
-        };
+        return { createAlert, updateAlert, removeAlert };
     };
 
     return {

@@ -19,14 +19,14 @@ checkAccess(2);
                 <label for="productName" class="form-label">Nazwa produktu:</label>
                 <div class="position-relative inputcontainer">
                     <input type="text" class="form-control" id="productName" name="ubrania[0][nazwa]" value="" required>
-                    <ul id="productSuggestions" class="list-group position-absolute" style="display: none; z-index: 1000; width: 100%; top: 100%;"></ul>
+                    <ul id="productSuggestions" class="productSuggestions list-group position-absolute" style="display: none; z-index: 1000; width: 100%; top: 100%;"></ul>
                 </div>
             </div>
             <div class="col-md-2 position-relative">
                 <label for="sizeName" class="form-label">Rozmiar:</label>
                 <div class="position-relative inputcontainer">
                     <input type="text" class="form-control" id="sizeName" name="ubrania[0][rozmiar]" value="" required>
-                    <ul id="sizeSuggestions" class="list-group position-absolute" style="display: none; z-index: 1000; width: 100%; top: 100%;"></ul>
+                    <ul id="sizeSuggestions" class="sizeSuggestions list-group position-absolute" style="display: none; z-index: 1000; width: 100%; top: 100%;"></ul>
                 </div>
             </div>
             <div class="col-md-2">

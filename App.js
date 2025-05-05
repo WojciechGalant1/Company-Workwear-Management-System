@@ -103,123 +103,80 @@ document.addEventListener('DOMContentLoaded', (event) => {
             }
         },
         'UbraniaManager': () => {
-            const addUbranieBtn = document.querySelector('.addUbranieBtn');
             const alertManager = AlertManager.create(document.getElementById('alertContainer'));
+            const manager = UbraniaManager.create();
 
+            const addUbranieBtn = document.querySelector('.addUbranieBtn');
             if (addUbranieBtn) {
-                addUbranieBtn.addEventListener('click', function () {
-                    UbraniaManager.addUbranie(alertManager);
+                addUbranieBtn.addEventListener('click', () => {
+                    manager.addUbranie(alertManager);
                 });
             }
 
             const ubraniaContainer = document.getElementById('ubraniaContainer');
             if (ubraniaContainer) {
-                ubraniaContainer.addEventListener('click', UbraniaManager.removeUbranie);
-                ubraniaContainer.addEventListener('change', UbraniaManager.loadRozmiary);
+                ubraniaContainer.addEventListener('click', manager.removeUbranie);
+                ubraniaContainer.addEventListener('change', manager.loadRozmiary);
             }
 
-            UbraniaManager.updateRemoveButtonVisibility();
-            UbraniaManager.loadInitialRozmiary();
+            manager.updateRemoveButtonVisibility();
+            manager.loadInitialRozmiary();
 
             const existingRadioButtons = document.querySelectorAll('input[type="radio"]');
-            if (existingRadioButtons) {
-                UbraniaManager.initializeRadioBehavior(existingRadioButtons);
+            if (existingRadioButtons.length) {
+                manager.initializeRadioBehavior(existingRadioButtons);
             }
 
             const kodInputs = document.querySelectorAll('.kodSection input');
-
-            if (kodInputs) {
+            if (kodInputs.length) {
                 kodInputs.forEach(input => UbraniaKod.initializeKodInput(input, alertManager));
             }
-
         },
         'ProductSuggestions': () => {
-            const initProductSuggestions = (container) => {
-                const productNameInputs = container.querySelectorAll('input[name^="ubrania"][name$="[nazwa]"]');
-                productNameInputs.forEach(input => {
-                    const suggestionsList = input.closest('.ubranieRow').querySelector('#productSuggestions');
+            const alertManager = AlertManager.create(document.getElementById('alertContainer'));
+            const manager = UbraniaManager.create();
 
-                    if (suggestionsList) {
-                        input.addEventListener('input', ProductSuggestions.debounce(() => {
-                            if (input.value.length >= 2) {
-                                ProductSuggestions.fetchSuggestions(input.value, suggestionsList, input, 'fetchProductNames.php');
-                            } else {
-                                suggestionsList.style.display = 'none';
-                            }
-                        }, 200));
-                        input.addEventListener('focus', () => {
-                            if (input.value.length >= 2) {
-                                suggestionsList.style.display = 'block';
-                            }
-                        });
-                        input.addEventListener('blur', () => {
-                            setTimeout(() => {
-                                suggestionsList.style.display = 'none';
-                            }, 200);
-                        });
-                    }
-                });
-
-                const sizeInputs = container.querySelectorAll('input[name^="ubrania"][name$="[rozmiar]"]');
-                sizeInputs.forEach(input => {
-                    const suggestionsList = input.closest('.ubranieRow').querySelector('#sizeSuggestions');
-                    if (suggestionsList) {
-                        input.addEventListener('input', ProductSuggestions.debounce(() => {
-                            if (input.value.length >= 2) {
-                                ProductSuggestions.fetchSuggestions(input.value, suggestionsList, input, 'fetchSizesNames.php');
-                            } else {
-                                suggestionsList.style.display = 'none';
-                            }
-                        }, 300));
-
-                        input.addEventListener('focus', () => {
-                            if (input.value.length >= 2) {
-                                suggestionsList.style.display = 'block';
-                            }
-                        });
-
-                        input.addEventListener('blur', () => {
-                            setTimeout(() => {
-                                suggestionsList.style.display = 'none';
-                            }, 200);
-                        });
+            const initCheckUbranieForRow = (row) => {
+                const inputs = row.querySelectorAll('input[name^="ubrania"]');
+                inputs.forEach(input => {
+                    if (input.name.endsWith('[kod]')) {
+                        CheckUbranie.checkKod(input, alertManager);
+                    } else if (input.name.endsWith('[nazwa]') || input.name.endsWith('[rozmiar]')) {
+                        CheckUbranie.checkNameSize(input, alertManager);
                     }
                 });
             };
 
-            initProductSuggestions(document);
+            ProductSuggestions.init(document);
 
             document.querySelector('.addUbranieBtn').addEventListener('click', () => {
-                const alertManager = AlertManager.create(document.getElementById('alertContainer'));
-                UbraniaManager.addZamowienieUbranie();
-                const lastUbranieRow = document.querySelector('.ubranieRow:last-of-type');
-                initProductSuggestions(lastUbranieRow);
+                manager.addZamowienieUbranie();
 
-                const newInputs = lastUbranieRow.querySelectorAll('input[name^="ubrania"][name$="[nazwa]"], input[name^="ubrania"][name$="[rozmiar]"], input[name^="ubrania"][name$="[kod]"]');
-                newInputs.forEach(input => {
-                    if (input.name.includes('kod')) {
-                        CheckUbranie.checkKod(input, alertManager);
-                    } else {
-                        CheckUbranie.checkNameSize(input, alertManager);
-                    }
-                });
+                const lastUbranieRow = document.querySelector('.ubranieRow:last-of-type');
+                ProductSuggestions.init(lastUbranieRow);
+                initCheckUbranieForRow(lastUbranieRow);
             });
 
             document.getElementById('ubraniaContainer').addEventListener('click', (event) => {
                 if (event.target.classList.contains('removeUbranieBtn')) {
-                    UbraniaManager.removeUbranie(event);
+                    manager.removeUbranie(event);
                 }
             });
         },
         'CheckUbranie': () => {
             const alertManager = AlertManager.create(document.getElementById('alertContainer'));
-            const nameInputs = document.querySelectorAll('input[name^="ubrania"][name$="[nazwa]"]');
-            const sizeInputs = document.querySelectorAll('input[name^="ubrania"][name$="[rozmiar]"]');
-            const kodInputs = document.querySelectorAll('input[name^="ubrania"][name$="[kod]"]');
 
-            nameInputs.forEach(input => CheckUbranie.checkNameSize(input, alertManager));
-            sizeInputs.forEach(input => CheckUbranie.checkNameSize(input, alertManager));
-            kodInputs.forEach(input => CheckUbranie.checkKod(input, alertManager));
+            const rows = document.querySelectorAll('.ubranieRow');
+
+            rows.forEach(row => {
+                const nameInput = row.querySelector('input[name$="[nazwa]"]');
+                const sizeInput = row.querySelector('input[name$="[rozmiar]"]');
+                const kodInput = row.querySelector('input[name$="[kod]"]');
+
+                if (nameInput) CheckUbranie.checkNameSize(nameInput, alertManager);
+                if (sizeInput) CheckUbranie.checkNameSize(sizeInput, alertManager);
+                if (kodInput) CheckUbranie.checkKod(kodInput, alertManager);
+            });
         },
         'EdycjaUbranie': () => {
             const alertManager = AlertManager.create(document.getElementById('alertContainer'));
