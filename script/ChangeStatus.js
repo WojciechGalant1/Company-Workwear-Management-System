@@ -4,27 +4,27 @@ export const ChangeStatus = (function () {
     let selectedId = null;
     let selectedButton = null;
 
-    const initialize = function () {
+    const initialize = () => {
         const informButtons = document.querySelectorAll('.inform-btn');
 
         informButtons.forEach(button => {
-            button.addEventListener('click', function () {
-                selectedId = this.getAttribute('data-id');
-                selectedButton = this;
+            button.addEventListener('click', (event) => {
+                const clickedButton = event.currentTarget;
+                selectedId = clickedButton.getAttribute('data-id');
+                selectedButton = clickedButton;
 
-                if (window.location.pathname.includes('historia.php')) {
-                    const currentAction = this.getAttribute('data-action');
+                if (document.getElementById('historia-page')) {
+                    const currentAction = clickedButton.getAttribute('data-action');
                     const currentStatus = currentAction === 'nieaktywne' ? 1 : 0;
                     updateStatus(currentStatus);
                 } else {
                     updateStatusForModal();
                 }
-
             });
         });
     };
 
-    const updateStatus = async function (currentStatus) {
+    const updateStatus = async (currentStatus) => {
         const baseUrl = GetBaseUrl();
 
         try {
@@ -33,7 +33,7 @@ export const ChangeStatus = (function () {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ id: selectedId, currentStatus: currentStatus })
+                body: JSON.stringify({ id: selectedId, currentStatus })
             });
 
             const data = await response.json();
@@ -52,15 +52,14 @@ export const ChangeStatus = (function () {
                 window.location.reload();
             } else {
                 alert('Błąd podczas aktualizacji statusu.');
-            }    
+            }
         } catch (error) {
             console.error('Błąd:', error);
             alert('Wystąpił błąd podczas aktualizacji statusu.');
         }
+    };
 
-};
-
-    const updateStatusForModal = async function () {
+    const updateStatusForModal = async () => {
         const isRaport = selectedButton.getAttribute('data-raport') === 'true';
         const baseUrl = GetBaseUrl();
 
@@ -84,14 +83,11 @@ export const ChangeStatus = (function () {
             } else {
                 alert('Błąd podczas aktualizacji statusu.');
             }
-
         } catch (error) {
             console.error('Błąd:', error);
-                alert('Wystąpił błąd podczas aktualizacji statusu.');
+            alert('Wystąpił błąd podczas aktualizacji statusu.');
         }
     };
 
-    return {
-        initialize
-    };
+    return { initialize };
 })();

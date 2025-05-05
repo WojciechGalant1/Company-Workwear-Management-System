@@ -1,13 +1,13 @@
 <?php
 header("Content-Type:text/html; charset=utf-8");
 
-include_once __DIR__ . '/../../layout/header.php';
-include_once __DIR__ . '/../../app/database/Auth.php';
+include_once __DIR__ . '../../layout/header.php';
+include_once __DIR__ . '../../app/database/Auth.php';
 checkAccess(4);
 
-include_once __DIR__ . '/../../app/controllers/PracownikC.php';
-include_once __DIR__ . '/../../app/controllers/WydaniaC.php';
-include_once __DIR__ . '/../../app/controllers/WydaneUbraniaC.php';
+include_once __DIR__ . '../../app/controllers/PracownikC.php';
+include_once __DIR__ . '../../app/controllers/WydaniaC.php';
+include_once __DIR__ . '../../app/controllers/WydaneUbraniaC.php';
 
 $pracownikC = new PracownikC();
 $wydaniaC = new WydaniaC();
@@ -105,7 +105,7 @@ $ubraniaPoTerminie = $wydaneUbraniaC->getUbraniaPoTerminie();
     </tbody>
 </table>
 
-<?php include_once __DIR__ . '/../../layout/footer.php'; ?>
+<?php include_once __DIR__ . '../../layout/footer.php'; ?>
 <script>
     function initializeDataTable(tableId) {
         new DataTable(tableId, {

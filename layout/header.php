@@ -51,9 +51,11 @@ $modulesConfig = include __DIR__ . '/../app/config/modules.php';
 // Get required modules for current page
 $modules = isset($modulesConfig[$current_page]) ? $modulesConfig[$current_page] : $modulesConfig['default'];
 
+$containerId = ($uri === '/historia-wydawania') ? 'id="historia-page"' : '';
 echo "<body data-modules='$modules'>";
 $nav->navBar($current_page);
-echo '<div class="container border border-secondary border-opacity-50 mt-5 shadow mb-5 p-4 bg-body rounded">';
+echo '
+<div ' . $containerId . ' class="container border border-secondary border-opacity-50 mt-5 shadow mb-5 p-4 bg-body rounded">';
 
 if (!isset($_SESSION['user_id'])) {
     echo '<div class="alert alert-info text-center">Nie jesteś zalogowany.</div>

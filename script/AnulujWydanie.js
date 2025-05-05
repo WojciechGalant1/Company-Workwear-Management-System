@@ -4,25 +4,29 @@ export const AnulujWydanie = (function () {
     let ubranieId = null;
     let selectedButton = null;
 
-    const initialize = function () {
+    const initialize = () => {
         const informButtons = document.querySelectorAll('.cancel-btn');
-
+    
         informButtons.forEach(button => {
-            button.addEventListener('click', function () {
-                ubranieId = this.getAttribute('data-id');
-                selectedButton = this;
-
+            button.addEventListener('click', (event) => {
+                const clickedButton = event.currentTarget;
+    
+                ubranieId = clickedButton.getAttribute('data-id');
+                selectedButton = clickedButton;
+    
                 $('#confirmCancelModal').modal('show');
             });
         });
-
-        document.getElementById('confirmCancelBtn').addEventListener('click', function () {
-            cancel(); 
-            $('#confirmCancelModal').modal('hide');
-        });
+    
+        document.getElementById('confirmCancelBtn')
+            .addEventListener('click', () => {
+                cancel();
+                $('#confirmCancelModal').modal('hide');
+            });
     };
+    
 
-    const cancel = async function () {
+    const cancel = async () => {
         const baseUrl = GetBaseUrl();
         
         try { 
@@ -47,12 +51,9 @@ export const AnulujWydanie = (function () {
         } catch (error) {
             console.error('Błąd:', error);
             alert('Wystąpił błąd podczas anulowania wydania.');
-
         }
-        
     };
 
-    return {
-        initialize
-    };
+    return { initialize };
 })();
+

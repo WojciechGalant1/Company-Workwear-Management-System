@@ -1,10 +1,11 @@
-export const ModalEdytujPracownika = (function () {
+export const ModalEdytujPracownika = (() => {
     let pracownikId = null;
 
-    const initialize = function () {
-        $('#example').on('click', '.open-modal-btn', function () {
-            pracownikId = $(this).data('id'); 
-            const index = $(this).data('index'); 
+    const initialize = () => {
+        $('#example').on('click', '.open-modal-btn', (event) => {
+            const clickedBtn = event.currentTarget;
+            pracownikId = $(clickedBtn).data('id');
+            const index = $(clickedBtn).data('index');
 
             const pracownicyData = document.getElementById("pracownicy-data");
             if (pracownicyData) {
@@ -22,7 +23,5 @@ export const ModalEdytujPracownika = (function () {
         });
     };
 
-    return {
-        initialize
-    };
+    return { initialize };
 })();

@@ -1,56 +1,77 @@
 export const AlertManager = (function () {
-    let AlertManager = function (alertContainer) {
-        this.alertContainer = alertContainer;
-        this.alertElement = null;
-        this.alertTimeout = null;
+    const create = (alertContainer) => {
+        let alertElement = null;
+        let alertTimeout = null;
 
-        this.createAlert = function (message, type = 'info') {
-            if (this.alertElement) {
-                this.updateAlert(message, type);
+        const removeAlert = () => {
+            if (alertElement) {
+                alertElement.remove();
+                alertElement = null;
+                clearTimeout(alertTimeout);
+            }
+        };
+
+        const resetAlertTimer = () => {
+            clearTimeout(alertTimeout);
+            alertTimeout = setTimeout(removeAlert, 6000);
+        };
+
+        const getAlertHTML = (message) => {
+            return `${message}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`;
+        };
+
+        const attachCloseListener = () => {
+            const closeButton = alertElement.querySelector('.btn-close');
+            if (closeButton) {
+                closeButton.addEventListener('click', removeAlert);
+            }
+        };
+
+        const styleAlert = () => {
+            Object.assign(alertElement.style, {
+                position: 'fixed',
+                top: '10%',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                zIndex: '9999'
+            });
+        };
+
+        const setAlertContent = (message, type) => {
+            alertElement.className = `alert alert-${type} alert-dismissible fade show`;
+            alertElement.innerHTML = getAlertHTML(message);
+            attachCloseListener();
+            resetAlertTimer();
+        };
+
+        const updateAlert = (message, type = 'secondary') => {
+            if (alertElement) {
+                setAlertContent(message, type);
+            }
+        };
+
+        const createAlert = (message, type = 'info') => {
+            if (alertElement) {
+                updateAlert(message, type);
                 return;
             }
 
-            this.alertElement = document.createElement('div');
-            this.alertElement.classList.add('alert', `alert-${type}`, 'alert-dismissible', 'fade', 'show');
-            this.alertElement.setAttribute('role', 'alert');
-            this.alertElement.innerHTML = `${message}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`;
-            this.alertContainer.appendChild(this.alertElement);
+            alertElement = document.createElement('div');
+            alertElement.setAttribute('role', 'alert');
+            alertContainer.appendChild(alertElement);
 
-            this.alertElement.style.position = 'fixed';
-            this.alertElement.style.top = '10%';
-            this.alertElement.style.left = '50%';
-            this.alertElement.style.transform = 'translateX(-50%)';
-            this.alertElement.style.zIndex = '9999';
-                
-            const closeButton = this.alertElement.querySelector('.btn-close');
-            closeButton.addEventListener('click', () => this.removeAlert());
-
-            this.resetAlertTimer();
+            styleAlert();
+            setAlertContent(message, type);
         };
 
-        this.updateAlert = function (message, type = 'secondary') {
-            if (this.alertElement) {
-                this.alertElement.className = `alert alert-${type} alert-dismissible fade show`;
-                this.alertElement.innerHTML = `${message}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`;
-                const closeButton = this.alertElement.querySelector('.btn-close');
-                closeButton.addEventListener('click', () => this.removeAlert());
-                this.resetAlertTimer();
-            }
-        };
-
-        this.resetAlertTimer = function () {
-            clearTimeout(this.alertTimeout);
-            this.alertTimeout = setTimeout(() => this.removeAlert(), 6000);
-        };
-
-        this.removeAlert = function () {
-            if (this.alertElement) {
-                this.alertElement.remove();
-                this.alertElement = null;
-                clearTimeout(this.alertTimeout);
-            }
+        return {
+            createAlert,
+            updateAlert,
+            removeAlert
         };
     };
 
-    return AlertManager;
+    return {
+        create
+    };
 })();

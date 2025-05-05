@@ -1,10 +1,10 @@
 <?php
 header("Content-Type:text/html; charset=utf-8");
 
-include_once __DIR__ . '/../../layout/header.php';
-include_once __DIR__ . '/../../app/database/Auth.php';
+include_once __DIR__ . '../../layout/header.php';
+include_once __DIR__ . '../../app/database/Auth.php';
 checkAccess(2);
-include_once __DIR__ . '/../../app/controllers/HistoriaZamowienC.php';
+include_once __DIR__ . '../../app/controllers/HistoriaZamowienC.php';
 
 $zamowieniaC = new HistoriaZamowienC();
 $zamowienia = $zamowieniaC->getAll();
@@ -68,4 +68,4 @@ $zamowienia = $zamowieniaC->getAll();
         });
     </script>
 
-<?php include_once __DIR__ . '/../../layout/footer.php'; ?>
+<?php include_once __DIR__ . '../../layout/footer.php'; ?>

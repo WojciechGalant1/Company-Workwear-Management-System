@@ -1,12 +1,13 @@
 <?php
 header("Content-Type:text/html; charset=utf-8");
 
-include_once __DIR__ . '/../../layout/header.php';
-include_once __DIR__ . '/../../app/database/Auth.php';
+include_once __DIR__ . '../../layout/header.php';
+include_once __DIR__ . '../../app/database/Auth.php';
 checkAccess(5);
-include_once __DIR__ . '/../controllers/PracownikC.php';
-include_once __DIR__ . '/../controllers/WydaniaC.php';
-include_once __DIR__ . '/../controllers/WydaneUbraniaC.php';
+include_once __DIR__ . '../../app/controllers/PracownikC.php';
+include_once __DIR__ . '../../app/controllers/WydaniaC.php';
+include_once __DIR__ . '../../app/controllers/WydaneUbraniaC.php';
+
 
 $pracownikC = new PracownikC();
 $wydaniaC = new WydaniaC();
@@ -56,15 +57,7 @@ $data = $wydaneUbraniaC->getWydaneUbraniaWithDetails();
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-    <!-- 
-            nazwa_ubrania
-            rozmiar
-            ilosc
-            wydane_przez
-            wydane_dla
-            data        
-    -->
-                
+                <!-- nazwa_ubrania rozmiar ilosc wydane_przez wydane_dla data -->       
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
@@ -100,4 +93,4 @@ $data = $wydaneUbraniaC->getWydaneUbraniaWithDetails();
     });
 </script>
 <script type="module" src="<?php echo $baseUrl; ?>/App.js"></script>
-<?php include_once __DIR__ . '/../../layout/footer.php'; ?>
+<?php include_once __DIR__ . '../../layout/footer.php'; ?>

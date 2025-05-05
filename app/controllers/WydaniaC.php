@@ -42,19 +42,10 @@ class WydaniaC extends Database {
     }
 
     public function getDetailedWydania() {
-        $stmt = $this->pdo->prepare("
-            SELECT wu.id AS wydane_ubranie_id, wu.ilosc, wu.data_waznosci, 
-                   u.nazwa_ubrania, r.nazwa_rozmiaru, 
-                   wydania.data_wydania, wydania.pracownik_id,
-                   p.imie AS pracownik_imie, p.nazwisko AS pracownik_nazwisko,
-                   wydania.user_id, uzytkownicy.nazwa AS wydane_przez
-            FROM wydane_ubrania wu
-            JOIN ubranie u ON wu.id_ubrania = u.id_ubranie
-            JOIN rozmiar r ON wu.id_rozmiaru = r.id_rozmiar
-            JOIN wydania ON wu.id_wydania = wydania.id_wydania
-            JOIN pracownicy p ON wydania.pracownik_id = p.id_pracownik
-            JOIN uzytkownicy ON wydania.user_id = uzytkownicy.id
-        ");
+        $stmt = $this->pdo->prepare("SELECT wu.id AS wydane_ubranie_id, wu.ilosc, wu.data_waznosci, u.nazwa_ubrania, r.nazwa_rozmiaru, wydania.data_wydania, wydania.pracownik_id,
+         p.imie AS pracownik_imie, p.nazwisko AS pracownik_nazwisko, wydania.user_id, uzytkownicy.nazwa AS wydane_przez
+            FROM wydane_ubrania wu JOIN ubranie u ON wu.id_ubrania = u.id_ubranie JOIN rozmiar r ON wu.id_rozmiaru = r.id_rozmiar JOIN wydania ON wu.id_wydania = wydania.id_wydania
+            JOIN pracownicy p ON wydania.pracownik_id = p.id_pracownik JOIN uzytkownicy ON wydania.user_id = uzytkownicy.id");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

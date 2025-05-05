@@ -1,10 +1,10 @@
 <?php
 header("Content-Type:text/html; charset=utf-8");
 
-include_once __DIR__ . '/../../layout/header.php';
-include_once __DIR__ . '/../../app/database/Auth.php';
+include_once __DIR__ . '../../layout/header.php';
+include_once __DIR__ . '../../app/database/Auth.php';
 checkAccess(4);
-include_once __DIR__ . '/../controllers/PracownikC.php';
+include_once __DIR__ . '../../app/controllers/PracownikC.php';
 
 $pracownikC = new PracownikC();
 $pracownicy = $pracownikC->getAll();
@@ -122,4 +122,4 @@ $pracownicy = $pracownikC->getAll();
         });
     </script>
 
-<?php include_once __DIR__ . '/../../layout/footer.php'; ?>
+<?php include_once __DIR__ . '../../layout/footer.php'; ?>

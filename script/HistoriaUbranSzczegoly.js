@@ -1,8 +1,10 @@
-export const HistoriaUbranSzczegoly = (function () {
-    const initialize = function () {
-        $('#example').on('click', '.open-modal-btn', function () {
-            const details = $(this).data('details'); 
-            console.log('Details:', details); 
+export const HistoriaUbranSzczegoly = (() => {
+    const initialize = () => {
+        $('#example').on('click', '.open-modal-btn', (event) => {
+            const clickedBtn = event.currentTarget;
+            const details = $(clickedBtn).data('details');
+
+            console.log('Details:', details);
 
             if (!details) {
                 console.error('Brak danych w "data-details"');
@@ -21,8 +23,6 @@ export const HistoriaUbranSzczegoly = (function () {
             $('#detailModal').modal('show');
         });
     };
-    
-    return {
-        initialize
-    };
+
+    return { initialize };
 })();

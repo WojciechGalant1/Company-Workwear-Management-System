@@ -1,15 +1,17 @@
 import { GetBaseUrl } from './GetBaseUrl.js';
 
-export const RedirectStatus = (function () {
-    const initialize = function () {
+export const RedirectStatus = (() => {
+    const initialize = () => {
         const informButtons = document.querySelectorAll('.redirect-btn');
 
         informButtons.forEach(button => {
-            button.addEventListener('click', function () {
-                const pracownikId = this.getAttribute('data-pracownik-id');
-                const pracownikImie = this.getAttribute('data-pracownik-imie');
-                const pracownikNazwisko = this.getAttribute('data-pracownik-nazwisko');
-                const pracownikStanowisko = this.getAttribute('data-pracownik-stanowisko');
+            button.addEventListener('click', (event) => {
+                const clickedBtn = event.currentTarget;
+
+                const pracownikId = clickedBtn.getAttribute('data-pracownik-id');
+                const pracownikImie = clickedBtn.getAttribute('data-pracownik-imie');
+                const pracownikNazwisko = clickedBtn.getAttribute('data-pracownik-nazwisko');
+                const pracownikStanowisko = clickedBtn.getAttribute('data-pracownik-stanowisko');
                 const baseUrl = GetBaseUrl();
             
                 window.location.href = `${baseUrl}/wydaj-ubranie?pracownikId=${pracownikId}&imie=${pracownikImie}&nazwisko=${pracownikNazwisko}&stanowisko=${pracownikStanowisko}&fromRaport=1`;
@@ -17,8 +19,5 @@ export const RedirectStatus = (function () {
         });
     };
 
-    return {
-        initialize
-    };
+    return { initialize };
 })();
-

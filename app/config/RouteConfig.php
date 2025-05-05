@@ -9,16 +9,16 @@ class RouteConfig {
      */
     public static function getRoutes() {
         return array(
-            '/' => './app/views/wydaj_ubranie.php',
-            '/wydaj-ubranie' => './app/views/wydaj_ubranie.php',
-            '/historia' => './app/views/historia_zamowien.php',
-            '/historia-ubran' => './app/views/historia_ubran.php',
-            '/historia-wydawania' => './app/views/historia.php',
-            '/pracownicy' => './app/views/prac_lista.php',
-            '/magazyn' => './app/views/mag_lista.php',
-            '/dodaj-zamowienie' => './app/views/dodaj_zamowienie.php',
-            '/raport' => './app/views/raport.php',
-            '/dodaj-pracownika' => './app/views/dodaj_pracownika.php'
+            '/' => './views/wydaj_ubranie.php',
+            '/wydaj-ubranie' => './views/wydaj_ubranie.php',
+            '/historia' => './views/historia_zamowien.php',
+            '/historia-ubran' => './views/historia_ubran.php',
+            '/historia-wydawania' => './views/historia.php',
+            '/pracownicy' => './views/prac_lista.php',
+            '/magazyn' => './views/mag_lista.php',
+            '/dodaj-zamowienie' => './views/dodaj_zamowienie.php',
+            '/raport' => './views/raport.php',
+            '/dodaj-pracownika' => './views/dodaj_pracownika.php'
         );
     }
     

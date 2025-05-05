@@ -1,6 +1,6 @@
 import { AlertManager } from './script/AlertManager.js';
 import { UbraniaManager } from './script/UbraniaManager.js';
-import { UserSuggestions } from './script/UserSuggestions.js';
+import { WorkerSuggestions } from './script/WorkerSuggestions.js';
 import { ModalEdytujPracownika } from './script/ModalEdytujPracownika.js';
 import { ProductSuggestions } from './script/ProductSuggestions.js';
 import { UbraniaKod } from './script/UbraniaKod.js';
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         'AlertManager': () => {
             const alertManagerContainer = document.getElementById('alertContainer');
             if (alertManagerContainer) {
-                const alertManager = new AlertManager(alertManagerContainer);
+                const alertManager = AlertManager.create(alertManagerContainer);
 
                 const forms = document.querySelectorAll('form');
                 forms.forEach(form => {
@@ -91,22 +91,20 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         },
         'ModalWydajUbranie': () => {
-            const alertContainer = document.getElementById('alertContainer');
-            const alertManager = new AlertManager(alertContainer);
+            const alertManager = AlertManager.create(document.getElementById('alertContainer'));
             ModalWydajUbranie.init(alertManager);
         },
-        'UserSuggestions': () => {
-            const alertManager = new AlertManager(document.getElementById('alertContainer'));
+        'WorkerSuggestions': () => {
+            const alertManager = AlertManager.create(document.getElementById('alertContainer'));
             const usernameInput = document.getElementById('username');
             const suggestions = document.getElementById('suggestions');
             if (usernameInput && suggestions) {
-                new UserSuggestions(usernameInput, suggestions, alertManager);
+                WorkerSuggestions.create(usernameInput, suggestions, alertManager);
             }
-
         },
         'UbraniaManager': () => {
             const addUbranieBtn = document.querySelector('.addUbranieBtn');
-            const alertManager = new AlertManager(document.getElementById('alertContainer'));
+            const alertManager = AlertManager.create(document.getElementById('alertContainer'));
 
             if (addUbranieBtn) {
                 addUbranieBtn.addEventListener('click', function () {
@@ -192,7 +190,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             initProductSuggestions(document);
 
             document.querySelector('.addUbranieBtn').addEventListener('click', () => {
-                const alertManager = new AlertManager(document.getElementById('alertContainer'));
+                const alertManager = AlertManager.create(document.getElementById('alertContainer'));
                 UbraniaManager.addZamowienieUbranie();
                 const lastUbranieRow = document.querySelector('.ubranieRow:last-of-type');
                 initProductSuggestions(lastUbranieRow);
@@ -214,7 +212,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             });
         },
         'CheckUbranie': () => {
-            const alertManager = new AlertManager(document.getElementById('alertContainer'));
+            const alertManager = AlertManager.create(document.getElementById('alertContainer'));
             const nameInputs = document.querySelectorAll('input[name^="ubrania"][name$="[nazwa]"]');
             const sizeInputs = document.querySelectorAll('input[name^="ubrania"][name$="[rozmiar]"]');
             const kodInputs = document.querySelectorAll('input[name^="ubrania"][name$="[kod]"]');
@@ -224,7 +222,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             kodInputs.forEach(input => CheckUbranie.checkKod(input, alertManager));
         },
         'EdycjaUbranie': () => {
-            const alertManager = new AlertManager(document.getElementById('alertContainer'));
+            const alertManager = AlertManager.create(document.getElementById('alertContainer'));
             EdycjaUbranie.initialize(alertManager);
         },
         'RedirectStatus': () => {

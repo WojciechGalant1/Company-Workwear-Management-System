@@ -19,6 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $response['success'] = false;
         $response['message'] = "Wystąpił problem podczas dodawania pracownika.";
     }
+} else {
+    $response['success'] = false;
+    $response['message'] = "Wystąpił błąd podczas przetwarzania żądania. Spróbuj ponownie później lub skontaktuj się z pomocą techniczną (oczekiwano metody POST)."; 
 }
 
 header('Content-Type: application/json');

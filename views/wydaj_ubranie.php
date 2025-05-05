@@ -1,20 +1,20 @@
 <?php
 
-include_once __DIR__ . '/../../layout/header.php';
-include_once __DIR__ . '/../../app/database/Auth.php';
+include_once __DIR__ . '../../layout/header.php';
+include_once __DIR__ . '../../app/database/Auth.php';
 checkAccess(1);
 
-include_once __DIR__ . '/../../app/controllers/PracownikC.php';
-include_once __DIR__ . '/../../app/controllers/UbranieC.php';
-include_once __DIR__ . '/../../app/controllers/WydaniaC.php';
-include_once __DIR__ . '/../../app/controllers/WydaneUbraniaC.php';
+include_once __DIR__ . '../../app/controllers/PracownikC.php';
+include_once __DIR__ . '../../app/controllers/UbranieC.php';
+include_once __DIR__ . '../../app/controllers/WydaniaC.php';
+include_once __DIR__ . '../../app/controllers/WydaneUbraniaC.php';
 
 
 $pracownikC = new PracownikC();
 $ubranieC = new UbranieC();
 $ubrania = $ubranieC->getAllUnique();
 
-include_once __DIR__ . '/../../app/helpers/DateHelper.php';
+include_once __DIR__ . '../../app/helpers/DateHelper.php';
 
 $miesiace = [6, 12, 18, 24];
 
@@ -187,4 +187,4 @@ if ($fromRaport) {
 </script>
 
 <script type="module" src="<?php echo $baseUrl; ?>/App.js"></script>
-<?php include_once __DIR__ . '/../../layout/footer.php'; ?>
+<?php include_once __DIR__ . '../../layout/footer.php'; ?>

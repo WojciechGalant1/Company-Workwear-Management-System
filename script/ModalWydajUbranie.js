@@ -1,4 +1,5 @@
 import { GetBaseUrl } from './GetBaseUrl.js';
+
 export const ModalWydajUbranie = (function () {
     const init = function (alertManager) {
         setupEventListeners(alertManager);
@@ -32,7 +33,5 @@ export const ModalWydajUbranie = (function () {
         });
     };
 
-    return {
-        init
-    };
+    return { init };
 })();

@@ -7,7 +7,7 @@ header('Content-Type: application/json; charset=utf-8');
 
 try {
     $data = json_decode(file_get_contents('php://input'), true);
-    
+
     if (!isset($data['id']) || !is_numeric($data['id'])) {
         throw new Exception('Nieprawidłowe dane wejściowe.');
     }
@@ -30,7 +30,7 @@ try {
 
     if ($wydaneUbraniaC->deleteWydaneUbranieStatus($ubranieId)) {
         $stanMagazynuC->updateIlosc($idUbrania, $idRozmiaru, $ilosc, true);
-/* 
+        /* 
         $pozostaleUbrania = $wydaneUbraniaC->getUbraniaByWydanieId($idWydania);
         if (empty($pozostaleUbrania)) {
             $wydaniaC->deleteWydanie($idWydania);
@@ -45,4 +45,3 @@ try {
     echo json_encode(['success' => false, 'message' => $e->getMessage()]);
     exit;
 }
-?>
