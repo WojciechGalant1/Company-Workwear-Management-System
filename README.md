@@ -20,14 +20,14 @@ A **robust web application** designed to streamline corporate workwear managemen
 
 ###  Key Features
 
-- ** Inventory Management** - Track clothing items with detailed size, quantity, and barcode information
-- ** Employee Profiles** - Maintain comprehensive employee records with clothing assignment history
-- ** Workflow Automation** - Streamline request, approval, and distribution processes
-- ** Real-time Dashboard** - Monitor inventory levels and usage patterns
-- ** Smart Notifications** - Automatic alerts for low stock items falling below minimum quantities
-- ** Advanced Reporting** - Generate comprehensive reports on distribution and usage
-- ** Role-based Security** - Granular access control for different user responsibilities
-- ** Expiration Tracking** - Monitor clothing expiration dates and automate replacement processes
+- **Inventory Management** - Track clothing items with detailed size, quantity, and barcode information
+- **Employee Profiles** - Maintain comprehensive employee records with clothing assignment history
+- **Workflow Automation** - Streamline request, approval, and distribution processes
+- **Real-time Dashboard** - Monitor inventory levels and usage patterns
+- **Smart Notifications** - Automatic alerts for low stock items falling below minimum quantities
+- **Advanced Reporting** - Generate comprehensive reports on distribution and usage
+- **Role-based Security** - Granular access control for different user responsibilities
+- **Expiration Tracking** - Monitor clothing expiration dates and automate replacement processes
 
 ##  Technical Highlights
 
