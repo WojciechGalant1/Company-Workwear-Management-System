@@ -1,14 +1,7 @@
 import { GetBaseUrl } from './GetBaseUrl.js';
+import { debounce } from './utils.js';
 
 export const ProductSuggestions = (function () {
-    const debounce = (func, wait) => {
-        let timeout;
-        return function (...args) {
-            clearTimeout(timeout);
-            timeout = setTimeout(() => func.apply(this, args), wait);
-        };
-    };
-
     const fetchSuggestions = async (query, suggestionsList, inputField, endpoint) => {
         if (query.length < 2) {
             suggestionsList.style.display = 'none';

@@ -1,14 +1,7 @@
 import { GetBaseUrl } from './GetBaseUrl.js';
+import { debounce } from './utils.js';
 
 export const WorkerSuggestions = (() => {
-    const debounce = (func, wait) => {
-        let timeout;
-        return (...args) => {
-            clearTimeout(timeout);
-            timeout = setTimeout(() => func.apply(this, args), wait);
-        };
-    };
-
     const showSuggestions = (filteredNames, suggestions, usernameInput, hiddenInput, alertManager) => {
         if (!Array.isArray(filteredNames)) {
             console.error('Expected array but got:', filteredNames);

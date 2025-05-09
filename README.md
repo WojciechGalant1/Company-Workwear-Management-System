@@ -135,4 +135,9 @@ project/
 
 ---
 
+todo
+- eng langueage ver
+- futher optimalization
+- ui adjustment
+
 *This project demonstrates advanced web development skills including architecture design, frontend-backend integration, database optimization, and user experience design.*
