@@ -1,4 +1,4 @@
-# Company Clothing Management System
+# Company Workwear Management System
 
 <div align="center">
   <img alt="PHP" src="https://img.shields.io/badge/PHP-777BB4.svg?style=for-the-badge&logo=PHP&logoColor=white">
@@ -12,22 +12,17 @@
 
 ##  Overview
 
-A **robust web application** designed to streamline corporate workwear management through its complete lifecycle: inventory tracking, employee assignment, distribution workflows, and detailed reporting. This system bridges the gap between inventory management and human resources, ensuring employees have appropriate work attire while optimizing company resources.
-
-> **Note**
-> This application was developed during a student internship at a company specializing in industrial locking and hinge systems, in response to real-world operational needs.
-
+A full-featured web platform designed to manage corporate workwear distribution throughout its entire lifecycle. Built from scratch during an internship to solve real-world problems for a manufacturing company — from inventory tracking to employee assignment and expiration-based replenishment.
 
 ###  Key Features
 
 - **Inventory Management** - Track clothing items with detailed size, quantity, and barcode information
 - **Employee Profiles** - Maintain comprehensive employee records with clothing assignment history
-- **Workflow Automation** - Streamline request, approval, and distribution processes
-- **Real-time Dashboard** - Monitor inventory levels and usage patterns
-- **Smart Notifications** - Automatic alerts for low stock items falling below minimum quantities
+- **Role-based Security** - Role-based login and permission control for different user responsibilities
+- **Real-time Dashboard** - Monitor inventory levels and advanced search/sorting
+- **Smart Notifications** - Automatic alerts for low stock items and expiration-based reporting
 - **Advanced Reporting** - Generate comprehensive reports on distribution and usage
-- **Role-based Security** - Granular access control for different user responsibilities
-- **Expiration Tracking** - Monitor clothing expiration dates and automate replacement processes
+- **Barcode integration** - Items added/edited via scanner input with auto-form submission
 
 ##  Technical Highlights
 
@@ -39,27 +34,16 @@ A **robust web application** designed to streamline corporate workwear managemen
 
 ##  Technology Stack
 
-- **Backend:** PHP with custom MVC framework
+- **Backend:** PHP (custom MVC from scratch), REST-style endpoints
 - **Frontend:** JavaScript (ES6 modules), Bootstrap, jQuery
 - **Database:** MySQL with optimized query structure
 - **Security:** Role-based access control, input validation
-- **Performance:** Optimized for low-resource environments
-
-##  Implementation Details
-
-The system features a modern architecture with:
-
-- **Modular JavaScript** with dynamic module loading
-- **Clean URL Routing** system for improved SEO and user experience
-- **Responsive design** for desktop and mobile access
-- **Real-time form validation** for improved user experience
-- **Comprehensive error handling** with user-friendly notifications
-- **Barcode scanning integration** for efficient inventory management
+- **Performance:** Designed for low-resource environments
 
 > **Warning**
 > Barcode scanners must be configured to automatically append an "Enter" keystroke after each scan for proper form submission and system interaction.
 
-##  Project Structure
+##  Project Structure (Simplified)
 
 ```
 project/
@@ -137,6 +121,15 @@ project/
 
 ---
 
+## My Role & Responsibilities
+
+- Designing and implementing a custom MVC framework
+- Architecting the database schema and writing optimized SQL queries
+- Building full CRUD interfaces with responsive design
+- Integrating barcode scanning into workflows
+- Developing a role-based authentication system
+- Collaborating with company staff to shape system workflows
+
 ## Potential Enhancements & Future Development
 
 - Codebase Modernization – Upgrade PHP version and refactor legacy components for modern standards (e.g., PHP 8+, namespaces, Composer)
@@ -147,3 +140,4 @@ project/
 - Batch Processing – Enable bulk import/export of inventory data via CSV or Excel
 - Analytics Dashboard – Visual performance indicators and usage statistics over time
 
+## Demo
