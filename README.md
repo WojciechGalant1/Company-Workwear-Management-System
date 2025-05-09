@@ -147,4 +147,3 @@ project/
 - Batch Processing – Enable bulk import/export of inventory data via CSV or Excel
 - Analytics Dashboard – Visual performance indicators and usage statistics over time
 
-*This project demonstrates advanced web development skills including architecture design, frontend-backend integration, database optimization, and user experience design.*
