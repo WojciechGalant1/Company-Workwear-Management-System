@@ -1,4 +1,4 @@
-import { GetBaseUrl } from './GetBaseUrl.js';
+import { getBaseUrl } from './utils.js';
 
 export const ChangeStatus = (function () {
     let selectedId = null;
@@ -25,7 +25,7 @@ export const ChangeStatus = (function () {
     };
 
     const updateStatus = async (currentStatus) => {
-        const baseUrl = GetBaseUrl();
+        const baseUrl = getBaseUrl();
 
         try {
             const response = await fetch(`${baseUrl}/handlers/changeStatus.php`, {
@@ -61,7 +61,7 @@ export const ChangeStatus = (function () {
 
     const updateStatusForModal = async () => {
         const isRaport = selectedButton.getAttribute('data-raport') === 'true';
-        const baseUrl = GetBaseUrl();
+        const baseUrl = getBaseUrl();
 
         try {
             const response = await fetch(`${baseUrl}/handlers/changeStatus.php`, {

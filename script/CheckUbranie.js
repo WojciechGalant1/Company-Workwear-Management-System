@@ -1,7 +1,7 @@
-import { GetBaseUrl } from './GetBaseUrl.js';
+import { getBaseUrl } from './utils.js';
 
 export const CheckUbranie = (() => {
-    const baseUrl = GetBaseUrl();
+    const baseUrl = getBaseUrl();
 
     const toggleIloscMinField = (field, show) => {
         field.style.display = show ? 'block' : 'none';

@@ -1,4 +1,4 @@
-import { GetBaseUrl } from './GetBaseUrl.js';
+import { getBaseUrl } from './utils.js';
 
 export const EdycjaUbranie = (() => {
     let ubranieId = null;
@@ -6,7 +6,7 @@ export const EdycjaUbranie = (() => {
 
     const initialize = (manager) => {
         alertManager = manager;
-        const baseUrl = GetBaseUrl();
+        const baseUrl = getBaseUrl();
 
         $('#example').on('click', '.open-modal-btn', (event) => {
             const clickedBtn = event.currentTarget;

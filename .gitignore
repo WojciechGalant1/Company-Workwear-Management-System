@@ -1,5 +1,5 @@
 # Apache configuration files
-.htaccess
+# .htaccess
 
 # Environment files
 .env

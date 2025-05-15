@@ -1,4 +1,4 @@
-import { GetBaseUrl } from './GetBaseUrl.js';
+import { getBaseUrl } from './utils.js';
 
 export const RedirectStatus = (() => {
     const initialize = () => {
@@ -12,7 +12,7 @@ export const RedirectStatus = (() => {
                 const pracownikImie = clickedBtn.getAttribute('data-pracownik-imie');
                 const pracownikNazwisko = clickedBtn.getAttribute('data-pracownik-nazwisko');
                 const pracownikStanowisko = clickedBtn.getAttribute('data-pracownik-stanowisko');
-                const baseUrl = GetBaseUrl();
+                const baseUrl = getBaseUrl();
             
                 window.location.href = `${baseUrl}/wydaj-ubranie?pracownikId=${pracownikId}&imie=${pracownikImie}&nazwisko=${pracownikNazwisko}&stanowisko=${pracownikStanowisko}&fromRaport=1`;
             });

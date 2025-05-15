@@ -1,4 +1,4 @@
-import { GetBaseUrl } from './GetBaseUrl.js';
+import { getBaseUrl } from './utils.js';
 
 export const AnulujWydanie = (function () {
     let ubranieId = null;
@@ -27,7 +27,7 @@ export const AnulujWydanie = (function () {
     
 
     const cancel = async () => {
-        const baseUrl = GetBaseUrl();
+        const baseUrl = getBaseUrl();
         
         try { 
             const response = await fetch(`${baseUrl}/handlers/anuluj_wydanie.php`, {

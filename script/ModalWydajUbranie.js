@@ -1,4 +1,4 @@
-import { GetBaseUrl } from './GetBaseUrl.js';
+import { getBaseUrl } from './utils.js';
 
 export const ModalWydajUbranie = (function () {
     const init = function (alertManager) {
@@ -28,7 +28,7 @@ export const ModalWydajUbranie = (function () {
 
         confirmButton.addEventListener('click', () => {
             modal.hide();
-            const baseUrl = GetBaseUrl();
+            const baseUrl = getBaseUrl();
             window.location.href = `${baseUrl}/raport`;
         });
     };

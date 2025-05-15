@@ -1,8 +1,8 @@
-import { GetBaseUrl } from './GetBaseUrl.js';
+import { getBaseUrl } from './utils.js';
 
 export const UbraniaKod = (() => {
     const initializeKodInput = (inputElement, alertManager) => {
-        const baseUrl = GetBaseUrl();
+        const baseUrl = getBaseUrl();
 
         inputElement.addEventListener('keydown', async (event) => {
             if (event.key !== 'Enter') return;

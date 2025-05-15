@@ -41,7 +41,6 @@ try {
         throw new Exception('Nie udało się anulować wydania.');
     }
 } catch (Exception $e) {
-    http_response_code(400);
     echo json_encode(['success' => false, 'message' => $e->getMessage()]);
     exit;
 }

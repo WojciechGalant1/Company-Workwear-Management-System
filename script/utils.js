@@ -5,3 +5,8 @@ export const debounce = (func, wait) => {
         timeout = setTimeout(() => func.apply(this, args), wait);
     };
 };
+
+export const getBaseUrl = () => {
+    const metaBaseUrl = document.querySelector('meta[name="base-url"]');
+    return metaBaseUrl ? metaBaseUrl.getAttribute('content') : '';
+};

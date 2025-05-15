@@ -1,4 +1,4 @@
-import { GetBaseUrl } from './GetBaseUrl.js';
+import { getBaseUrl } from './utils.js';
 import { debounce } from './utils.js';
 
 export const WorkerSuggestions = (() => {
@@ -51,7 +51,7 @@ export const WorkerSuggestions = (() => {
     };
 
     const create = (usernameInput, suggestions, alertManager) => {
-        const baseUrl = GetBaseUrl();
+        const baseUrl = getBaseUrl();
         const hiddenInput = document.getElementById('pracownikID');
         const loadingSpinner = document.getElementById('loadingSpinnerName');
 

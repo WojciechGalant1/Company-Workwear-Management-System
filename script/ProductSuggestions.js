@@ -1,4 +1,4 @@
-import { GetBaseUrl } from './GetBaseUrl.js';
+import { getBaseUrl } from './utils.js';
 import { debounce } from './utils.js';
 
 export const ProductSuggestions = (function () {
@@ -9,7 +9,7 @@ export const ProductSuggestions = (function () {
             return;
         }
 
-        const baseUrl = GetBaseUrl();
+        const baseUrl = getBaseUrl();
 
         try {
             const response = await fetch(`${baseUrl}/handlers/${endpoint}?query=${encodeURIComponent(query)}`);

@@ -1,11 +1,11 @@
-import { GetBaseUrl } from './GetBaseUrl.js';
+import { getBaseUrl } from './utils.js';
 
 export const ZniszczUbranie = (function () {
     let ubranieId = null;
     let selectedButton = null;
 
     const destroy = async () => {
-        const baseUrl = GetBaseUrl();
+        const baseUrl = getBaseUrl();
 
         try {
             const response = await fetch(`${baseUrl}/handlers/zniszcz_ubranie.php`, {

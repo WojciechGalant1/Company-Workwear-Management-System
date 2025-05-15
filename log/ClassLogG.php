@@ -20,10 +20,25 @@ class ClassLogG {
                         <input type="password" class="form-control form-control-lg" name="kodID" id="kodID" autocomplete="off" placeholder="Kod identyfikatora">
                         <label for="kodID">Kod identyfikatora</label>
                     </div>
-                    <p class="text-muted"><i class="bi bi-info-circle me-2"></i> Zeskanuj kod swojego identyfikatora.</p>
+                    <div class="d-grid gap-2">
+                        <button type="button" id="demoButton" class="btn btn-secondary btn-lg">
+                            <i class="bi bi-person-badge me-2"></i> Demo
+                        </button>
+                    </div>
+                    <p class="text-muted mt-3"><i class="bi bi-info-circle me-2"></i> Zeskanuj kod swojego identyfikatora.</p>
                 </div>
             </div>
-            <script>document.getElementById("kodID").focus();</script>';
+            <script>
+                document.getElementById("kodID").focus();
+                
+                // Add event listener for demo button
+                document.getElementById("demoButton").addEventListener("click", function() {
+                    document.getElementById("kodID").value = "ID|07202419|1";
+                    // Trigger the change event to initiate login
+                    const event = new Event("change");
+                    document.getElementById("kodID").dispatchEvent(event);
+                });
+            </script>';
     }
     
     public function ekranLog() {

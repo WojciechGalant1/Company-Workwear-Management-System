@@ -29,7 +29,7 @@ class ClassMenu {
                         <img src="' . $baseUrl . '/img/protective-equipement.png" class="logo-image" alt="Logo" height="30">
                     </a>';
         
-        // Build navigation items based on user status
+        // navigation items based on user status
         echo NavBuilder::buildNavGroups($activeUri, $baseUrl, $userStatus, $hasShortages);
                 
         echo '
