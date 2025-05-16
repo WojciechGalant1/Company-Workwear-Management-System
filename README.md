@@ -87,12 +87,20 @@ A full-featured web platform designed to manage corporate workwear distribution 
 
 ```
 project/
-├── app/                    # Application core (MVC components)
+├── app/                    # Application core
+│   ├── controllers/        # Business logic controllers
+│   ├── models/             # Data models
+│   ├── config/             # Configuration files
+│   ├── database/           # Database connection and queries
+│   ├── forms/              # Form processing handlers
+│   └── helpers/            # Utility functions
+├── views/                  # View templates
 ├── handlers/               # AJAX request handlers
 ├── img/                    # Image assets
 ├── layout/                 # Layout templates
 ├── log/                    # Logging and session management
 ├── script/                 # JavaScript modules
+├── styl/                   # CSS stylesheets
 ├── .htaccess               # Apache configuration
 ├── App.js                  # Main application JavaScript
 └── index.php               # Application entry point
