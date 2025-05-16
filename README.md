@@ -19,30 +19,14 @@
   </p>
 </div>
 
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
+## Table of Contents
+- [Overview](#-Overview)
+- [Key Features](#-Key-Features)
+- [Technology Stack](#-Technology-Stack)
+- [Project Structure](#-documentation)
+- [My Role & Responsibilities](#-feedback-and-contributions)
+- [Future Development](#-license)
+- [Contacts](#%EF%B8%8F-contacts)
 
 
 ##  Overview
@@ -58,6 +42,8 @@ A full-featured web platform designed to manage corporate workwear distribution 
 - **Smart Notifications** - Automatic alerts for low stock items and expiration-based reporting
 - **Advanced Reporting** - Generate comprehensive reports on distribution and usage
 - **Barcode integration** - Items added/edited via scanner input with auto-form submission
+> **Warning**
+> Barcode scanners must be configured to automatically append an "Enter" keystroke after each scan for proper form submission and system interaction.
 
 ##  Technology Stack
 
@@ -68,9 +54,6 @@ A full-featured web platform designed to manage corporate workwear distribution 
 |Database|JavaScript (ES6), Bootstrap, jQuery|
 |Security|MySQL (relational, optimized queries)|
 |Performance|ole-based access, server-side validation|
-
-> **Warning**
-> Barcode scanners must be configured to automatically append an "Enter" keystroke after each scan for proper form submission and system interaction.
 
 ##  Project Structure (Simplified)
 
@@ -177,4 +160,3 @@ project/
 - Batch Processing – Enable bulk import/export of inventory data via CSV or Excel
 - Analytics Dashboard – Visual performance indicators and usage statistics over time
 
-## Demo
