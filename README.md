@@ -91,7 +91,7 @@ project/
 │   ├── controllers/        # Business logic controllers
 │   ├── models/             # Data models
 │   ├── config/             # Configuration files
-│   ├── database/           # Database connection and queries
+│   ├── database/           # Database connection 
 │   ├── forms/              # Form processing handlers
 │   └── helpers/            # Utility functions
 ├── views/                  # View templates
