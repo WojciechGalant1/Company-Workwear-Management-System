@@ -13,7 +13,6 @@
   <h1 align="center">Company Workwear Management System</h3>
   <p align="center">
     <br />
-    <br />
     <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
     &middot;
     <a href="https://github.com/othneildrew/Best-README-Template"><strong>Polish version »</strong></a>
