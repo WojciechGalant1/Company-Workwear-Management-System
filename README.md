@@ -59,21 +59,15 @@ A full-featured web platform designed to manage corporate workwear distribution 
 - **Advanced Reporting** - Generate comprehensive reports on distribution and usage
 - **Barcode integration** - Items added/edited via scanner input with auto-form submission
 
-##  Technical Highlights
-
-- **Clean Architecture** - MVC pattern for separation of concerns and code maintainability
-- **Modern Frontend** - Responsive interface with Bootstrap and modular JavaScript
-- **RESTful API Design** - Clean URL routing and AJAX-powered asynchronous operations
-- **Optimized Performance** - Efficient database queries and lightweight frontend
-- **Scalable Structure** - Modular code organization for easy maintenance and enhancement
-
 ##  Technology Stack
 
-- **Backend:** PHP (custom MVC from scratch), REST-style endpoints
-- **Frontend:** JavaScript (ES6 modules), Bootstrap, jQuery
-- **Database:** MySQL with optimized query structure
-- **Security:** Role-based access control, input validation
-- **Performance:** Designed for low-resource environments
+|Layer|Tech|
+|:-|:-|
+|Backend PHP|(custom MVC), REST-style endpoints|
+|Frontend|[id_token](https://www.certification.openid.net/plan-detail.html?public=true&plan=cQxDzZ2AF6kCd)|58|
+|Database|JavaScript (ES6), Bootstrap, jQuery|
+|Security|MySQL (relational, optimized queries)|
+|Performance|ole-based access, server-side validation|
 
 > **Warning**
 > Barcode scanners must be configured to automatically append an "Enter" keystroke after each scan for proper form submission and system interaction.
