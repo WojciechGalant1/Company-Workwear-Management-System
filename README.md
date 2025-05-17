@@ -15,7 +15,7 @@
     <br />
     <a href="https://company-clothing-management-system.ct.ws/log/logowanie.php?">View Demo</a>
     &middot;
-    <a href="https://github.com/WojciechGalant1/Company-Workwear-Management-System/blob/master/README_PL.md">Polish version »/a>
+    <a href="https://github.com/WojciechGalant1/Company-Workwear-Management-System/blob/master/README_PL.md">Polish version</a>
   </p>
 </div>
 
