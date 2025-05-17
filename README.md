@@ -13,9 +13,9 @@
   <h1 align="center">Company Workwear Management System</h3>
   <p align="center">
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="https://company-clothing-management-system.ct.ws/log/logowanie.php?i=1">View Demo</a>
     &middot;
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Polish version »</strong></a>
+    <a href=""><strong>Polish version »</strong></a>
   </p>
 </div>
 
@@ -23,9 +23,10 @@
 - [Overview](#-Overview)
 - [Key Features](#-Key-Features)
 - [Technology Stack](#-Technology-Stack)
-- [Project Structure](#-documentation)
-- [My Role & Responsibilities](#-feedback-and-contributions)
-- [Future Development](#-license)
+- [Project Structure](#-Project-Structure-(Simplified))
+- [System Modules](#-System-Modules)
+- [My Role & Responsibilities](#-My-Role-&-Responsibilities)
+- [Future Development](#-Potential-Enhancements-&-Future-Development)
 - [Contacts](#%EF%B8%8F-contacts)
 
 
@@ -108,5 +109,7 @@ project/
 - Integrating barcode scanning into workflows
 - Developing a role-based authentication system
 - Collaborating with company staff to shape system workflows
+- Conducted testing and validation in collaboration with company staff
+- Deployed and documented the system for long-term internal use
 
 
