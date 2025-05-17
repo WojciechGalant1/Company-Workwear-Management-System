@@ -13,7 +13,7 @@
   <h1 align="center">Company Workwear Management System</h3>
   <p align="center">
     <br />
-    <a href="https://company-clothing-management-system.ct.ws/log/logowanie.php?i=1">View Demo</a>
+    <a href="https://company-clothing-management-system.ct.ws/log/logowanie.php?">View Demo</a>
     &middot;
     <a href=""><strong>Polish version »</strong></a>
   </p>
@@ -92,13 +92,19 @@ project/
 |Access Control|Define admin/staff roles with granular permission levels|
 
 ## Potential Enhancements & Future Development
+- **Codebase Modernization** – Upgrade PHP version and refactor legacy components for modern standards (e.g., PHP 8+, namespaces, Composer)
+- **Multi-language Support** – Implement English-language version for broader usability
+- **Mobile Optimization** – Enhance touch interactions and responsive views for tablet/handheld use in warehouse environments
+- **API Integration** – Introduce REST API endpoints for external system sync (e.g., ERP or HR software)
+- **Batch Processing** – Enable bulk import/export of inventory data via CSV 
+- **Analytics Dashboard** – Visual performance indicators and usage statistics over time
+- **MVC Architecture Improvements** – Refine custom MVC structure for better modularity, testability, and separation of concerns
+- **Robust Error Handling** – Implement a global error handler and proper error boundaries across the stack
+- **Security Enhancements**:
+  - CSRF protection for all forms
+  - Rate limiting to prevent brute-force form submissions
+  - API request throttling to mitigate abuse and maintain performance
 
-- Codebase Modernization – Upgrade PHP version and refactor legacy components for modern standards (e.g., PHP 8+, namespaces, Composer)
-- Multi-language Support – Implement English-language version for broader usability
-- Mobile Optimization – Enhance touch interactions and responsive views for tablet/handheld use in warehouse environments
-- API Integration – Introduce REST API endpoints for external system sync (e.g., ERP or HR software)
-- Batch Processing – Enable bulk import/export of inventory data via CSV 
-- Analytics Dashboard – Visual performance indicators and usage statistics over time
 
 ## My Role & Responsibilities
 
