@@ -97,13 +97,13 @@ project/
 - **Mobile Optimization** – Enhance touch interactions and responsive views for tablet/handheld use in warehouse environments
 - **API Integration** – Introduce REST API endpoints for external system sync (e.g., ERP or HR software)
 - **Batch Processing** – Enable bulk import/export of inventory data via CSV 
-- **Analytics Dashboard** – Visual performance indicators and usage statistics over time
 - **MVC Architecture Improvements** – Refine custom MVC structure for better modularity, testability, and separation of concerns
 - **Robust Error Handling** – Implement a global error handler and proper error boundaries across the stack
 - **Security Enhancements**:
   - CSRF protection for all forms
   - Rate limiting to prevent brute-force form submissions
   - API request throttling to mitigate abuse and maintain performance
+- Omplementation of automated test suites to improve future maintainability and reduce regression risk
 
 
 ## My Role & Responsibilities
