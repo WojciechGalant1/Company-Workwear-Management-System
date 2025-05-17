@@ -20,14 +20,14 @@
 </div>
 
 ## Table of Contents
-- [Overview](#-Overview)
-- [Key Features](#-Key-Features)
-- [Technology Stack](#-Technology-Stack)
-- [Project Structure](#-Project-Structure-(Simplified))
-- [System Modules](#-System-Modules)
-- [My Role & Responsibilities](#-My-Role-&-Responsibilities)
-- [Future Development](#-Potential-Enhancements-&-Future-Development)
-- [Contacts](#%EF%B8%8F-contacts)
+- [Overview](##-Overview)
+- [Key Features](###-Key-Features)
+- [Technology Stack](##-Technology-Stack)
+- [Project Structure](##-Project-Structure-(Simplified))
+- [System Modules](##-System-Modules)
+- [My Role & Responsibilities](##-My-Role-&-Responsibilities)
+- [Future Development](##-Potential-Enhancements-&-Future-Development)
+
 
 
 ##  Overview
