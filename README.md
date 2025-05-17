@@ -49,11 +49,13 @@ A full-featured web platform designed to manage corporate workwear distribution 
 
 |Layer|Tech|
 |:-|:-|
-|Backend PHP|(custom MVC), REST-style endpoints|
-|Frontend|[id_token](https://www.certification.openid.net/plan-detail.html?public=true&plan=cQxDzZ2AF6kCd)|58|
-|Database|JavaScript (ES6), Bootstrap, jQuery|
-|Security|MySQL (relational, optimized queries)|
-|Performance|ole-based access, server-side validation|
+|Backend|PHP(custom MVC), REST-style endpoints|
+|Frontend|JavaScript (ES6), Bootstrap, jQuery|
+|Database|MySQL (relational, optimized queries)|
+|Performance|Designed for low-resource deployment|
+> **Note**
+> Optimized for performance in PHP 5.3 environments due to infrastructure constraints at the time of development
+
 
 ##  Project Structure (Simplified)
 
@@ -78,68 +80,25 @@ project/
 └── index.php               # Application entry point
 ```
 
-##  Code Architecture Highlights
+##  System Modules
 
-### Backend (PHP)
+|Area|Description|
+|:-|:-|
+|Orders|Add clothing items (manually or via barcode) with metadata|
+|Distributions|Assign gear to employees with full history + returns/damage logging|
+|Inventory|Search, sort, update, and receive alerts on low stock|
+|Employee Mgmt|View/update employee info with distribution linkages|
+|Expiration Reports|Track upcoming renewals and automate replacements|
+|Access Control|Define admin/staff roles with granular permission levels|
 
-- **Custom Router** providing clean URLs and RESTful endpoints
-- **MVC Pattern** with clear separation between data, presentation, and logic
-- **Database Abstraction Layer** for secure and optimized queries
-- **Authentication System** with role-based permissions
+## Potential Enhancements & Future Development
 
-### Frontend (JavaScript)
-
-- **Module System** using ES6 imports for code organization
-- **Component-based Architecture** for UI elements
-- **Event-driven Communication** between modules
-- **Asynchronous Processing** with Fetch API and Promises
-> **Note**
-> Optimized for performance in PHP 5.3 environments due to infrastructure constraints at the time of development
-
-##  Functional Modules
-
-### Order Management
-- Add new clothing products with barcode, name, size, quantity, and minimum quantity
-- Add existing products via barcode scanning with automatic data population
-- Add products with new barcodes linked to existing inventory items
-- View complete order history including items added during inventory adjustments
-
-### Clothing Distribution
-- Issue clothing to employees with detailed tracking
-- Record employee information for each distribution
-- Add items by barcode scanning or manual selection
-- Support for multiple items per distribution
-- Optional notes for distribution context
-
-### Inventory Management
-- Real-time inventory monitoring with search and sort capabilities
-- Edit product details including name, size, current quantity, and minimum quantity
-- Low stock notifications when quantity falls below minimum threshold
-- Comprehensive transaction history tracking all quantity changes
-
-### Distribution History
-- View complete distribution history by employee
-- Cancel distributions within 30 days for returned undamaged items
-- Mark items as damaged when returned in poor condition
-- Add or remove items from the expiration report
-
-### Clothing History
-- Review details of all distributed clothing items
-- Search by clothing name, size, or employee name
-- View comprehensive distribution data up to one year
-
-### Expiration Reporting
-- Automatic tracking of clothing expiration dates
-- Reports for items expiring within two months
-- Streamlined replacement process with pre-filled forms
-- Summary statistics for items issued from the expiration report
-
-### Employee Management
-- Add new employees with name, position and status
-- View and search complete employee database
-- Edit employee details and update employment status
-
----
+- Codebase Modernization – Upgrade PHP version and refactor legacy components for modern standards (e.g., PHP 8+, namespaces, Composer)
+- Multi-language Support – Implement English-language version for broader usability
+- Mobile Optimization – Enhance touch interactions and responsive views for tablet/handheld use in warehouse environments
+- API Integration – Introduce REST API endpoints for external system sync (e.g., ERP or HR software)
+- Batch Processing – Enable bulk import/export of inventory data via CSV 
+- Analytics Dashboard – Visual performance indicators and usage statistics over time
 
 ## My Role & Responsibilities
 
@@ -150,13 +109,4 @@ project/
 - Developing a role-based authentication system
 - Collaborating with company staff to shape system workflows
 
-## Potential Enhancements & Future Development
-
-- Codebase Modernization – Upgrade PHP version and refactor legacy components for modern standards (e.g., PHP 8+, namespaces, Composer)
-- Multi-language Support – Implement English-language version for broader usability
-- Mobile Optimization – Enhance touch interactions and responsive views for tablet/handheld use in warehouse environments
-- API Integration – Introduce REST API endpoints for external system sync (e.g., ERP or HR software)
-- Smart Suggestions – Use item history and employee size data to suggest clothing types and sizes automatically
-- Batch Processing – Enable bulk import/export of inventory data via CSV or Excel
-- Analytics Dashboard – Visual performance indicators and usage statistics over time
 
