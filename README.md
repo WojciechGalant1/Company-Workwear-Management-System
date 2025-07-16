@@ -42,7 +42,7 @@ A full-featured web platform designed to manage corporate workwear distribution 
 - **Smart Notifications** - Automatic alerts for low stock items and expiration-based reporting
 - **Advanced Reporting** - Generate comprehensive reports on distribution and usage
 - **Barcode integration** - Items added/edited via scanner input with auto-form submission
-> **Warning**
+> **Warning:**
 > Barcode scanners must be configured to automatically append an "Enter" keystroke after each scan for proper form submission and system interaction.
 
 ##  Technology Stack
@@ -53,7 +53,7 @@ A full-featured web platform designed to manage corporate workwear distribution 
 |Frontend|JavaScript (ES6), Bootstrap, jQuery|
 |Database|MySQL (relational, optimized queries)|
 |Performance|Designed for low-resource deployment|
-> **Note**
+> **Note:**
 > Optimized for performance in PHP 5.3 environments due to infrastructure constraints at the time of development
 
 
@@ -103,7 +103,7 @@ project/
   - CSRF protection for all forms
   - Rate limiting to prevent brute-force form submissions
   - API request throttling to mitigate abuse and maintain performance
-- Omplementation of automated test suites to improve future maintainability and reduce regression risk
+- Implementation of automated test suites to improve future maintainability and reduce regression risk
 
 
 ## My Role & Responsibilities
