@@ -2,10 +2,18 @@ import { getBaseUrl } from './utils.js';
 import { debounce } from './utils.js';
 
 export const ProductSuggestions = (function () {
+    const cache = {};
+
     const fetchSuggestions = async (query, suggestionsList, inputField, endpoint) => {
         if (query.length < 2) {
             suggestionsList.style.display = 'none';
             suggestionsList.innerHTML = '';
+            return;
+        }
+
+        const cacheKey = endpoint + ':' + query;
+        if (cache[cacheKey]) {
+            showSuggestions(cache[cacheKey], suggestionsList, inputField);
             return;
         }
 
@@ -14,6 +22,7 @@ export const ProductSuggestions = (function () {
         try {
             const response = await fetch(`${baseUrl}/handlers/${endpoint}?query=${encodeURIComponent(query)}`);
             const data = await response.json();
+            cache[cacheKey] = data;
             showSuggestions(data, suggestionsList, inputField);
         } catch (error) {
             console.error(`Error fetching ${endpoint} suggestions:`, error);

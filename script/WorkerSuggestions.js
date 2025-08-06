@@ -23,6 +23,8 @@ export const WorkerSuggestions = (() => {
         });
     };
 
+    const cache = {};
+
     const fetchSuggestions = async (query, baseUrl, suggestions, usernameInput, hiddenInput, alertManager, loadingSpinner) => {
         if (query.length < 3) {
             suggestions.style.display = 'none';
@@ -32,11 +34,18 @@ export const WorkerSuggestions = (() => {
             return;
         }
 
+        if (cache[query]) {
+            showSuggestions(cache[query], suggestions, usernameInput, hiddenInput, alertManager);
+            loadingSpinner.style.display = 'none';
+            return;
+        }
+
         try {
             const response = await fetch(`${baseUrl}/handlers/fetchWorkers.php?query=${encodeURIComponent(query)}`);
             if (!response.ok) throw new Error('Network response was not ok');
             
             const data = await response.json();
+            cache[query] = data;
 
             if (data.length === 0) {
                 alertManager.createAlert('Nie znaleziono pracownika o podanym imieniu i nazwisku.');
