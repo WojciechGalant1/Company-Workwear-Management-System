@@ -26,7 +26,7 @@ class ClassMenu {
             <div class="container-fluid">
                 <ul class="navbar-nav ms-2 d-flex align-items-center">    
                     <a class="navbar-brand" href="' . $baseUrl . '/">
-                        <img src="' . $baseUrl . '/img/protective-equipement.png" class="logo-image" alt="Logo" height="30">
+                        <img src="' . $baseUrl . '/img/protectve-equipment.png" class="logo-image" alt="Logo" height="30">
                     </a>';
         
         // navigation items based on user status
