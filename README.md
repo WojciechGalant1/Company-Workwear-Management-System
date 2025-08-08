@@ -61,6 +61,7 @@ A full-featured web platform designed to manage corporate workwear distribution 
 ```
 project/
 ├── app/                    # Application core
+│   ├── auth/               # authorization and session management
 │   ├── controllers/        # Business logic controllers
 │   ├── models/             # Data models
 │   ├── config/             # Configuration files
@@ -71,7 +72,6 @@ project/
 ├── handlers/               # AJAX request handlers
 ├── img/                    # Image assets
 ├── layout/                 # Layout templates
-├── log/                    # Logging and session management
 ├── script/                 # JavaScript modules
 ├── styl/                   # CSS stylesheets
 ├── .htaccess               # Apache configuration
