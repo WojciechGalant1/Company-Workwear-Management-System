@@ -13,6 +13,12 @@ $uri = UrlHelper::getCleanUri();
 // Get current page for module loading
 $current_page = UrlHelper::getCurrentPage($uri);
 
+// Access control: redirect unauthenticated users before any output
+if (!isset($_SESSION['user_id'])) {
+    header("Location: " . $baseUrl . "/login");
+    exit;
+}
+
 echo '
 <!DOCTYPE html>
 <html lang="pl">
@@ -21,7 +27,7 @@ echo '
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="base-url" content="' . $baseUrl . '">
     <title>Ubrania</title>
-    <link rel="icon" href="' . $baseUrl . '/img/protectve-equipment.png" type="image/png">
+    <link rel="icon" href="' . $baseUrl . '/img/protective-equipement.png" type="image/png">
     <link rel="stylesheet" href="' . $baseUrl . '/styl/css/custom.css">
     <link rel="stylesheet" href="' . $baseUrl . '/layout/navbar.css">
     <link rel="stylesheet" href="' . $baseUrl . '/styl/bootstrap-select/css/bootstrap-select.css">
@@ -57,11 +63,6 @@ $nav->navBar($current_page);
 echo '
 <div ' . $containerId . ' class="container border border-secondary border-opacity-50 mt-5 shadow mb-5 p-4 bg-body rounded">';
 
-if (!isset($_SESSION['user_id'])) {
-    echo '<div class="alert alert-info text-center">Nie jesteś zalogowany.</div>
-    <div class="text-center">Zaloguj się do systemu!<a target="_blank" href="' . $baseUrl . '/log/in/">ZALOGUJ</a></div>';
-    header("Location: " . $baseUrl . "/log/logowanie.php");
-    die();
-}
+// user is authenticated at this point
 
 ?>

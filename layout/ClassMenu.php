@@ -1,7 +1,7 @@
 <?php
 
 include_once __DIR__ . '/../app/controllers/StanMagazynuC.php'; 
-include_once __DIR__ . '/../log/sesja/SessionManager.php';
+include_once __DIR__ . '/../app/auth/SessionManager.php';
 include_once __DIR__ . '/../app/helpers/UrlHelper.php';
 include_once __DIR__ . '/../app/helpers/NavBuilder.php';
 

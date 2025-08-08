@@ -18,7 +18,8 @@ class RouteConfig {
             '/magazyn' => './views/mag_lista.php',
             '/dodaj-zamowienie' => './views/dodaj_zamowienie.php',
             '/raport' => './views/raport.php',
-            '/dodaj-pracownika' => './views/dodaj_pracownika.php'
+            '/dodaj-pracownika' => './views/dodaj_pracownika.php',
+            '/login' => './views/auth/login.php'
         );
     }
     
@@ -36,7 +37,8 @@ class RouteConfig {
             '/magazyn' => 'mag_lista.php',
             '/dodaj-zamowienie' => 'dodaj_zamowienie.php',
             '/raport' => 'raport.php',
-            '/dodaj-pracownika' => 'dodaj_pracownika.php'
+            '/dodaj-pracownika' => 'dodaj_pracownika.php',
+            '/login' => 'login.php'
         );
     }
     
@@ -53,7 +55,8 @@ class RouteConfig {
             'dodaj_zamowienie.php' => '/dodaj-zamowienie',
             'wydaj_ubranie.php' => '/wydaj-ubranie',
             'raport.php' => '/raport',
-            'dodaj_pracownika.php' => '/dodaj-pracownika'
+            'dodaj_pracownika.php' => '/dodaj-pracownika',
+            'login.php' => '/login'
         );
     }
 } 

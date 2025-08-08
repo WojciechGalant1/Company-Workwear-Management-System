@@ -50,7 +50,7 @@ class NavBuilder {
         
         $output .= self::separator();
         $output .= '<li class="nav-item">
-                        <a class="nav-link text-warning" href="' . $baseUrl . '/log/sesja/logout.php">
+                        <a class="nav-link text-warning" href="' . $baseUrl . '/handlers/auth/logout.php">
                             Wyloguj
                         </a>
                     </li>';

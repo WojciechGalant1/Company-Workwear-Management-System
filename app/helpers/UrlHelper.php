@@ -9,6 +9,34 @@ class UrlHelper {
         $basePath = dirname($_SERVER['SCRIPT_NAME']);
         return $basePath === '/' ? '' : $basePath;
     }
+
+    /**
+     * Get the application root base URL, trimming subpaths like handlers/, views/, log/
+     * Useful inside endpoints under nested directories.
+     */
+    public static function getAppBaseUrl() {
+        $basePath = dirname($_SERVER['SCRIPT_NAME']);
+        $segments = array();
+        if ($basePath !== '/') {
+            $trimmed = trim($basePath, '/');
+            $segments = $trimmed === '' ? array() : explode('/', $trimmed);
+        }
+
+        $stopDirs = array('handlers', 'views', 'log', 'app');
+        foreach ($stopDirs as $stop) {
+            $pos = array_search($stop, $segments);
+            if ($pos !== false) {
+                $segments = array_slice($segments, 0, $pos);
+                break;
+            }
+        }
+
+        $prefix = '/' . implode('/', $segments);
+        if ($prefix === '/') {
+            return '';
+        }
+        return $prefix;
+    }
     
     /**
      * Get clean URI without query string and basePath
