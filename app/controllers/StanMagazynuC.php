@@ -94,8 +94,9 @@ class StanMagazynuC extends Database {
     }
     
 
-    public function updateStanMagazynu($id, $nazwa, $rozmiar, $ilosc, $iloscMin, $uwagi) {
+    public function updateStanMagazynu($id, $nazwa, $rozmiar, $ilosc, $iloscMin, $uwagi, $currentUserId = null) {
         try {
+            $this->pdo->beginTransaction();
             $ubranieC = new UbranieC();
             $rozmiarC = new RozmiarC();
     
@@ -106,6 +107,7 @@ class StanMagazynuC extends Database {
             $stmt->bindParam(':idUbrania', $idUbrania, PDO::PARAM_INT);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             if (!$stmt->execute()) {
+                $this->pdo->rollBack();
                 return ['status' => 'error', 'message' => 'Błąd podczas aktualizacji nazwy ubrania.'];
             }
     
@@ -116,6 +118,7 @@ class StanMagazynuC extends Database {
             $stmt->bindParam(':idRozmiaru', $idRozmiaru, PDO::PARAM_INT);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             if (!$stmt->execute()) {
+                $this->pdo->rollBack();
                 return ['status' => 'error', 'message' => 'Błąd podczas aktualizacji nazwy rozmiaru.'];
             }
     
@@ -132,41 +135,44 @@ class StanMagazynuC extends Database {
     
             if ($stmt->execute()) {
                 if ($iloscDiff !== 0) {
-                    $this->addHistoriaZamowien($idUbrania, $idRozmiaru, $iloscDiff, $uwagi);
+                    $this->addHistoriaZamowien($idUbrania, $idRozmiaru, $iloscDiff, $uwagi, $currentUserId);
                 }
+                $this->pdo->commit();
                 return ['status' => 'success', 'message' => 'Stan magazynu został zaktualizowany.'];
             } else {
+                $this->pdo->rollBack();
                 return ['status' => 'error', 'message' => 'Błąd podczas aktualizacji ilości.'];
             }
         } catch (Exception $e) {
+            if ($this->pdo->inTransaction()) {
+                $this->pdo->rollBack();
+            }
             return ['status' => 'error', 'message' => $e->getMessage()];
         }
     }
     
-    private function addHistoriaZamowien($idUbrania, $idRozmiaru, $iloscDiff, $uwagi) {
+    private function addHistoriaZamowien($idUbrania, $idRozmiaru, $iloscDiff, $uwagi, $currentUserId = null) {
         $historiaZamowienC = new HistoriaZamowienC();
         $szczegolyZamowieniaC = new SzczegolyZamowieniaC();
-    
-        session_start();
-        if (!isset($_SESSION['user_id'])) {
+
+        $userId = $currentUserId !== null ? $currentUserId : (isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null);
+        if (!$userId) {
             throw new Exception("Brak zalogowanego użytkownika.");
         }
-    
-        $current_user_id = $_SESSION['user_id'];
-    
-        $zamowienie = new HistoriaZamowien(new DateTime(), $current_user_id, $uwagi, 2);
-    
+
+        $zamowienie = new HistoriaZamowien(new DateTime(), $userId, $uwagi, 2);
+
         if (!$historiaZamowienC->create($zamowienie)) {
             throw new Exception("Nie udało się zapisać historii zamówienia.");
         }
-    
+
         $zamowienieId = $historiaZamowienC->getLastInsertId();
         if (!$zamowienieId) {
             throw new Exception("Nie udało się pobrać ID ostatniego zamówienia.");
         }
-    
+
         $szczegol = new SzczegolyZamowienia($zamowienieId, $idUbrania, $idRozmiaru, $iloscDiff, 0, "-", 0);
-    
+
         if (!$szczegolyZamowieniaC->create($szczegol)) {
             throw new Exception("Nie udało się zapisać szczegółów zamówienia.");
         }

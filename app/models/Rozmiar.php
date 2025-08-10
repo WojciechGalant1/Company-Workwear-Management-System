@@ -12,7 +12,7 @@ class Rozmiar {
         return $this->id_rozmiar;
     }
 
-    public function setIdRozmiar( $id_rozmiar){
+    public function setIdRozmiar($id_rozmiar){
         $this->id_rozmiar = $id_rozmiar;
     }
 

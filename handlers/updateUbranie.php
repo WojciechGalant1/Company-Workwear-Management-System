@@ -1,7 +1,12 @@
 <?php
 include_once __DIR__ . '/../app/controllers/StanMagazynuC.php';
+include_once __DIR__ . '/../app/auth/SessionManager.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Ensure session and get current user id
+    $sessionManager = new SessionManager();
+    $currentUserId = $sessionManager->getUserId();
+
     $id = $_POST['id'];
     $nazwa = $_POST['nazwa'];
     $rozmiar = $_POST['rozmiar'];
@@ -11,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $stanMagazynuC = new StanMagazynuC();
 
-    $result = $stanMagazynuC->updateStanMagazynu($id, $nazwa, $rozmiar, $ilosc, $iloscMin, $uwagi);
+    $result = $stanMagazynuC->updateStanMagazynu($id, $nazwa, $rozmiar, $ilosc, $iloscMin, $uwagi, $currentUserId);
 
     if ($result['status'] === 'success') {
         http_response_code(200);

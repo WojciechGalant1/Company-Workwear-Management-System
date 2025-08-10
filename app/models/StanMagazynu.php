@@ -22,7 +22,7 @@ class StanMagazynu {
         return $this->id_ubrania;
     }
 
-    public function setIdUbrania( $id_ubrania) {
+    public function setIdUbrania($id_ubrania) {
         $this->id_ubrania = $id_ubrania;
     }
 
@@ -30,7 +30,7 @@ class StanMagazynu {
         return $this->id_rozmiaru;
     }
 
-    public function setIdRozmiaru( $id_rozmiaru) {
+    public function setIdRozmiaru($id_rozmiaru) {
         $this->id_rozmiaru = $id_rozmiaru;
     }
 
@@ -38,7 +38,7 @@ class StanMagazynu {
         return $this->ilosc;
     }
 
-    public function setIlosc( $ilosc)  {
+    public function setIlosc($ilosc)  {
         $this->ilosc = $ilosc;
     }
 
@@ -46,7 +46,7 @@ class StanMagazynu {
         return $this->iloscMin;
     }
 
-    public function setIloscMin( $iloscMin)  {
+    public function setIloscMin($iloscMin)  {
         $this->ilosc = $iloscMin;
     }
 }

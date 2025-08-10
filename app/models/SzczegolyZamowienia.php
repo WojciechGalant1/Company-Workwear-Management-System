@@ -28,7 +28,7 @@ class SzczegolyZamowienia {
         return $this->zamowienie_id;
     }
 
-    public function setZamowienieID( $zamowienie_id) {
+    public function setZamowienieID($zamowienie_id) {
         $this->zamowienie_id = $zamowienie_id;
     }
 
@@ -36,7 +36,7 @@ class SzczegolyZamowienia {
         return $this->id_ubrania;
     }
 
-    public function setIdUbrania( $id_ubrania) {
+    public function setIdUbrania($id_ubrania) {
         $this->id_ubrania = $id_ubrania;
     }
 
@@ -44,7 +44,7 @@ class SzczegolyZamowienia {
         return $this->id_rozmiaru;
     }
 
-    public function setIdRozmiaru( $id_rozmiaru) {
+    public function setIdRozmiaru($id_rozmiaru) {
         $this->id_rozmiaru = $id_rozmiaru;
     }
 
@@ -52,7 +52,7 @@ class SzczegolyZamowienia {
         return $this->ilosc;
     }
 
-    public function setIlosc( $ilosc)  {
+    public function setIlosc($ilosc)  {
         $this->ilosc = $ilosc;
     }
 
@@ -61,14 +61,14 @@ class SzczegolyZamowienia {
     }
 
     public function setIloscMin($iloscMin)  {
-        $this->ilosc = $iloscMin;
+        $this->iloscMin = $iloscMin;
     }
 
     public function getFirma() {
         return $this->firma;
     }
 
-    public function setFirma( $firma) {
+    public function setFirma($firma) {
         $this->firma = $firma;
     }
 
