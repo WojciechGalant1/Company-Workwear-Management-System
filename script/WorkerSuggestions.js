@@ -2,6 +2,8 @@ import { getBaseUrl } from './utils.js';
 import { debounce } from './utils.js';
 
 export const WorkerSuggestions = (() => {
+    let currentController = null;
+
     const showSuggestions = (filteredNames, suggestions, usernameInput, hiddenInput, alertManager) => {
         if (!Array.isArray(filteredNames)) {
             console.error('Expected array but got:', filteredNames);
@@ -41,7 +43,11 @@ export const WorkerSuggestions = (() => {
         }
 
         try {
-            const response = await fetch(`${baseUrl}/handlers/fetchWorkers.php?query=${encodeURIComponent(query)}`);
+            if (currentController) {
+                currentController.abort();
+            }
+            currentController = new AbortController();
+            const response = await fetch(`${baseUrl}/handlers/fetchWorkers.php?query=${encodeURIComponent(query)}`, { signal: currentController.signal });
             if (!response.ok) throw new Error('Network response was not ok');
             
             const data = await response.json();
@@ -53,6 +59,10 @@ export const WorkerSuggestions = (() => {
                 showSuggestions(data, suggestions, usernameInput, hiddenInput, alertManager);
             }
         } catch (error) {
+            if (error.name === 'AbortError') {
+                // Ignoruj anulowane żądania
+                return;
+            }
             console.error('Nie udało się wczytać danych:', error);
         } finally {
             loadingSpinner.style.display = 'none';

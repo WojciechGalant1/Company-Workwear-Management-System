@@ -3,6 +3,7 @@ import { debounce } from './utils.js';
 
 export const ProductSuggestions = (function () {
     const cache = {};
+    let currentController = null;
 
     const fetchSuggestions = async (query, suggestionsList, inputField, endpoint) => {
         if (query.length < 2) {
@@ -20,11 +21,18 @@ export const ProductSuggestions = (function () {
         const baseUrl = getBaseUrl();
 
         try {
-            const response = await fetch(`${baseUrl}/handlers/${endpoint}?query=${encodeURIComponent(query)}`);
+            if (currentController) {
+                currentController.abort();
+            }
+            currentController = new AbortController();
+            const response = await fetch(`${baseUrl}/handlers/${endpoint}?query=${encodeURIComponent(query)}`, { signal: currentController.signal });
             const data = await response.json();
             cache[cacheKey] = data;
             showSuggestions(data, suggestionsList, inputField);
         } catch (error) {
+            if (error.name === 'AbortError') {
+                return;
+            }
             console.error(`Error fetching ${endpoint} suggestions:`, error);
         }
     };
