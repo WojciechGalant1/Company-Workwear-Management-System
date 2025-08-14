@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			const alertManager = AlertManager.create(alertManagerContainer);
 			const forms = document.querySelectorAll('form');
 			forms.forEach(form => {
-				form.addEventListener('submit', function (e) {
+				form.addEventListener('submit', async function (e) {
 					e.preventDefault();
 					const submitBtn = form.querySelector('.submitBtn');
 					const loadingSpinner = document.getElementById('loadingSpinner');
@@ -25,30 +25,30 @@ document.addEventListener('DOMContentLoaded', (event) => {
 					if (loadingSpinner) loadingSpinner.style.display = 'block';
 					const formData = new FormData(this);
 					const actionUrl = this.getAttribute('action');
-					fetch(actionUrl, { method: 'POST', body: formData })
-						.then(response => { if (!response.ok) throw new Error('Network error: ' + response.statusText); return response.json(); })
-						.then(data => {
-							if (data.success) {
-								alertManager.createAlert(data.message, 'success');
-								if (window.fromRaport) {
-									const modalElement = document.getElementById('confirmModal');
-									if (modalElement) { new bootstrap.Modal(modalElement).show(); }
-								} else {
-									setTimeout(() => { location.reload(); }, 200);
-								}
+					try {
+						const response = await fetch(actionUrl, { method: 'POST', body: formData });
+						if (!response.ok) throw new Error('Network error: ' + response.statusText);
+						const data = await response.json();
+						if (data.success) {
+							alertManager.createAlert(data.message, 'success');
+							if (window.fromRaport) {
+								const modalElement = document.getElementById('confirmModal');
+								if (modalElement) { new bootstrap.Modal(modalElement).show(); }
 							} else {
-								alertManager.createAlert(data.message || 'Wystąpił błąd podczas przetwarzania żądania.', 'danger');
+								await new Promise(resolve => setTimeout(resolve, 200));
+								location.reload();
 							}
-						})
-						.catch(() => {
-							alertManager.createAlert('Wystąpił błąd podczas przetwarzania żądania.', 'danger');
-							const modalElement = document.getElementById('confirmModal');
-							if (modalElement) { new bootstrap.Modal(modalElement).show(); }
-						})
-						.finally(() => {
-							if (submitBtn) submitBtn.disabled = false;
-							if (loadingSpinner) loadingSpinner.style.display = 'none';
-						});
+						} else {
+							alertManager.createAlert(data.message || 'Wystąpił błąd podczas przetwarzania żądania.', 'danger');
+						}
+					} catch (err) {
+						alertManager.createAlert('Wystąpił błąd podczas przetwarzania żądania.', 'danger');
+						const modalElement = document.getElementById('confirmModal');
+						if (modalElement) { new bootstrap.Modal(modalElement).show(); }
+					} finally {
+						if (submitBtn) submitBtn.disabled = false;
+						if (loadingSpinner) loadingSpinner.style.display = 'none';
+					}
 				});
 			});
 		},

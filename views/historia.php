@@ -116,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['pracownikID']) && !empt
                     echo "<td>{$statusText}</td>";
                     echo "<td>
                     <div class='d-flex flex-column align-items-center'>
-                        <button class='btn btn-secondary inform-btn mb-2' data-id='{$ubranie['id']}' data-action='{$buttonAction}' {$reportDisabledBtn}>{$buttonText}</button>
+                        <button class='btn btn-info inform-btn mb-2' data-id='{$ubranie['id']}' data-action='{$buttonAction}' {$reportDisabledBtn}>{$buttonText}</button>
                         <button class='btn btn-danger destroy-btn' data-id='{$ubranie['id']}' {$destroyDisabled}>Zniszcz ubranie</button>
                     </div>
                   </td>";
