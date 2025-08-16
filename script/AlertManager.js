@@ -67,7 +67,5 @@ export const AlertManager = (function () {
         return { createAlert, updateAlert, removeAlert };
     };
 
-    return {
-        create
-    };
+    return { create };
 })();
