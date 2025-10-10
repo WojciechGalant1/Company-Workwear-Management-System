@@ -1,10 +1,11 @@
 <?php
 header("Content-Type: application/json; charset=UTF-8");
 
-include_once __DIR__ . '/../app/controllers/WydaneUbraniaC.php';
+include_once __DIR__ . '/../app/services/ServiceContainer.php';
 
 try {
-    $wydaneUbraniaC = new WydaneUbraniaC();
+    $serviceContainer = ServiceContainer::getInstance();
+    $wydaneUbraniaC = $serviceContainer->getController('WydaneUbraniaC');
     $data = json_decode(file_get_contents("php://input"));
 
     if (!isset($data->id, $data->currentStatus)) {

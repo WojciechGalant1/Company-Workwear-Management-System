@@ -1,14 +1,11 @@
 <?php
-include_once __DIR__ . '/../database/Database.php';
+include_once __DIR__ . '/BaseController.php';
 include_once __DIR__ . '/../models/Kod.php';
 
-class KodC extends Database {
+class KodC extends BaseController {
 
-    private $pdo; 
-
-    public function __construct() {
-        $db = new Database();
-        $this->pdo = $db->getPdo();
+    public function __construct(PDO $pdo) {
+        parent::__construct($pdo);
     }
     
     public function create(Kod $kod) {

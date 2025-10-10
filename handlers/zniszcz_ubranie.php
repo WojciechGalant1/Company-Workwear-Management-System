@@ -1,12 +1,13 @@
 <?php
-include_once __DIR__ . '/../app/controllers/WydaneUbraniaC.php';
+include_once __DIR__ . '/../app/services/ServiceContainer.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
     $id = isset($data['id']) ? $data['id'] : null;
 
     if ($id) {
-        $wydaneUbraniaC = new WydaneUbraniaC();
+        $serviceContainer = ServiceContainer::getInstance();
+        $wydaneUbraniaC = $serviceContainer->getController('WydaneUbraniaC');
         $success = $wydaneUbraniaC->destroyStatus($id);
 
         if ($success) {

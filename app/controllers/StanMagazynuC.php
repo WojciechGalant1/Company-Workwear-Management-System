@@ -1,5 +1,5 @@
 <?php
-include_once __DIR__ . '/../database/Database.php';
+include_once __DIR__ . '/BaseController.php';
 include_once __DIR__ . '/../models/StanMagazynu.php';
 include_once __DIR__ . '/../models/HistoriaZamowien.php';
 include_once __DIR__ . '/../models/SzczegolyZamowienia.php';
@@ -9,13 +9,10 @@ include_once __DIR__ . '/UserC.php';
 include_once __DIR__ . '/HistoriaZamowienC.php';
 include_once __DIR__ . '/SzczegolyZamowieniaC.php';
 
-class StanMagazynuC extends Database {
+class StanMagazynuC extends BaseController {
 
-    public $pdo; 
-
-    public function __construct() {
-        $db = new Database();
-        $this->pdo = $db->getPdo();
+    public function __construct(PDO $pdo) {
+        parent::__construct($pdo);
     }
 
     public function create(StanMagazynu $stanMagazynu) {
@@ -96,9 +93,9 @@ class StanMagazynuC extends Database {
 
     public function updateStanMagazynu($id, $nazwa, $rozmiar, $ilosc, $iloscMin, $uwagi, $currentUserId = null) {
         try {
-            $this->pdo->beginTransaction();
-            $ubranieC = new UbranieC();
-            $rozmiarC = new RozmiarC();
+            //$this->pdo->beginTransaction();
+            $ubranieC = new UbranieC($this->pdo);
+            $rozmiarC = new RozmiarC($this->pdo);
     
             $existingUbranie = $ubranieC->findByName($nazwa);
             $idUbrania = $existingUbranie ? $existingUbranie->getIdUbranie() : $ubranieC->create(new Ubranie($nazwa));
@@ -144,16 +141,16 @@ class StanMagazynuC extends Database {
                 return ['status' => 'error', 'message' => 'Błąd podczas aktualizacji ilości.'];
             }
         } catch (Exception $e) {
-            if ($this->pdo->inTransaction()) {
-                $this->pdo->rollBack();
-            }
+            // if ($this->pdo->inTransaction()) {
+            //     $this->pdo->rollBack();
+            // }
             return ['status' => 'error', 'message' => $e->getMessage()];
         }
     }
     
     private function addHistoriaZamowien($idUbrania, $idRozmiaru, $iloscDiff, $uwagi, $currentUserId = null) {
-        $historiaZamowienC = new HistoriaZamowienC();
-        $szczegolyZamowieniaC = new SzczegolyZamowieniaC();
+        $historiaZamowienC = new HistoriaZamowienC($this->pdo);
+        $szczegolyZamowieniaC = new SzczegolyZamowieniaC($this->pdo);
 
         $userId = $currentUserId !== null ? $currentUserId : (isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null);
         if (!$userId) {

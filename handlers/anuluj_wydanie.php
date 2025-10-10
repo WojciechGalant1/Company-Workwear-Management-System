@@ -1,7 +1,5 @@
 <?php
-include_once __DIR__ . '/../app/controllers/WydaneUbraniaC.php';
-include_once __DIR__ . '/../app/controllers/StanMagazynuC.php';
-include_once __DIR__ . '/../app/controllers/WydaniaC.php';
+include_once __DIR__ . '/../app/services/ServiceContainer.php';
 
 header('Content-Type: application/json; charset=utf-8');
 
@@ -14,9 +12,10 @@ try {
 
     $ubranieId = $data['id'];
 
-    $wydaneUbraniaC = new WydaneUbraniaC();
-    $stanMagazynuC = new StanMagazynuC();
-    $wydaniaC = new WydaniaC();
+    $serviceContainer = ServiceContainer::getInstance();
+    $wydaneUbraniaC = $serviceContainer->getController('WydaneUbraniaC');
+    $stanMagazynuC = $serviceContainer->getController('StanMagazynuC');
+    $wydaniaC = $serviceContainer->getController('WydaniaC');
 
     $wydaneUbranie = $wydaneUbraniaC->getUbraniaById($ubranieId);
     if (!$wydaneUbranie) {

@@ -1,9 +1,10 @@
 <?php
-include_once __DIR__ . '/../app/controllers/PracownikC.php';
+include_once __DIR__ . '/../app/services/ServiceContainer.php';
 
 $query = isset($_GET['query']) ? $_GET['query'] : '';
 
-$pracownikC = new PracownikC();
+$serviceContainer = ServiceContainer::getInstance();
+$pracownikC = $serviceContainer->getController('PracownikC');
 $pracownicy = $pracownikC->searchByName($query);
 
 header('Content-Type: application/json');

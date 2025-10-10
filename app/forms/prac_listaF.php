@@ -1,5 +1,5 @@
 <?php
-include_once __DIR__ . '/../controllers/PracownikC.php';
+include_once __DIR__ . '/../services/ServiceContainer.php';
 
 $response = [];
 
@@ -12,7 +12,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $status = isset($_POST['status']) ? $_POST['status'] : '';
 
     if (!empty($id) && !empty($imie) && !empty($nazwisko) && !empty($stanowisko) && $status !== '') {
-        $pracownikC = new PracownikC();
+        $serviceContainer = ServiceContainer::getInstance();
+        $pracownikC = $serviceContainer->getController('PracownikC');
 
         if ($pracownikC->update($id, $imie, $nazwisko, $stanowisko, $status)) {
             $response['success'] = true;

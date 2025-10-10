@@ -1,11 +1,12 @@
 <?php
 header('Content-Type: application/json');
-include_once __DIR__ . '/../app/controllers/UbranieC.php';
+include_once __DIR__ . '/../app/services/ServiceContainer.php';
 
 try {
     $query = isset($_GET['query']) ? $_GET['query'] : '';
 
-    $ubranieC = new UbranieC();
+    $serviceContainer = ServiceContainer::getInstance();
+    $ubranieC = $serviceContainer->getController('UbranieC');
     $ubrania = $ubranieC->searchByName($query);
 
     if ($ubrania === false) {

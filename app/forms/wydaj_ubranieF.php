@@ -2,13 +2,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-include_once __DIR__ . '/../controllers/PracownikC.php';
-include_once __DIR__ . '/../controllers/UbranieC.php';
-include_once __DIR__ . '/../controllers/RozmiarC.php';
-include_once __DIR__ . '/../controllers/WydaniaC.php';
-include_once __DIR__ . '/../controllers/WydaneUbraniaC.php';
-include_once __DIR__ . '/../controllers/StanMagazynuC.php';
-include_once __DIR__ . '/../controllers/UserC.php';
+include_once __DIR__ . '/../services/ServiceContainer.php';
 
 $response = [];
 
@@ -16,7 +10,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pracownikID = isset($_POST['pracownikID']) ? $_POST['pracownikID'] : '';
     $uwagi = isset($_POST['uwagi']) ? $_POST['uwagi'] : '';
 
-    $pracownikC = new PracownikC();
+    $serviceContainer = ServiceContainer::getInstance();
+    $pracownikC = $serviceContainer->getController('PracownikC');
     $pracownik = $pracownikC->getById($pracownikID);
 
     if (!$pracownik) {
@@ -31,8 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $current_user_id = $_SESSION['user_id'];
 
-    $dbRstUsers = new UserC();
-    $currentUser = $dbRstUsers->getUserById($current_user_id);
+    $userC = $serviceContainer->getController('UserC');
+    $currentUser = $userC->getUserById($current_user_id);
 
     if (!$currentUser) {
         $response['success'] = false;
@@ -42,9 +37,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    $wydaniaC = new WydaniaC();
-    $wydaneUbraniaC = new WydaneUbraniaC();
-    $stanMagazynuC = new StanMagazynuC();
+    $wydaniaC = $serviceContainer->getController('WydaniaC');
+    $wydaneUbraniaC = $serviceContainer->getController('WydaneUbraniaC');
+    $stanMagazynuC = $serviceContainer->getController('StanMagazynuC');
 
     $wydanie = new Wydania($current_user_id, $pracownik['id_pracownik'], $data_wydania_obj, $uwagi);
     $id_wydania = $wydaniaC->create($wydanie);

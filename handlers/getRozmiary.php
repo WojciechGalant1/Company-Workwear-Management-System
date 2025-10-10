@@ -1,9 +1,10 @@
 <?php
-include_once __DIR__ . '/../app/controllers/UbranieC.php';
+include_once __DIR__ . '/../app/services/ServiceContainer.php';
 
 $ubranie_id  = isset($_GET['ubranie_id']) ? $_GET['ubranie_id'] : '';
 
-$ubranieC = new UbranieC();
+$serviceContainer = ServiceContainer::getInstance();
+$ubranieC = $serviceContainer->getController('UbranieC');
 $rozmiary = $ubranieC->getRozmiaryByUbranieId($ubranie_id);
 
 header('Content-Type: application/json');

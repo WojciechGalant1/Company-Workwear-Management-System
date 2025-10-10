@@ -1,11 +1,12 @@
 <?php
 header('Content-Type: application/json');
-include_once __DIR__ . '/../app/controllers/RozmiarC.php';
+include_once __DIR__ . '/../app/services/ServiceContainer.php';
 
 try {
     $query = isset($_GET['query']) ? $_GET['query'] : '';
 
-    $rozmiarC = new RozmiarC();
+    $serviceContainer = ServiceContainer::getInstance();
+    $rozmiarC = $serviceContainer->getController('RozmiarC');
     $rozmiary = $rozmiarC->searchByName($query);
 
     header('Content-Type: application/json');

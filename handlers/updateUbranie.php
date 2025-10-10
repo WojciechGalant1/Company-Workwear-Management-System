@@ -1,5 +1,5 @@
 <?php
-include_once __DIR__ . '/../app/controllers/StanMagazynuC.php';
+include_once __DIR__ . '/../app/services/ServiceContainer.php';
 include_once __DIR__ . '/../app/auth/SessionManager.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -14,7 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $iloscMin = $_POST['iloscMin'];
     $uwagi = $_POST['uwagi'];
 
-    $stanMagazynuC = new StanMagazynuC();
+    $serviceContainer = ServiceContainer::getInstance();
+    $stanMagazynuC = $serviceContainer->getController('StanMagazynuC');
 
     $result = $stanMagazynuC->updateStanMagazynu($id, $nazwa, $rozmiar, $ilosc, $iloscMin, $uwagi, $currentUserId);
 

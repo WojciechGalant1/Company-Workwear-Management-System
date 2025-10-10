@@ -5,13 +5,12 @@ include_once __DIR__ . '../../layout/header.php';
 include_once __DIR__ . '../../app/auth/Auth.php';
 checkAccess(4);
 
-include_once __DIR__ . '../../app/controllers/PracownikC.php';
-include_once __DIR__ . '../../app/controllers/WydaniaC.php';
-include_once __DIR__ . '../../app/controllers/WydaneUbraniaC.php';
+include_once __DIR__ . '../../app/services/ServiceContainer.php';
 
-$pracownikC = new PracownikC();
-$wydaniaC = new WydaniaC();
-$wydaneUbraniaC = new WydaneUbraniaC();
+$serviceContainer = ServiceContainer::getInstance();
+$pracownikC = $serviceContainer->getController('PracownikC');
+$wydaniaC = $serviceContainer->getController('WydaniaC');
+$wydaneUbraniaC = $serviceContainer->getController('WydaneUbraniaC');
 $ubraniaPoTerminie = $wydaneUbraniaC->getUbraniaPoTerminie();
 ?>
 <div id="alertContainer"></div>

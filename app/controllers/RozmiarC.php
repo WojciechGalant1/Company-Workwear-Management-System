@@ -1,14 +1,11 @@
 <?php
-include_once __DIR__ . '/../database/Database.php';
+include_once __DIR__ . '/BaseController.php';
 include_once __DIR__ . '/../models/Rozmiar.php';
 
-class RozmiarC extends Database {
+class RozmiarC extends BaseController {
 
-    private $pdo; 
-
-    public function __construct() {
-        $db = new Database();
-        $this->pdo = $db->getPdo();
+    public function __construct(PDO $pdo) {
+        parent::__construct($pdo);
     }
     
     public function create(Rozmiar $rozmiar) {

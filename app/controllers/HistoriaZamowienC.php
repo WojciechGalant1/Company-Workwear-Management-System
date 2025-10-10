@@ -1,16 +1,14 @@
 <?php
-include_once __DIR__ . '/../database/Database.php';
+include_once __DIR__ . '/BaseController.php';
 include_once __DIR__ . '/../models/HistoriaZamowien.php';
 include_once __DIR__ . '/UbranieC.php';
 include_once __DIR__ . '/RozmiarC.php';
 include_once __DIR__ . '/StanMagazynuC.php';
 
-class HistoriaZamowienC extends Database {
+class HistoriaZamowienC extends BaseController {
 
-    private $pdo;
-    public function __construct() {
-        $db = new Database();
-        $this->pdo = $db->getPdo();
+    public function __construct(PDO $pdo) {
+        parent::__construct($pdo);
     }
 
     public function create(HistoriaZamowien $zamowienie) {
@@ -41,13 +39,13 @@ class HistoriaZamowienC extends Database {
     }
 
     public function dodajDoMagazynu(HistoriaZamowien $zamowienie) {
-        $szczegolyZamowieniaC = new SzczegolyZamowieniaC();
+        $szczegolyZamowieniaC = new SzczegolyZamowieniaC($this->pdo);
         $szczegoly = $szczegolyZamowieniaC->getByZamowienieId($zamowienie->getId());
 
         foreach ($szczegoly as $szczegolData) {
-            $ubranieC = new UbranieC();
-            $rozmiarC = new RozmiarC();
-            $stanMagazynuC = new StanMagazynuC();
+            $ubranieC = new UbranieC($this->pdo);
+            $rozmiarC = new RozmiarC($this->pdo);
+            $stanMagazynuC = new StanMagazynuC($this->pdo);
 
             $idUbrania = $szczegolData['id_ubrania'];
             $idRozmiaru = $szczegolData['id_rozmiaru'];

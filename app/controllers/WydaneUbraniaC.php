@@ -1,18 +1,16 @@
 <?php
-include_once __DIR__ . '/../database/Database.php';
+include_once __DIR__ . '/BaseController.php';
 include_once __DIR__ . '/../models/WydaneUbrania.php';
 
-class WydaneUbraniaC extends Database {
+class WydaneUbraniaC extends BaseController {
 
-    private $pdo;
     private $currentDate;
     private $twoMonthsAhead; 
     private $sixMonthsAgo;
 
-    public function __construct()
+    public function __construct(PDO $pdo)
     {
-        $db = new Database();
-        $this->pdo = $db->getPdo();
+        parent::__construct($pdo);
         $this->currentDate = new DateTime();
         $this->twoMonthsAhead = (new DateTime())->modify('+2 months');
         $this->sixMonthsAgo = (new DateTime())->modify('-6 months');

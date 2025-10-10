@@ -1,8 +1,9 @@
 <?php
-include_once __DIR__ . '/../app/controllers/KodC.php';
+include_once __DIR__ . '/../app/services/ServiceContainer.php';
 
 if (isset($_GET['kod'])) {
-    $kodC = new KodC();
+    $serviceContainer = ServiceContainer::getInstance();
+    $kodC = $serviceContainer->getController('KodC');
     $kodData = $kodC->findByNazwa($_GET['kod']);
 
     if ($kodData) {

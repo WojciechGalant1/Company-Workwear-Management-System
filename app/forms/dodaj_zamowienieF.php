@@ -2,12 +2,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-include_once __DIR__ . '/../controllers/HistoriaZamowienC.php';
-include_once __DIR__ . '/../controllers/SzczegolyZamowieniaC.php';
-include_once __DIR__ . '/../controllers/UbranieC.php';
-include_once __DIR__ . '/../controllers/RozmiarC.php';
-include_once __DIR__ . '/../controllers/KodC.php';
-include_once __DIR__ . '/../controllers/UserC.php';
+include_once __DIR__ . '/../services/ServiceContainer.php';
 
 $response = array();
 
@@ -17,8 +12,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $uwagi = isset($_POST['uwagi']) ? $_POST['uwagi'] : '';
 
     $current_user_id = $_SESSION['user_id'];
-    $dbRstUsers = new UserC();
-    $currentUser = $dbRstUsers->getUserById($current_user_id);
+    $serviceContainer = ServiceContainer::getInstance();
+    $userC = $serviceContainer->getController('UserC');
+    $currentUser = $userC->getUserById($current_user_id);
 
     if (!$currentUser) {
         $response['success'] = false;
@@ -29,9 +25,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $zamowienie = new HistoriaZamowien($data_zamowienia_obj, $current_user_id, $uwagi, $status);
-    $zamowienieC = new HistoriaZamowienC();
-    $szczegolyZamowieniaC = new SzczegolyZamowieniaC();
-    $kodC = new KodC();
+    $zamowienieC = $serviceContainer->getController('HistoriaZamowienC');
+    $szczegolyZamowieniaC = $serviceContainer->getController('SzczegolyZamowieniaC');
+    $kodC = $serviceContainer->getController('KodC');
 
 
     if ($zamowienieC->create($zamowienie)) {
@@ -48,8 +44,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $iloscMin = isset($ubranie['iloscMin']) ? $ubranie['iloscMin'] : 0; 
                 $kod_nazwa = $ubranie['kod'];
 
-                $ubranieC = new UbranieC();
-                $rozmiarC = new RozmiarC();
+                $ubranieC = $serviceContainer->getController('UbranieC');
+                $rozmiarC = $serviceContainer->getController('RozmiarC');
 
                 $idUbrania = $ubranieC->firstOrCreate(new Ubranie($nazwa));
                 $idRozmiaru = $rozmiarC->firstOrCreate(new Rozmiar($rozmiar));

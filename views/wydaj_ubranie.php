@@ -4,14 +4,11 @@ include_once __DIR__ . '../../layout/header.php';
 include_once __DIR__ . '../../app/auth/Auth.php';
 checkAccess(1);
 
-include_once __DIR__ . '../../app/controllers/PracownikC.php';
-include_once __DIR__ . '../../app/controllers/UbranieC.php';
-include_once __DIR__ . '../../app/controllers/WydaniaC.php';
-include_once __DIR__ . '../../app/controllers/WydaneUbraniaC.php';
+include_once __DIR__ . '../../app/services/ServiceContainer.php';
 
-
-$pracownikC = new PracownikC();
-$ubranieC = new UbranieC();
+$serviceContainer = ServiceContainer::getInstance();
+$pracownikC = $serviceContainer->getController('PracownikC');
+$ubranieC = $serviceContainer->getController('UbranieC');
 $ubrania = $ubranieC->getAllUnique();
 
 include_once __DIR__ . '../../app/helpers/DateHelper.php';
@@ -30,13 +27,13 @@ if ($fromRaport) {
     $stanowisko = isset($_GET['stanowisko']) ? htmlspecialchars($_GET['stanowisko']) : '';
 
 
-    $wydaneUbraniaC = new WydaneUbraniaC();
+    $wydaneUbraniaC = $serviceContainer->getController('WydaneUbraniaC');
 
     $pracownikId = isset($_GET['pracownikId']) ? htmlspecialchars($_GET['pracownikId']) : '';
     $expiredUbrania = [];
 
     if ($pracownikId) {
-        $wydaniaC = new WydaniaC();
+        $wydaniaC = $serviceContainer->getController('WydaniaC');
         $wydaniaPracownika = $wydaniaC->getWydaniaByPracownikId($pracownikId);
 
         foreach ($wydaniaPracownika as $wydanie) {

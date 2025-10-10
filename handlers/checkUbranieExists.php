@@ -1,13 +1,14 @@
 <?php
 header('Content-Type: application/json');
-include_once __DIR__ . '/../app/controllers/StanMagazynuC.php';
+include_once __DIR__ . '/../app/services/ServiceContainer.php';
 
 try {
     if (isset($_GET['nazwa']) && isset($_GET['rozmiar'])) {
         $nazwa = $_GET['nazwa'];
         $rozmiar = $_GET['rozmiar'];
 
-        $stanMagazynuC = new StanMagazynuC();
+        $serviceContainer = ServiceContainer::getInstance();
+        $stanMagazynuC = $serviceContainer->getController('StanMagazynuC');
         $ubranieExists = $stanMagazynuC->findByUbranieAndRozmiarByName($nazwa, $rozmiar);
 
         $response = ['exists' => (bool)$ubranieExists];

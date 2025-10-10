@@ -1,5 +1,5 @@
 <?php
-include_once __DIR__ . '/../controllers/UserC.php';
+include_once __DIR__ . '/../services/ServiceContainer.php';
 include_once __DIR__ . '/../helpers/UrlHelper.php';
 
 function checkAccess($requiredStatus) {
@@ -13,7 +13,8 @@ function checkAccess($requiredStatus) {
         exit();
     }
 
-    $userController = new UserC();
+    $serviceContainer = ServiceContainer::getInstance();
+    $userController = $serviceContainer->getController('UserC');
     $user = $userController->getUserById($_SESSION['user_id']);
 
     if (!$user || $user['status'] < $requiredStatus) {

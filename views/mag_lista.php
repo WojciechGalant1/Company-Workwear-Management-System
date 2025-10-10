@@ -4,9 +4,10 @@ header("Content-Type:text/html; charset=utf-8");
 include_once __DIR__ . '../../layout/header.php';
 include_once __DIR__ . '../../app/auth/Auth.php';
 checkAccess(2);
-include_once __DIR__ . '../../app/controllers/StanMagazynuC.php';
+include_once __DIR__ . '../../app/services/ServiceContainer.php';
 
-$stanMagazynuC = new StanMagazynuC();
+$serviceContainer = ServiceContainer::getInstance();
+$stanMagazynuC = $serviceContainer->getController('StanMagazynuC');
 $ubrania = $stanMagazynuC->readAll();
 ?>
 

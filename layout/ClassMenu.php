@@ -1,6 +1,6 @@
 <?php
 
-include_once __DIR__ . '/../app/controllers/StanMagazynuC.php'; 
+include_once __DIR__ . '/../app/services/ServiceContainer.php';
 include_once __DIR__ . '/../app/auth/SessionManager.php';
 include_once __DIR__ . '/../app/helpers/UrlHelper.php';
 include_once __DIR__ . '/../app/helpers/NavBuilder.php';
@@ -11,7 +11,8 @@ class ClassMenu {
         $sessionManager = new SessionManager();
         $userStatus = $sessionManager->getUserStatus(); 
 
-        $stanMagazynuC = new StanMagazynuC();
+        $serviceContainer = ServiceContainer::getInstance();
+        $stanMagazynuC = $serviceContainer->getController('StanMagazynuC');
         $hasShortages = $stanMagazynuC->checkIlosc();
 
         // Get base URL and current URI
@@ -26,7 +27,7 @@ class ClassMenu {
             <div class="container-fluid">
                 <ul class="navbar-nav ms-2 d-flex align-items-center">    
                     <a class="navbar-brand" href="' . $baseUrl . '/">
-                        <img src="' . $baseUrl . '/img/protectve-equipment.png" class="logo-image" alt="Logo" height="30">
+                        <img src="' . $baseUrl . '/img/protective-equipment.png" class="logo-image" alt="Logo" height="30">
                     </a>';
         
         // navigation items based on user status
