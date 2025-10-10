@@ -98,6 +98,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $response['success'] = true;
         $response['message'] = "Zamówienie dodano pomyślnie, i stan magazynu został zaktualizowany.";
+        $response['newOrder'] = array(
+            'data' => $data_zamowienia_obj->format('Y-m-d H:i:s'),
+            'ilosc' => count($ubrania),
+            'status' => 'Dodane',
+            'uwagi' => $uwagi,
+            'timestamp' => time()
+        );
     } else {
         $response['success'] = false;
         $response['message'] = "Wystąpił problem podczas dodawania zamówienia.";

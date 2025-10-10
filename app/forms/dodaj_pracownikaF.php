@@ -35,6 +35,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($pracownikC->create($pracownik)) {
         $response['success'] = true;
         $response['message'] = "Pracownik został dodany pomyślnie.";
+        $response['newEmployee'] = array(
+            'imie' => $imie,
+            'nazwisko' => $nazwisko,
+            'stanowisko' => $stanowisko,
+            'timestamp' => date('Y-m-d H:i:s')
+        );
     } else {
         $response['success'] = false;
         $response['message'] = "Wystąpił problem podczas dodawania pracownika.";

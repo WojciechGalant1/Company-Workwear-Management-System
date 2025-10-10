@@ -6,10 +6,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
         new bootstrap.Tooltip(tooltipTriggerEl);
     });
 
+	// Initialize DOM Update System
+	let domUpdateSystem = null;
+
 	const moduleLoaders = {
 		AlertManager: async () => {
 			const { AlertManager } = await import('./script/AlertManager.js');
 			const { addCsrfToFormData } = await import('./script/utils.js');
+			const { DomUpdateSystem } = await import('./script/DomUpdateSystem.js');
+			
+			// Initialize DOM Update System
+			domUpdateSystem = DomUpdateSystem;
+			domUpdateSystem.initialize();
+			
 			const alertManagerContainer = document.getElementById('alertContainer');
 			if (!alertManagerContainer) {
 				console.warn('AlertManager: Element alertContainer nie został znaleziony.');
@@ -33,12 +42,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
 						const data = await response.json();
 						if (data.success) {
 							alertManager.createAlert(data.message, 'success');
+							
 							if (window.fromRaport) {
 								const modalElement = document.getElementById('confirmModal');
 								if (modalElement) { new bootstrap.Modal(modalElement).show(); }
 							} else {
-								await new Promise(resolve => setTimeout(resolve, 200));
-								location.reload();
+								await domUpdateSystem.updateDOMAfterFormSubmission(form, data);
 							}
 						} else {
 							alertManager.createAlert(data.message || 'Wystąpił błąd podczas przetwarzania żądania.', 'danger');

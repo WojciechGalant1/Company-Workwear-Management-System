@@ -105,5 +105,10 @@ export const WorkerSuggestions = (() => {
         usernameInput.addEventListener('input', onInputChange);
     };
 
-    return { create };
+    const clearCache = () => {
+        Object.keys(cache).forEach(key => delete cache[key]);
+        console.log('WorkerSuggestions cache cleared');
+    };
+
+    return { create, clearCache };
 })();

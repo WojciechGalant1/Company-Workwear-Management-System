@@ -127,6 +127,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (!isset($response['success']) || $response['success'] !== false) {
             $response['success'] = true;
             $response['message'] = "Ubrania zostały wydane pomyślnie, stan magazynu został zaktualizowany.";
+            $response['updatedItems'] = array();
+            
+            // Add information about updated inventory items
+            foreach ($_POST['ubrania'] as $ubranie) {
+                $idUbrania = intval($ubranie['id_ubrania']);
+                $idRozmiar = intval($ubranie['id_rozmiar']);
+                $ilosc = intval($ubranie['ilosc']);
+                
+                $response['updatedItems'][] = array(
+                    'id_ubrania' => $idUbrania,
+                    'id_rozmiar' => $idRozmiar,
+                    'ilosc_wydana' => $ilosc,
+                    'timestamp' => date('Y-m-d H:i:s')
+                );
+            }
         }
     }
 } else {
