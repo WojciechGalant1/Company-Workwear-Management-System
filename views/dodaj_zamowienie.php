@@ -9,6 +9,7 @@ checkAccess(2);
 <h2 class="mb-4">Dodawanie zamówienia</h2>
 
 <form id="zamowienieForm" action="<?php echo $baseUrl; ?>/app/forms/dodaj_zamowienieF.php" method="post" class="needs-validation" autocomplete="off">
+    <?php echo CsrfHelper::getTokenField(); ?>
     <div class="mb-3 p-3" id="ubraniaContainer">
         <div class="row ubranieRow mt-3 mb-3 border border-2 p-3 bg-body rounded">
             <div class="col-md-3 ">

@@ -1,21 +1,30 @@
 <?php
+include_once __DIR__ . '/../helpers/CsrfHelper.php';
 
 class SessionManager {
     public function __construct() {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
+        
+        // Initialize CSRF token using the new helper
+        if (!isset($_SESSION['csrf_token'])) {
+            CsrfHelper::generateToken();
+        }
+        
+        // Keep backward compatibility with old CSRF implementation
         if (!isset($_SESSION['csrf'])) {
-            $_SESSION['csrf'] = md5(uniqid(mt_rand(), true));
+            $_SESSION['csrf'] = CsrfHelper::getToken();
         }
     }
 
     public function login($userId, $status) {
         $_SESSION['user_id'] = $userId;
         $_SESSION['user_status'] = $status;
-        if (!isset($_SESSION['csrf'])) {
-            $_SESSION['csrf'] = md5(uniqid(mt_rand(), true));
-        }
+        
+        // Regenerate CSRF token on login for security
+        CsrfHelper::regenerateToken();
+        $_SESSION['csrf'] = CsrfHelper::getToken();
     }
 
     public function logout() {

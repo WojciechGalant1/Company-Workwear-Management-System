@@ -2,6 +2,7 @@
 include_once __DIR__ . '/../../app/models/User.php';
 include_once __DIR__ . '/../../app/database/Database.php';
 include_once __DIR__ . '/../../app/auth/SessionManager.php';
+include_once __DIR__ . '/../../app/helpers/CsrfHelper.php';
 
 header('Content-Type: application/json');
 

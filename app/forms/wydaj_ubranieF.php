@@ -3,12 +3,31 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 include_once __DIR__ . '/../services/ServiceContainer.php';
+include_once __DIR__ . '/../helpers/CsrfHelper.php';
 
-$response = [];
+$response = array();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $pracownikID = isset($_POST['pracownikID']) ? $_POST['pracownikID'] : '';
-    $uwagi = isset($_POST['uwagi']) ? $_POST['uwagi'] : '';
+    // Validate CSRF token
+    if (!CsrfHelper::validateToken()) {
+        $response['success'] = false;
+        $response['message'] = "Błąd bezpieczeństwa. Odśwież stronę i spróbuj ponownie.";
+        header("Content-Type: application/json");
+        echo json_encode($response);
+        exit;
+    }
+    
+    $pracownikID = isset($_POST['pracownikID']) ? trim($_POST['pracownikID']) : '';
+    $uwagi = isset($_POST['uwagi']) ? trim($_POST['uwagi']) : '';
+
+    // Validate required fields
+    if (empty($pracownikID)) {
+        $response['success'] = false;
+        $response['message'] = "Pracownik jest wymagany.";
+        header("Content-Type: application/json");
+        echo json_encode($response);
+        exit;
+    }
 
     $serviceContainer = ServiceContainer::getInstance();
     $pracownikC = $serviceContainer->getController('PracownikC');
@@ -46,17 +65,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $all_items_valid = true;
 
-    foreach ($_POST['ubrania'] as $ubranie) {
-        $idUbrania = isset($ubranie['id_ubrania']) ? $ubranie['id_ubrania'] : null;
-        $idRozmiar = isset($ubranie['id_rozmiar']) ? $ubranie['id_rozmiar'] : null;
+    // Validate ubrania data
+    if (!isset($_POST['ubrania']) || !is_array($_POST['ubrania'])) {
+        $response['success'] = false;
+        $response['message'] = "Brak danych o ubraniach.";
+        header("Content-Type: application/json");
+        echo json_encode($response);
+        exit;
+    }
 
-        //$kod = isset($ubranie['kod']) ? $ubranie['kod'] : null;
-        $ilosc = isset($ubranie['ilosc']) ? $ubranie['ilosc'] : 0;
+    foreach ($_POST['ubrania'] as $ubranie) {
+        $idUbrania = isset($ubranie['id_ubrania']) ? intval($ubranie['id_ubrania']) : 0;
+        $idRozmiar = isset($ubranie['id_rozmiar']) ? intval($ubranie['id_rozmiar']) : 0;
+        $ilosc = isset($ubranie['ilosc']) ? intval($ubranie['ilosc']) : 0;
+        
         $iloscDostepna = $stanMagazynuC->getIlosc($idUbrania, $idRozmiar);
 
         if ($idUbrania == 0 || $idRozmiar == 0) {
             $response['success'] = false;
             $response['message'] = "Kod nie został wprowadzony lub został wprowadzony niepoprawnie";
+            $all_items_valid = false;
+            break;
+        }
+
+        if ($ilosc <= 0) {
+            $response['success'] = false;
+            $response['message'] = "Ilość musi być większa od zera";
             $all_items_valid = false;
             break;
         }
@@ -71,9 +105,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($all_items_valid) {
         foreach ($_POST['ubrania'] as $ubranie) {
-            $idUbrania = $ubranie['id_ubrania'];
-            $idRozmiar = $ubranie['id_rozmiar'];
-            $ilosc = $ubranie['ilosc'];
+            $idUbrania = intval($ubranie['id_ubrania']);
+            $idRozmiar = intval($ubranie['id_rozmiar']);
+            $ilosc = intval($ubranie['ilosc']);
             $status = 1;
 
             $data_waznosci_miesiace = isset($ubranie['data_waznosci']) ? intval($ubranie['data_waznosci']) : 0;
@@ -90,8 +124,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 break;
             }
         }
-        $response['success'] = true;
-        $response['message'] = "Ubrania zostały wydane pomyślnie, stan magazynu został zaktualizowany.";
+        if (!isset($response['success']) || $response['success'] !== false) {
+            $response['success'] = true;
+            $response['message'] = "Ubrania zostały wydane pomyślnie, stan magazynu został zaktualizowany.";
+        }
     }
 } else {
     $response['success'] = false;
@@ -100,3 +136,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 header("Content-Type: application/json");
 echo json_encode($response);
+?>

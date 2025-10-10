@@ -8,6 +8,7 @@ checkAccess(4);
 
 <h2 class="mb-4">Dodawanie pracownika</h2>
 <form id="pracownikForm" action="<?php echo $baseUrl; ?>/app/forms/dodaj_pracownikaF.php" method="post" class="needs-validation">
+    <?php echo CsrfHelper::getTokenField(); ?>
     <div class="mb-3 col-md-5">
         <label for="imie" class="form-label">Imię:</label>
         <input type="text" class="form-control" id="imie" name="imie" required>

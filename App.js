@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	const moduleLoaders = {
 		AlertManager: async () => {
 			const { AlertManager } = await import('./script/AlertManager.js');
+			const { addCsrfToFormData } = await import('./script/utils.js');
 			const alertManagerContainer = document.getElementById('alertContainer');
 			if (!alertManagerContainer) {
 				console.warn('AlertManager: Element alertContainer nie został znaleziony.');
@@ -24,6 +25,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 					if (submitBtn) submitBtn.disabled = true;
 					if (loadingSpinner) loadingSpinner.style.display = 'block';
 					const formData = new FormData(this);
+					addCsrfToFormData(formData);
 					const actionUrl = this.getAttribute('action');
 					try {
 						const response = await fetch(actionUrl, { method: 'POST', body: formData });

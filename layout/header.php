@@ -5,6 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Include helpers
 include_once __DIR__ . '/../app/helpers/UrlHelper.php';
+include_once __DIR__ . '/../app/helpers/CsrfHelper.php';
 
 // Get base URL for assets and current URI
 $baseUrl = UrlHelper::getBaseUrl();
@@ -19,6 +20,12 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
+// Get CSRF token for JavaScript
+$csrfToken = CsrfHelper::getToken();
+if (!$csrfToken) {
+    $csrfToken = CsrfHelper::generateToken();
+}
+
 echo '
 <!DOCTYPE html>
 <html lang="pl">
@@ -26,6 +33,7 @@ echo '
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="base-url" content="' . $baseUrl . '">
+    <meta name="csrf-token" content="' . htmlspecialchars($csrfToken, ENT_QUOTES, 'UTF-8') . '">
     <title>Ubrania</title>
     <link rel="icon" href="' . $baseUrl . '/img/protective-equipement.png" type="image/png">
     <link rel="stylesheet" href="' . $baseUrl . '/styl/css/custom.css">

@@ -3,13 +3,23 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 include_once __DIR__ . '/../services/ServiceContainer.php';
+include_once __DIR__ . '/../helpers/CsrfHelper.php';
 
 $response = array();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Validate CSRF token
+    if (!CsrfHelper::validateToken()) {
+        $response['success'] = false;
+        $response['message'] = "Błąd bezpieczeństwa. Odśwież stronę i spróbuj ponownie.";
+        header("Content-Type: application/json");
+        echo json_encode($response);
+        exit;
+    }
+    
     $data_zamowienia_obj = new DateTime();
     $status = 1;
-    $uwagi = isset($_POST['uwagi']) ? $_POST['uwagi'] : '';
+    $uwagi = isset($_POST['uwagi']) ? trim($_POST['uwagi']) : '';
 
     $current_user_id = $_SESSION['user_id'];
     $serviceContainer = ServiceContainer::getInstance();
@@ -29,7 +39,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $szczegolyZamowieniaC = $serviceContainer->getController('SzczegolyZamowieniaC');
     $kodC = $serviceContainer->getController('KodC');
 
-
     if ($zamowienieC->create($zamowienie)) {
         $zamowienieId = $zamowienieC->getLastInsertId();
         $zamowienie->setId($zamowienieId); 
@@ -37,12 +46,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (!empty($ubrania) && is_array($ubrania)) {
             foreach ($ubrania as $ubranie) {
-                $nazwa = $ubranie['nazwa'];
-                $rozmiar = $ubranie['rozmiar'];
-                $firma = $ubranie['firma'];
-                $ilosc = $ubranie['ilosc'];
-                $iloscMin = isset($ubranie['iloscMin']) ? $ubranie['iloscMin'] : 0; 
-                $kod_nazwa = $ubranie['kod'];
+                $nazwa = isset($ubranie['nazwa']) ? trim($ubranie['nazwa']) : '';
+                $rozmiar = isset($ubranie['rozmiar']) ? trim($ubranie['rozmiar']) : '';
+                $firma = isset($ubranie['firma']) ? trim($ubranie['firma']) : '';
+                $ilosc = isset($ubranie['ilosc']) ? intval($ubranie['ilosc']) : 0;
+                $iloscMin = isset($ubranie['iloscMin']) ? intval($ubranie['iloscMin']) : 0; 
+                $kod_nazwa = isset($ubranie['kod']) ? trim($ubranie['kod']) : '';
+
+                // Basic validation
+                if (empty($nazwa) || empty($rozmiar) || empty($firma) || $ilosc <= 0) {
+                    $response['success'] = false;
+                    $response['message'] = "Wszystkie pola są wymagane i ilość musi być większa od zera.";
+                    echo json_encode($response);
+                    exit;
+                }
 
                 $ubranieC = $serviceContainer->getController('UbranieC');
                 $rozmiarC = $serviceContainer->getController('RozmiarC');

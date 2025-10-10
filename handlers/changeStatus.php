@@ -2,18 +2,25 @@
 header("Content-Type: application/json; charset=UTF-8");
 
 include_once __DIR__ . '/../app/services/ServiceContainer.php';
+include_once __DIR__ . '/../app/helpers/CsrfHelper.php';
 
 try {
     $serviceContainer = ServiceContainer::getInstance();
     $wydaneUbraniaC = $serviceContainer->getController('WydaneUbraniaC');
-    $data = json_decode(file_get_contents("php://input"));
+    $data = json_decode(file_get_contents("php://input"), true);
 
-    if (!isset($data->id, $data->currentStatus)) {
+    if (!isset($data['id'], $data['currentStatus'])) {
         throw new Exception('Invalid input data');
     }
 
-    $id = $data->id;
-    $currentStatus = $data->currentStatus;
+    // Validate CSRF token
+    if (!CsrfHelper::validateTokenFromJson($data)) {
+        echo json_encode(CsrfHelper::getErrorResponse());
+        exit;
+    }
+
+    $id = intval($data['id']);
+    $currentStatus = intval($data['currentStatus']);
     $newStatus = ($currentStatus == 1) ? 0 : 1;
 
     if ($wydaneUbraniaC->updateStatus($id, $newStatus)) {

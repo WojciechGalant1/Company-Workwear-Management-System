@@ -1,13 +1,32 @@
 <?php
 include_once __DIR__ . '/../services/ServiceContainer.php';
+include_once __DIR__ . '/../helpers/CsrfHelper.php';
 
-$response = [];
+$response = array();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $imie = $_POST['imie'];
-    $nazwisko = $_POST['nazwisko'];
-    $stanowisko = $_POST['stanowisko'];
+    // Validate CSRF token
+    if (!CsrfHelper::validateToken()) {
+        $response['success'] = false;
+        $response['message'] = "Błąd bezpieczeństwa. Odśwież stronę i spróbuj ponownie.";
+        header('Content-Type: application/json');
+        echo json_encode($response);
+        exit;
+    }
+    
+    $imie = isset($_POST['imie']) ? trim($_POST['imie']) : '';
+    $nazwisko = isset($_POST['nazwisko']) ? trim($_POST['nazwisko']) : '';
+    $stanowisko = isset($_POST['stanowisko']) ? trim($_POST['stanowisko']) : '';
     $status = 1;
+
+    // Basic input validation
+    if (empty($imie) || empty($nazwisko) || empty($stanowisko)) {
+        $response['success'] = false;
+        $response['message'] = "Wszystkie pola są wymagane.";
+        header('Content-Type: application/json');
+        echo json_encode($response);
+        exit;
+    }
 
     $pracownik = new Pracownik($imie, $nazwisko, $stanowisko, $status);
     $serviceContainer = ServiceContainer::getInstance();

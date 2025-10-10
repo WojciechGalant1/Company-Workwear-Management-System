@@ -1,4 +1,4 @@
-import { getBaseUrl } from './utils.js';
+import { getBaseUrl, addCsrfToObject } from './utils.js';
 
 export const ChangeStatus = (function () {
     let selectedId = null;
@@ -28,12 +28,14 @@ export const ChangeStatus = (function () {
         const baseUrl = getBaseUrl();
 
         try {
+            const requestData = addCsrfToObject({ id: selectedId, currentStatus });
+            
             const response = await fetch(`${baseUrl}/handlers/changeStatus.php`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ id: selectedId, currentStatus })
+                body: JSON.stringify(requestData)
             });
 
             const data = await response.json();
@@ -51,7 +53,7 @@ export const ChangeStatus = (function () {
                 }
                 window.location.reload();
             } else {
-                alert('Błąd podczas aktualizacji statusu.');
+                alert(data.message || 'Błąd podczas aktualizacji statusu.');
             }
         } catch (error) {
             console.error('Błąd:', error);
@@ -64,12 +66,14 @@ export const ChangeStatus = (function () {
         const baseUrl = getBaseUrl();
 
         try {
+            const requestData = addCsrfToObject({ id: selectedId, currentStatus: 1 });
+            
             const response = await fetch(`${baseUrl}/handlers/changeStatus.php`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ id: selectedId, currentStatus: 1 })
+                body: JSON.stringify(requestData)
             });
 
             const data = await response.json();
@@ -81,7 +85,7 @@ export const ChangeStatus = (function () {
                     window.location.reload();
                 }
             } else {
-                alert('Błąd podczas aktualizacji statusu.');
+                alert(data.message || 'Błąd podczas aktualizacji statusu.');
             }
         } catch (error) {
             console.error('Błąd:', error);
