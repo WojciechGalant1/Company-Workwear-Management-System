@@ -4,18 +4,30 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 require_once __DIR__ . '/../../app/helpers/UrlHelper.php';
+require_once __DIR__ . '/../../app/helpers/LocalizationHelper.php';
+require_once __DIR__ . '/../../app/helpers/LanguageSwitcher.php';
+
+// Initialize language system
+$currentLanguage = LanguageSwitcher::initialize();
+
 $baseUrl = UrlHelper::getBaseUrl();
+
+// Translation helper function for templates
+function __($key, $params = array()) {
+    return LocalizationHelper::translate($key, $params);
+}
 ?>
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="<?php echo $currentLanguage; ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="base-url" content="<?php echo $baseUrl; ?>">
+    <meta name="current-language" content="<?php echo $currentLanguage; ?>">
     <?php if (isset($_SESSION['csrf'])): ?>
     <meta name="csrf-token" content="<?php echo htmlspecialchars($_SESSION['csrf']); ?>">
     <?php endif; ?>
-    <title>Logowanie</title>
+    <title><?php echo __('login_title'); ?></title>
     <link rel="icon" href="<?php echo $baseUrl; ?>/img/protectve-equipment.png" type="image/png">
     <link rel="stylesheet" href="<?php echo $baseUrl; ?>/styl/css/custom.css">
     <link rel="stylesheet" href="<?php echo $baseUrl; ?>/layout/login.css">
@@ -33,8 +45,8 @@ $baseUrl = UrlHelper::getBaseUrl();
         <div class="row">
             <div class="col-lg-6">
                 <div class="hero-section mb-5 mb-lg-0">
-                    <h1 class="display-4 fw-bold text-primary mb-3">System Zarządzania<br>Ubraniami</h1>
-                    <p class="lead text-muted mb-4">Zaloguj się, aby zarządzać wydaniami ubrań i monitorować stan magazynu.</p>
+                    <h1 class="display-4 fw-bold text-primary mb-3"><?php echo __('app_title'); ?></h1>
+                    <p class="lead text-muted mb-4"><?php echo __('login_scan_code'); ?></p>
                     <div class="d-none alert text-center" id="logInfoError"></div>
                     <div class="alert-container"></div>
                     <div class="features mt-5">
@@ -45,8 +57,8 @@ $baseUrl = UrlHelper::getBaseUrl();
                                         <i class="bi bi-box-seam text-primary"></i>
                                     </div>
                                     <div>
-                                        <h5 class="mb-1">Magazyn</h5>
-                                        <p class="text-muted small mb-0">Zarządzaj stanem odzieży</p>
+                                        <h5 class="mb-1"><?php echo __('feature_warehouse'); ?></h5>
+                                        <p class="text-muted small mb-0"><?php echo __('feature_warehouse_desc'); ?></p>
                                     </div>
                                 </div>
                             </div>
@@ -56,8 +68,8 @@ $baseUrl = UrlHelper::getBaseUrl();
                                         <i class="bi bi-people text-primary"></i>
                                     </div>
                                     <div>
-                                        <h5 class="mb-1">Pracownicy</h5>
-                                        <p class="text-muted small mb-0">Monitoruj wydania</p>
+                                        <h5 class="mb-1"><?php echo __('feature_employees'); ?></h5>
+                                        <p class="text-muted small mb-0"><?php echo __('feature_employees_desc'); ?></p>
                                     </div>
                                 </div>
                             </div>
@@ -72,23 +84,24 @@ $baseUrl = UrlHelper::getBaseUrl();
                             <i class="loader mx-2" id="loadingSpinner" style="display: none; width: 35px; height: 35px; line-height: 35px; font-size: 35px; border-width: 5px;"></i>
                         </div>
                         <div class="card-header bg-primary text-white fw-bold py-3">
-                            <i class="bi bi-upc-scan me-2"></i> ZESKANUJ KOD
+                            <i class="bi bi-upc-scan me-2"></i> <?php echo __('login_title'); ?>
                         </div>
                         <div class="card-body p-4">
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control form-control-lg" name="kodID" id="kodID" autocomplete="off" placeholder="Kod identyfikatora">
-                                <label for="kodID">Kod identyfikatora</label>
+                                <input type="password" class="form-control form-control-lg" name="kodID" id="kodID" autocomplete="off" placeholder="<?php echo __('login_scan_code'); ?>">
+                                <label for="kodID"><?php echo __('login_scan_code'); ?></label>
                             </div>
                             <div class="d-grid gap-2">
                                 <button type="button" id="demoButton" class="btn btn-secondary btn-lg">
-                                    <i class="bi bi-person-badge me-2"></i> Demo
+                                    <i class="bi bi-person-badge me-2"></i> <?php echo __('login_demo'); ?>
                                 </button>
                             </div>
-                            <p class="text-muted mt-3"><i class="bi bi-info-circle me-2"></i> Zeskanuj kod swojego identyfikatora.</p>
+                            <p class="text-muted mt-3"><i class="bi bi-info-circle me-2"></i> <?php echo __('login_scan_code'); ?></p>
                         </div>
                     </div>
                     <div class="text-center mt-4">
-                        <p class="text-muted small">© <?php echo date('Y'); ?> System Zarządzania Ubraniami</p>
+                        <p class="text-muted small"><?php echo __('copyright', array('year' => date('Y'))); ?></p>
+                        <?php echo LanguageSwitcher::generateSimpleLinks(); ?>
                     </div>
                 </div>
             </div>
@@ -103,7 +116,7 @@ $baseUrl = UrlHelper::getBaseUrl();
                 <div class="spinner-border text-primary mb-3" role="status">
                     <span class="visually-hidden">Loading...</span>
                 </div>
-                <p class="mb-0">Sprawdzanie danych...</p>
+                <p class="mb-0"><?php echo __('status_processing'); ?></p>
             </div>
         </div>
     </div>

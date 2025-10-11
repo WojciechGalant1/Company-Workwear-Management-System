@@ -49,9 +49,9 @@ if ($fromRaport) {
 <div id="alertContainer"></div>
 
 <div class="d-flex align-items-center">
-    <h2 class="mb-4">Wydawanie ubrań</h2>
+    <h2 class="mb-4"><?php echo __('issue_title'); ?></h2>
     <div id="loadingSpinnerName" class="spinner-border mb-2 mx-4" style="display: none;" role="status">
-        <span class="visually-hidden">Loading...</span>
+        <span class="visually-hidden"><?php echo __('loading'); ?></span>
     </div>
 </div>
 

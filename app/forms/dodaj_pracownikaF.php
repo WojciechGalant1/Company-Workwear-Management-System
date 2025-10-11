@@ -1,6 +1,11 @@
 <?php
 include_once __DIR__ . '/../services/ServiceContainer.php';
 include_once __DIR__ . '/../helpers/CsrfHelper.php';
+include_once __DIR__ . '/../helpers/LocalizationHelper.php';
+include_once __DIR__ . '/../helpers/LanguageSwitcher.php';
+
+// Initialize language system
+$currentLanguage = LanguageSwitcher::initialize();
 
 $response = array();
 
@@ -8,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validate CSRF token
     if (!CsrfHelper::validateToken()) {
         $response['success'] = false;
-        $response['message'] = "Błąd bezpieczeństwa. Odśwież stronę i spróbuj ponownie.";
+        $response['message'] = LocalizationHelper::translate('error_csrf');
         header('Content-Type: application/json');
         echo json_encode($response);
         exit;
@@ -22,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Basic input validation
     if (empty($imie) || empty($nazwisko) || empty($stanowisko)) {
         $response['success'] = false;
-        $response['message'] = "Wszystkie pola są wymagane.";
+        $response['message'] = LocalizationHelper::translate('employee_required_fields');
         header('Content-Type: application/json');
         echo json_encode($response);
         exit;
@@ -34,14 +39,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($pracownikC->create($pracownik)) {
         $response['success'] = true;
-        $response['message'] = "Pracownik został dodany pomyślnie.";
+        $response['message'] = LocalizationHelper::translate('employee_add_success');
     } else {
         $response['success'] = false;
-        $response['message'] = "Wystąpił problem podczas dodawania pracownika.";
+        $response['message'] = LocalizationHelper::translate('error_general');
     }
 } else {
     $response['success'] = false;
-    $response['message'] = "Wystąpił błąd podczas przetwarzania żądania. Spróbuj ponownie później lub skontaktuj się z pomocą techniczną (oczekiwano metody POST)."; 
+    $response['message'] = LocalizationHelper::translate('error_general'); 
 }
 
 header('Content-Type: application/json');
