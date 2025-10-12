@@ -100,16 +100,16 @@ $pracownicy = $pracownikC->getAll();
         new DataTable('#example', {
             lengthMenu: [
                 [15, 25, 50, -1],
-                [15, 25, 50, "<?php echo __('all'); ?>"],
+                [15, 25, 50, "<?php echo __('table_all'); ?>"],
             ],
             language: {
-                processing: "<?php echo __('status_processing'); ?>",
+                processing: "<?php echo __('table_processing'); ?>",
                 search: "<?php echo __('search'); ?>:",
                 lengthMenu: "<?php echo __('table_show_menu'); ?>",
                 info: "<?php echo __('table_info'); ?>",
                 infoEmpty: "<?php echo __('table_info_empty'); ?>",
                 infoFiltered: "<?php echo __('table_info_filtered'); ?>",
-                loadingRecords: "<?php echo __('status_loading'); ?>",
+                loadingRecords: "<?php echo __('table_loading'); ?>",
                 zeroRecords: "<?php echo __('table_zero_records'); ?>",
                 emptyTable: "<?php echo __('table_empty'); ?>",
                 paginate: {

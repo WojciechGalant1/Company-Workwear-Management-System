@@ -15,18 +15,18 @@ $ubraniaPoTerminie = $wydaneUbraniaC->getUbraniaPoTerminie();
 ?>
 <div id="alertContainer"></div>
 
-<h2 class="mb-4">Raport wydawania</h2>
+<h2 class="mb-4"><?php echo __('reports_issue_title'); ?></h2>
 <table id="example" class="table table-striped table-hover table-bordered text-center align-middle" style="width:100%">
     <thead class="table-dark">
         <tr>
-            <th scope="col">Data ważności</th>
-            <th scope="col">Imie i nazwisko</th>
-            <th scope="col">Stanowisko</th>
-            <th scope="col">Ubranie</th>
-            <th scope="col">Rozmiar</th>
-            <th scope="col">Ilość</th>
-            <th scope="col">Status</th>
-            <th scope="col">Akcje</th>
+            <th scope="col"><?php echo __('reports_expiry_date'); ?></th>
+            <th scope="col"><?php echo __('employee_first_name'); ?> <?php echo __('employee_last_name'); ?></th>
+            <th scope="col"><?php echo __('employee_position'); ?></th>
+            <th scope="col"><?php echo __('clothing_name'); ?></th>
+            <th scope="col"><?php echo __('clothing_size'); ?></th>
+            <th scope="col"><?php echo __('clothing_quantity'); ?></th>
+            <th scope="col"><?php echo __('order_status'); ?></th>
+            <th scope="col"><?php echo __('actions'); ?></th>
         </tr>
     </thead>
     <tbody>
@@ -58,15 +58,15 @@ $ubraniaPoTerminie = $wydaneUbraniaC->getUbraniaPoTerminie();
                                     data-pracownik-id='{$wydanie['pracownik_id']}' 
                                     data-pracownik-imie='{$pracownikImie}' 
                                     data-pracownik-nazwisko='{$pracownikNazwisko}' 
-                                    data-pracownik-stanowisko='{$pracownikStanowisko}'>Wydaj</button>
-                        <button class='btn btn-secondary inform-btn p-1' data-raport='true' data-id='{$ubranie['id']}'>Usuń z raportu</button>
+                                    data-pracownik-stanowisko='{$pracownikStanowisko}'>" . __('reports_issue') . "</button>
+                        <button class='btn btn-secondary inform-btn p-1' data-raport='true' data-id='{$ubranie['id']}'>" . __('reports_remove_from_report') . "</button>
                      </div>
                         </td>
                     </tr>";
                 }
             }
         } else {
-            echo "<tr><td colspan='8'>Brak wydanych ubrań.</td></tr>";
+            echo "<tr><td colspan='8'>" . __('reports_no_issued_clothing') . "</td></tr>";
         }
         ?>
     </tbody>
@@ -74,15 +74,15 @@ $ubraniaPoTerminie = $wydaneUbraniaC->getUbraniaPoTerminie();
 
 <br />
 
-<h2 class="mb-4 mt-3">Wydane ubrania</h2>
+<h2 class="mb-4 mt-3"><?php echo __('reports_issued_clothing'); ?></h2>
 <table id="example1" class="table table-striped table-bordered display text-center align-middle" style="width:100%">
     <thead class="table-dark">
         <tr>
-            <th scope="col">Nazwa ubrania</th>
-            <th scope="col">Rozmiar</th>
-            <th scope="col">Ilość wydana</th>
-            <th scope="col">Ilość w magazynie</th>
-            <th scope="col">Ilość minimalna</th>
+            <th scope="col"><?php echo __('clothing_name'); ?></th>
+            <th scope="col"><?php echo __('clothing_size'); ?></th>
+            <th scope="col"><?php echo __('reports_issued_quantity'); ?></th>
+            <th scope="col"><?php echo __('reports_warehouse_quantity'); ?></th>
+            <th scope="col"><?php echo __('clothing_min_quantity'); ?></th>
         </tr>
     </thead>
     <tbody>
@@ -98,7 +98,7 @@ $ubraniaPoTerminie = $wydaneUbraniaC->getUbraniaPoTerminie();
             <?php endforeach; ?>
         <?php else : ?>
             <tr>
-                <td colspan="5">Brak.</td>
+                <td colspan="5"><?php echo __('no'); ?></td>
             </tr>
         <?php endif; ?>
     </tbody>
@@ -110,23 +110,23 @@ $ubraniaPoTerminie = $wydaneUbraniaC->getUbraniaPoTerminie();
         new DataTable(tableId, {
             lengthMenu: [
                 [15, 25, 50, -1],
-                [15, 25, 50, "Wszystkie"],
+                [15, 25, 50, "<?php echo __('table_all'); ?>"],
             ],
             language: {
-                processing: "Przetwarzanie...",
-                search: "Szukaj:",
-                lengthMenu: "Pokaż _MENU_ pozycji",
-                info: "Pozycje od _START_ do _END_ z _TOTAL_ łącznie",
-                infoEmpty: "Pozycji 0 z 0 dostępnych",
-                infoFiltered: "(filtrowanie spośród _MAX_ dostępnych pozycji)",
-                loadingRecords: "Wczytywanie...",
-                zeroRecords: "Nie znaleziono pasujących pozycji",
-                emptyTable: "Brak danych",
+                processing: "<?php echo __('table_processing'); ?>",
+                search: "<?php echo __('search'); ?>:",
+                lengthMenu: "<?php echo __('table_show_menu'); ?>",
+                info: "<?php echo __('table_info'); ?>",
+                infoEmpty: "<?php echo __('table_info_empty'); ?>",
+                infoFiltered: "<?php echo __('table_info_filtered'); ?>",
+                loadingRecords: "<?php echo __('table_loading'); ?>",
+                zeroRecords: "<?php echo __('table_zero_records'); ?>",
+                emptyTable: "<?php echo __('table_empty'); ?>",
                 paginate: {
-                    first: "Pierwsza",
-                    previous: "Poprzednia",
-                    next: "Następna",
-                    last: "Ostatnia",
+                    first: "<?php echo __('table_first'); ?>",
+                    previous: "<?php echo __('table_previous'); ?>",
+                    next: "<?php echo __('table_next'); ?>",
+                    last: "<?php echo __('table_last'); ?>",
                 },
             }
         });

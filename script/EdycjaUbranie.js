@@ -1,4 +1,5 @@
 import { getBaseUrl } from './utils.js';
+import { Translations } from './translations.js';
 
 export const EdycjaUbranie = (() => {
     let ubranieId = null;
@@ -42,16 +43,19 @@ export const EdycjaUbranie = (() => {
                 url: `${baseUrl}/handlers/updateUbranie.php`,
                 type: 'POST',
                 data: formData,
+                xhrFields: {
+                    withCredentials: true
+                },
                 success: (response) => {
                     if (alertManager) {
-                        alertManager.createAlert('Edycja zakończona sukcesem', 'success');
+                        alertManager.createAlert(Translations.translate('edit_success'), 'success');
                     }
                     $('#editModal').modal('hide');
                     location.reload();
                 },
                 error: () => {
                     if (alertManager) {
-                        alertManager.createAlert('Błąd podczas edycji', 'danger');
+                        alertManager.createAlert(Translations.translate('edit_error'), 'danger');
                     }
                 }
             });

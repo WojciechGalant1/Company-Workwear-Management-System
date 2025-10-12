@@ -4,6 +4,11 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 include_once __DIR__ . '/../services/ServiceContainer.php';
 include_once __DIR__ . '/../helpers/CsrfHelper.php';
+include_once __DIR__ . '/../helpers/LocalizationHelper.php';
+include_once __DIR__ . '/../helpers/LanguageSwitcher.php';
+
+// Initialize language system
+LanguageSwitcher::initializeWithRouting();
 
 $response = array();
 
@@ -11,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate CSRF token
     if (!CsrfHelper::validateToken()) {
         $response['success'] = false;
-        $response['message'] = "Blad bezpieczenstwa. Odśwież stronę i spróbuj ponownie.";
+        $response['message'] = LocalizationHelper::translate('error_csrf');
         header("Content-Type: application/json");
         echo json_encode($response);
         exit;
@@ -23,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate required fields
     if (empty($pracownikID)) {
         $response['success'] = false;
-        $response['message'] = "Pracownik jest wymagany.";
+        $response['message'] = LocalizationHelper::translate('issue_employee_required');
         header("Content-Type: application/json");
         echo json_encode($response);
         exit;
@@ -35,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (!$pracownik) {
         $response['success'] = false;
-        $response['message'] = "Nie znaleziono pracownika o podanym imieniu i nazwisku.";
+        $response['message'] = LocalizationHelper::translate('issue_employee_not_found');
         header("Content-Type: application/json");
         echo json_encode($response);
         exit;
@@ -50,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (!$currentUser) {
         $response['success'] = false;
-        $response['message'] = "Nie znaleziono zalogowanego użytkownika.";
+        $response['message'] = LocalizationHelper::translate('error_user_not_found');
         header("Content-Type: application/json");
         echo json_encode($response);
         exit;
@@ -68,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate ubrania data
     if (!isset($_POST['ubrania']) || !is_array($_POST['ubrania'])) {
         $response['success'] = false;
-        $response['message'] = "Brak danych o ubraniach.";
+        $response['message'] = LocalizationHelper::translate('issue_no_clothing_data');
         header("Content-Type: application/json");
         echo json_encode($response);
         exit;
@@ -83,21 +88,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($idUbrania == 0 || $idRozmiar == 0) {
             $response['success'] = false;
-            $response['message'] = "Kod nie został wprowadzony lub został wprowadzony niepoprawnie";
+            $response['message'] = LocalizationHelper::translate('issue_invalid_code');
             $all_items_valid = false;
             break;
         }
 
         if ($ilosc <= 0) {
             $response['success'] = false;
-            $response['message'] = "Ilość musi być większa od zera";
+            $response['message'] = LocalizationHelper::translate('issue_quantity_positive');
             $all_items_valid = false;
             break;
         }
 
         if ($ilosc > $iloscDostepna) {
             $response['success'] = false;
-            $response['message'] = "Nie można wydać więcej ubrań niż jest dostępnych w magazynie lub kod wprowadzono niepoprawnie";
+            $response['message'] = LocalizationHelper::translate('issue_insufficient_stock');
             $all_items_valid = false;
             break;
         }
@@ -120,18 +125,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stanMagazynuC->updateIlosc($idUbrania, $idRozmiar, $ilosc);
             } else {
                 $response['success'] = false;
-                $response['message'] = "Wystąpił problem podczas wydawania ubrania.";
+                $response['message'] = LocalizationHelper::translate('issue_error_processing');
                 break;
             }
         }
         if (!isset($response['success']) || $response['success'] !== false) {
             $response['success'] = true;
-            $response['message'] = "Ubrania zostały wydane pomyślnie, stan magazynu został zaktualizowany.";
+            $response['message'] = LocalizationHelper::translate('issue_success');
         }
     }
 } else {
     $response['success'] = false;
-    $response['message'] = "Wystąpił błąd podczas przetwarzania żądania. Spróbuj ponownie później lub skontaktuj się z pomocą techniczną (oczekiwano metody POST).";
+    $response['message'] = LocalizationHelper::translate('error_method_not_allowed');
 }
 
 header("Content-Type: application/json");

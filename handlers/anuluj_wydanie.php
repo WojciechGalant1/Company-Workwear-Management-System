@@ -1,4 +1,8 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 include_once __DIR__ . '/../app/services/ServiceContainer.php';
 include_once __DIR__ . '/../app/helpers/CsrfHelper.php';
 

@@ -1,4 +1,5 @@
 import { getBaseUrl, addCsrfToObject } from './utils.js';
+import { Translations } from './translations.js';
 
 export const ZniszczUbranie = (function () {
     let ubranieId = null;
@@ -15,6 +16,7 @@ export const ZniszczUbranie = (function () {
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                credentials: 'same-origin',
                 body: JSON.stringify(requestData)
             });
 
@@ -22,14 +24,14 @@ export const ZniszczUbranie = (function () {
 
             if (data.success) {
                 selectedButton.disabled = true;
-                selectedButton.textContent = "Status zmieniony";
+                selectedButton.textContent = Translations.translate('status_changed');
                 window.location.reload();
             } else {
-                alert('Błąd podczas usuwania zniszczonego ubrania.');
+                alert(Translations.translate('delete_error'));
             }
         } catch (error) {
             console.error('Błąd:', error);
-            alert('Wystąpił błąd podczas przesyłania żądania.');
+            alert(Translations.translate('network_error'));
         }
     };
 

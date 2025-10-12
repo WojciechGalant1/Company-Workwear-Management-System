@@ -1,4 +1,5 @@
 import { getBaseUrl, addCsrfToObject } from './utils.js';
+import { Translations } from './translations.js';
 
 export const AnulujWydanie = (function () {
     let ubranieId = null;
@@ -37,6 +38,7 @@ export const AnulujWydanie = (function () {
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                credentials: 'same-origin',
                 body: JSON.stringify(requestData)
             });
             
@@ -44,15 +46,15 @@ export const AnulujWydanie = (function () {
 
             if (data.success) {
                 selectedButton.disabled = true;
-                selectedButton.textContent = "Anulowano";
+                selectedButton.textContent = Translations.translate('status_cancelled');
                 window.location.reload();
             } else {
-                alert('Błąd podczas anulowania wydania.');
+                alert(Translations.translate('operation_error'));
             }
 
         } catch (error) {
             console.error('Błąd:', error);
-            alert('Wystąpił błąd podczas anulowania wydania.');
+            alert(Translations.translate('network_error'));
         }
     };
 
