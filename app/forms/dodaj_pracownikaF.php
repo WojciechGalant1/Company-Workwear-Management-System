@@ -4,8 +4,8 @@ include_once __DIR__ . '/../helpers/CsrfHelper.php';
 include_once __DIR__ . '/../helpers/LocalizationHelper.php';
 include_once __DIR__ . '/../helpers/LanguageSwitcher.php';
 
-// Initialize language system
-$currentLanguage = LanguageSwitcher::initialize();
+// Initialize language system (compatible with routing)
+$currentLanguage = LanguageSwitcher::initializeWithRouting();
 
 $response = array();
 

@@ -3,6 +3,7 @@
  * English translations for the clothing management system
  */
 return array(
+
     // General
     'app_title' => 'Clothing Management System',
     'loading' => 'Loading...',
@@ -77,7 +78,7 @@ return array(
     'clothing_size' => 'Size',
     'clothing_quantity' => 'Quantity',
     'clothing_min_quantity' => 'Minimum Quantity',
-    'clothing_code' => 'Code',
+    'clothing_code' => 'Barr Code',
     'clothing_company' => 'Company',
     'clothing_expiry_date' => 'Expiry Date',
     'clothing_status' => 'Status',
@@ -120,6 +121,12 @@ return array(
     'order_update_success' => 'Order updated successfully',
     'order_delete_success' => 'Order deleted successfully',
     'order_required_fields' => 'All fields are required and quantity must be greater than zero',
+    'order_add_item' => 'Add Item',
+    'order_remove_item' => 'Remove Item',
+    'order_add_submit' => 'Add Order',
+    'order_details_error' => 'Error adding order details',
+    'order_no_items' => 'No clothing items in order',
+    'order_create_error' => 'Error creating order',
     
     // Warehouse
     'warehouse_title' => 'Warehouse Management',
@@ -184,6 +191,7 @@ return array(
     'error_server' => 'Server error occurred',
     'error_database' => 'Database connection error',
     'error_session' => 'Session expired. Please log in again',
+    'error_user_not_found' => 'Logged in user not found',
     
     // Success Messages
     'success_saved' => 'Data saved successfully',

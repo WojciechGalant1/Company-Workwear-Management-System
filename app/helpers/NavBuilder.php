@@ -22,39 +22,99 @@ class NavBuilder {
      * Group navigation items by user status level
      */
     public static function buildNavGroups($activeUri, $baseUrl, $userStatus, $hasShortages = false) {
+        include_once __DIR__ . '/LocalizationHelper.php';
+        include_once __DIR__ . '/LanguageSwitcher.php';
+        
+        // Ensure we're using the current language for translations
+        $currentLanguage = LanguageSwitcher::getCurrentLanguage();
+        LocalizationHelper::setLanguage($currentLanguage);
+        
         $output = '';
         
         if ($userStatus >= 3) {
-            $output .= self::navItem('/dodaj-zamowienie', 'Dodaj zamówienie', $activeUri, $baseUrl);
-            $output .= self::navItem('/historia', 'Historia zamówień', $activeUri, $baseUrl);
+            $output .= self::navItem('/dodaj-zamowienie', LocalizationHelper::translate('nav_add_order'), $activeUri, $baseUrl);
+            $output .= self::navItem('/historia', LocalizationHelper::translate('nav_history'), $activeUri, $baseUrl);
         }
         
         if ($userStatus >= 1) {
             $output .= self::separator();
-            $output .= self::navItem('/wydaj-ubranie', 'Wydaj ubrania', $activeUri, $baseUrl);
+            $output .= self::navItem('/wydaj-ubranie', LocalizationHelper::translate('nav_issue_clothing'), $activeUri, $baseUrl);
         }
         
         if ($userStatus >= 3) {
             $shortageCls = $hasShortages ? 'text-danger fw-bold text-uppercase' : '';
-            $output .= self::navItem('/magazyn', 'Stany magazynowe', $activeUri, $baseUrl, $shortageCls);
+            $output .= self::navItem('/magazyn', LocalizationHelper::translate('nav_warehouse'), $activeUri, $baseUrl, $shortageCls);
         }
         
         if ($userStatus >= 5) {
-            $output .= self::navItem('/historia-wydawania', 'Historia wydawania', $activeUri, $baseUrl);
-            $output .= self::navItem('/historia-ubran', 'Historia ubrań', $activeUri, $baseUrl);
-            $output .= self::navItem('/raport', 'Raport wydawania', $activeUri, $baseUrl);
+            $output .= self::navItem('/historia-wydawania', LocalizationHelper::translate('nav_issue_history'), $activeUri, $baseUrl);
+            $output .= self::navItem('/historia-ubran', LocalizationHelper::translate('nav_clothing_history'), $activeUri, $baseUrl);
+            $output .= self::navItem('/raport', LocalizationHelper::translate('nav_reports'), $activeUri, $baseUrl);
             $output .= self::separator();
-            $output .= self::navItem('/dodaj-pracownika', 'Dodaj pracownika', $activeUri, $baseUrl);
-            $output .= self::navItem('/pracownicy', 'Lista pracowników', $activeUri, $baseUrl);
+            $output .= self::navItem('/dodaj-pracownika', LocalizationHelper::translate('nav_add_employee'), $activeUri, $baseUrl);
+            $output .= self::navItem('/pracownicy', LocalizationHelper::translate('nav_employees'), $activeUri, $baseUrl);
         }
         
         $output .= self::separator();
         $output .= '<li class="nav-item">
                         <a class="nav-link text-warning" href="' . $baseUrl . '/handlers/auth/logout.php">
-                            Wyloguj
+                            ' . LocalizationHelper::translate('nav_logout') . '
                         </a>
                     </li>';
         
         return $output;
+    }
+    
+    /**
+     * Build language switcher for navbar
+     */
+    public static function buildLanguageSwitcher($baseUrl, $currentLanguage) {
+        include_once __DIR__ . '/LocalizationHelper.php';
+        include_once __DIR__ . '/LanguageSwitcher.php';
+        
+        $availableLanguages = LocalizationHelper::getAvailableLanguages();
+        $currentPath = UrlHelper::getCleanUri();
+        
+        $output = '<li class="nav-item dropdown">';
+        $output .= '<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">';
+        $output .= '<i class="bi bi-translate me-1"></i>';
+        $output .= LocalizationHelper::getLanguageName($currentLanguage);
+        $output .= '</a>';
+        $output .= '<ul class="dropdown-menu dropdown-menu-end">';
+        
+        foreach ($availableLanguages as $lang) {
+            $isActive = $lang === $currentLanguage ? 'active' : '';
+            $langName = LocalizationHelper::getLanguageName($lang);
+            $langUrl = UrlHelper::buildUrl($currentPath, array('lang' => $lang));
+            
+            $output .= '<li>';
+            $output .= '<a class="dropdown-item ' . $isActive . '" href="' . htmlspecialchars($langUrl) . '">';
+            $output .= self::getLanguageFlag($lang) . ' ' . $langName;
+            if ($isActive) {
+                $output .= ' <i class="bi bi-check float-end"></i>';
+            }
+            $output .= '</a>';
+            $output .= '</li>';
+        }
+        
+        $output .= '</ul>';
+        $output .= '</li>';
+        
+        return $output;
+    }
+    
+    /**
+     * Get language flag emoji
+     */
+    private static function getLanguageFlag($language) {
+        $flags = array(
+            'en' => '🇺🇸',
+            'pl' => '🇵🇱',
+            'de' => '🇩🇪',
+            'fr' => '🇫🇷',
+            'es' => '🇪🇸'
+        );
+        
+        return isset($flags[$language]) ? $flags[$language] : '🌐';
     }
 } 

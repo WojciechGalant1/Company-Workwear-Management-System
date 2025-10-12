@@ -120,6 +120,12 @@ return array(
     'order_update_success' => 'Zamówienie zostało zaktualizowane pomyślnie',
     'order_delete_success' => 'Zamówienie zostało usunięte pomyślnie',
     'order_required_fields' => 'Wszystkie pola są wymagane i ilość musi być większa od zera',
+    'order_add_item' => 'Dodaj ubranie',
+    'order_remove_item' => 'Usuń ubranie',
+    'order_add_submit' => 'Dodaj zamówienie',
+    'order_details_error' => 'Wystąpił problem podczas dodawania szczegółów zamówienia',
+    'order_no_items' => 'Brak danych o ubraniach w zamówieniu',
+    'order_create_error' => 'Wystąpił problem podczas dodawania zamówienia',
     
     // Warehouse
     'warehouse_title' => 'Zarządzanie magazynem',
@@ -184,6 +190,7 @@ return array(
     'error_server' => 'Wystąpił błąd serwera',
     'error_database' => 'Błąd połączenia z bazą danych',
     'error_session' => 'Sesja wygasła. Zaloguj się ponownie',
+    'error_user_not_found' => 'Nie znaleziono zalogowanego użytkownika',
     
     // Success Messages
     'success_saved' => 'Dane zostały zapisane pomyślnie',

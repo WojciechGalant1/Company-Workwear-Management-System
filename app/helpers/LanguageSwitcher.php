@@ -11,14 +11,15 @@ class LanguageSwitcher {
     const DEFAULT_LANGUAGE = 'en';
     const COOKIE_EXPIRE = 31536000; // 1 year
     
+    
     /**
-     * Initialize language from session, cookie, or default
+     * Initialize language from URL, session, cookie, or default
      * @return string Current language code
      */
-    public static function initialize() {
+    public static function initializeWithRouting() {
         $language = self::DEFAULT_LANGUAGE;
         
-        // Check if language is set in URL parameter
+        // Check URL parameter first (highest priority)
         if (isset($_GET['lang']) && self::isValidLanguage($_GET['lang'])) {
             $language = $_GET['lang'];
             self::setLanguage($language);
@@ -30,14 +31,18 @@ class LanguageSwitcher {
         // Check cookie
         elseif (isset($_COOKIE[self::COOKIE_KEY])) {
             $language = $_COOKIE[self::COOKIE_KEY];
-            self::setLanguage($language);
+            // Set in session without cookie to avoid header issues
+            $_SESSION[self::SESSION_KEY] = $language;
+            LocalizationHelper::setLanguage($language);
         }
         // Use browser language detection
         else {
             $browserLang = self::detectBrowserLanguage();
             if ($browserLang) {
                 $language = $browserLang;
-                self::setLanguage($language);
+                // Set in session without cookie to avoid header issues
+                $_SESSION[self::SESSION_KEY] = $language;
+                LocalizationHelper::setLanguage($language);
             }
         }
         
@@ -54,7 +59,11 @@ class LanguageSwitcher {
         }
         
         $_SESSION[self::SESSION_KEY] = $language;
-        setcookie(self::COOKIE_KEY, $language, time() + self::COOKIE_EXPIRE, '/');
+        
+        // Only set cookie if headers haven't been sent yet
+        if (!headers_sent()) {
+            setcookie(self::COOKIE_KEY, $language, time() + self::COOKIE_EXPIRE, '/');
+        }
         
         // Initialize localization with the new language
         LocalizationHelper::setLanguage($language);
@@ -102,46 +111,6 @@ class LanguageSwitcher {
         return null;
     }
     
-    /**
-     * Generate language switcher HTML
-     * @return string
-     */
-    public static function generateSwitcher() {
-        $currentLang = self::getCurrentLanguage();
-        $availableLanguages = LocalizationHelper::getAvailableLanguages();
-        $currentUrl = $_SERVER['REQUEST_URI'];
-        
-        // Remove existing lang parameter
-        $currentUrl = preg_replace('/[?&]lang=[^&]*/', '', $currentUrl);
-        $separator = strpos($currentUrl, '?') !== false ? '&' : '?';
-        
-        $html = '<div class="language-switcher dropdown">';
-        $html .= '<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">';
-        $html .= '<i class="bi bi-translate me-1"></i>';
-        $html .= LocalizationHelper::getLanguageName($currentLang);
-        $html .= '</button>';
-        $html .= '<ul class="dropdown-menu">';
-        
-        foreach ($availableLanguages as $lang) {
-            $isActive = $lang === $currentLang ? 'active' : '';
-            $langName = LocalizationHelper::getLanguageName($lang);
-            $langUrl = $currentUrl . $separator . 'lang=' . $lang;
-            
-            $html .= '<li>';
-            $html .= '<a class="dropdown-item ' . $isActive . '" href="' . htmlspecialchars($langUrl) . '">';
-            $html .= $langName;
-            if ($isActive) {
-                $html .= ' <i class="bi bi-check float-end"></i>';
-            }
-            $html .= '</a>';
-            $html .= '</li>';
-        }
-        
-        $html .= '</ul>';
-        $html .= '</div>';
-        
-        return $html;
-    }
     
     /**
      * Get language flag emoji
@@ -160,34 +129,5 @@ class LanguageSwitcher {
         return isset($flags[$language]) ? $flags[$language] : '🌐';
     }
     
-    /**
-     * Generate simple language links
-     * @return string
-     */
-    public static function generateSimpleLinks() {
-        $currentLang = self::getCurrentLanguage();
-        $availableLanguages = LocalizationHelper::getAvailableLanguages();
-        $currentUrl = $_SERVER['REQUEST_URI'];
-        
-        // Remove existing lang parameter
-        $currentUrl = preg_replace('/[?&]lang=[^&]*/', '', $currentUrl);
-        $separator = strpos($currentUrl, '?') !== false ? '&' : '?';
-        
-        $html = '<div class="language-links">';
-        
-        foreach ($availableLanguages as $lang) {
-            $isActive = $lang === $currentLang ? 'active' : '';
-            $langName = LocalizationHelper::getLanguageName($lang);
-            $langUrl = $currentUrl . $separator . 'lang=' . $lang;
-            
-            $html .= '<a href="' . htmlspecialchars($langUrl) . '" class="lang-link ' . $isActive . '">';
-            $html .= self::getLanguageFlag($lang) . ' ' . $langName;
-            $html .= '</a>';
-        }
-        
-        $html .= '</div>';
-        
-        return $html;
-    }
 }
 ?>

@@ -9,8 +9,8 @@ include_once __DIR__ . '/../app/helpers/CsrfHelper.php';
 include_once __DIR__ . '/../app/helpers/LocalizationHelper.php';
 include_once __DIR__ . '/../app/helpers/LanguageSwitcher.php';
 
-// Initialize language system
-$currentLanguage = LanguageSwitcher::initialize();
+// Initialize language system (compatible with routing)
+$currentLanguage = LanguageSwitcher::initializeWithRouting();
 
 // Get base URL for assets and current URI
 $baseUrl = UrlHelper::getBaseUrl();
@@ -32,7 +32,11 @@ if (!$csrfToken) {
 }
 
 // Translation helper function for templates
+// This function always uses the current language from LocalizationHelper
 function __($key, $params = array()) {
+    // Ensure we're using the current language from the session/cookie/URL
+    $currentLang = LanguageSwitcher::getCurrentLanguage();
+    LocalizationHelper::setLanguage($currentLang);
     return LocalizationHelper::translate($key, $params);
 }
 
@@ -64,38 +68,16 @@ echo '
     .tooltip-inner {
         font-size: 1.2rem;
     }
-    .language-switcher {
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        z-index: 1000;
+    /* Language switcher styles for navbar */
+    .navbar .dropdown-menu {
+        min-width: 120px;
     }
-    .language-links {
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        z-index: 1000;
-    }
-    .language-links .lang-link {
-        display: inline-block;
-        margin-left: 5px;
-        padding: 5px 10px;
-        text-decoration: none;
-        border-radius: 3px;
-        background: #f8f9fa;
-        color: #495057;
-        font-size: 0.9em;
-    }
-    .language-links .lang-link.active {
-        background: #007bff;
+    .navbar .dropdown-item.active {
+        background-color: #007bff;
         color: white;
     }
-    .language-links .lang-link:hover {
-        background: #e9ecef;
-        color: #495057;
-    }
-    .language-links .lang-link.active:hover {
-        background: #0056b3;
+    .navbar .dropdown-item.active:hover {
+        background-color: #0056b3;
         color: white;
     }
 </style>
@@ -113,10 +95,7 @@ $modules = isset($modulesConfig[$current_page]) ? $modulesConfig[$current_page] 
 $containerId = ($uri === '/historia-wydawania') ? 'id="historia-page"' : '';
 echo "<body data-modules='$modules'>";
 
-// Add language switcher
-echo LanguageSwitcher::generateSimpleLinks();
-
-$nav->navBar($current_page);
+$nav->navBar($current_page, $currentLanguage);
 echo '
 <div ' . $containerId . ' class="container border border-secondary border-opacity-50 mt-5 shadow mb-5 p-4 bg-body rounded">';
 

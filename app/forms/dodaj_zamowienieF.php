@@ -4,6 +4,11 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 include_once __DIR__ . '/../services/ServiceContainer.php';
 include_once __DIR__ . '/../helpers/CsrfHelper.php';
+include_once __DIR__ . '/../helpers/LocalizationHelper.php';
+include_once __DIR__ . '/../helpers/LanguageSwitcher.php';
+
+// Initialize language system (compatible with routing)
+$currentLanguage = LanguageSwitcher::initializeWithRouting();
 
 $response = array();
 
@@ -11,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate CSRF token
     if (!CsrfHelper::validateToken()) {
         $response['success'] = false;
-        $response['message'] = "Błąd bezpieczeństwa. Odśwież stronę i spróbuj ponownie.";
+        $response['message'] = LocalizationHelper::translate('error_csrf');
         header("Content-Type: application/json");
         echo json_encode($response);
         exit;
@@ -28,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (!$currentUser) {
         $response['success'] = false;
-        $response['message'] = "Nie znaleziono zalogowanego użytkownika.";
+        $response['message'] = LocalizationHelper::translate('error_user_not_found');
         header("Content-Type: application/json");
         echo json_encode($response);
         exit;
@@ -56,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Basic validation
                 if (empty($nazwa) || empty($rozmiar) || empty($firma) || $ilosc <= 0) {
                     $response['success'] = false;
-                    $response['message'] = "Wszystkie pola są wymagane i ilość musi być większa od zera.";
+                    $response['message'] = LocalizationHelper::translate('order_required_fields');
                     echo json_encode($response);
                     exit;
                 }
@@ -80,14 +85,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 if (!$szczegolyZamowieniaC->create($szczegol)) {
                     $response['success'] = false;
-                    $response['message'] = "Wystąpił problem podczas dodawania szczegółów zamówienia.";
+                    $response['message'] = LocalizationHelper::translate('order_details_error');
                     echo json_encode($response);
                     exit;
                 }
             }
         } else {
             $response['success'] = false;
-            $response['message'] = "Brak danych o ubraniach w zamówieniu.";
+            $response['message'] = LocalizationHelper::translate('order_no_items');
             echo json_encode($response);
             exit;
         }
@@ -97,14 +102,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         $response['success'] = true;
-        $response['message'] = "Zamówienie dodano pomyślnie, i stan magazynu został zaktualizowany.";
+        $response['message'] = LocalizationHelper::translate('order_add_success');
     } else {
         $response['success'] = false;
-        $response['message'] = "Wystąpił problem podczas dodawania zamówienia.";
+        $response['message'] = LocalizationHelper::translate('order_create_error');
     }
 } else {
     $response['success'] = false;
-    $response['message'] = "Wystąpił błąd podczas przetwarzania żądania. Spróbuj ponownie później lub skontaktuj się z pomocą techniczną (oczekiwano metody POST).";
+    $response['message'] = LocalizationHelper::translate('error_general');
 }
 
 header('Content-Type: application/json');

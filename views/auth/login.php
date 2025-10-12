@@ -7,13 +7,16 @@ require_once __DIR__ . '/../../app/helpers/UrlHelper.php';
 require_once __DIR__ . '/../../app/helpers/LocalizationHelper.php';
 require_once __DIR__ . '/../../app/helpers/LanguageSwitcher.php';
 
-// Initialize language system
-$currentLanguage = LanguageSwitcher::initialize();
+// Initialize language system (compatible with routing)
+$currentLanguage = LanguageSwitcher::initializeWithRouting();
 
 $baseUrl = UrlHelper::getBaseUrl();
 
 // Translation helper function for templates
 function __($key, $params = array()) {
+    // Ensure we're using the current language from the session/cookie/URL
+    $currentLang = LanguageSwitcher::getCurrentLanguage();
+    LocalizationHelper::setLanguage($currentLang);
     return LocalizationHelper::translate($key, $params);
 }
 ?>
@@ -101,7 +104,22 @@ function __($key, $params = array()) {
                     </div>
                     <div class="text-center mt-4">
                         <p class="text-muted small"><?php echo __('copyright', array('year' => date('Y'))); ?></p>
-                        <?php echo LanguageSwitcher::generateSimpleLinks(); ?>
+                        
+                        <!-- Simple language switcher for login page -->
+                        <div class="mt-3">
+                            <?php 
+                            $availableLanguages = LocalizationHelper::getAvailableLanguages();
+                            $currentPath = '/login';
+                            foreach ($availableLanguages as $lang) {
+                                $isActive = $lang === $currentLanguage ? 'btn-primary' : 'btn-outline-secondary';
+                                $langName = LocalizationHelper::getLanguageName($lang);
+                                $langUrl = UrlHelper::buildUrl($currentPath, array('lang' => $lang));
+                                echo '<a href="' . htmlspecialchars($langUrl) . '" class="btn btn-sm ' . $isActive . ' me-1">';
+                                echo $langName;
+                                echo '</a>';
+                            }
+                            ?>
+                        </div>
                     </div>
                 </div>
             </div>

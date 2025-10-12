@@ -64,6 +64,31 @@ class UrlHelper {
     }
     
     /**
+     * Get query parameters from current request
+     */
+    public static function getQueryParams() {
+        $params = array();
+        if (isset($_SERVER['QUERY_STRING'])) {
+            parse_str($_SERVER['QUERY_STRING'], $params);
+        }
+        return $params;
+    }
+    
+    /**
+     * Build URL with query parameters
+     */
+    public static function buildUrl($path, $params = array()) {
+        $baseUrl = self::getBaseUrl();
+        $url = $baseUrl . $path;
+        
+        if (!empty($params)) {
+            $url .= '?' . http_build_query($params);
+        }
+        
+        return $url;
+    }
+    
+    /**
      * Get current page from URI using route mapping
      */
     public static function getCurrentPage($uri = null) {
