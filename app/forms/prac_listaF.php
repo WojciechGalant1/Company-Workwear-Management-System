@@ -1,9 +1,18 @@
 <?php
 include_once __DIR__ . '/../services/ServiceContainer.php';
+include_once __DIR__ . '/../helpers/CsrfHelper.php';
 
 $response = [];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Validate CSRF token
+    if (!CsrfHelper::validateToken()) {
+        $response['success'] = false;
+        $response['message'] = 'Błąd bezpieczeństwa. Odśwież stronę i spróbuj ponownie.';
+        header('Content-Type: application/json');
+        echo json_encode($response);
+        exit;
+    }
 
     $id = isset($_POST['id']) ? $_POST['id'] : '';
     $imie = isset($_POST['imie']) ? $_POST['imie'] : '';

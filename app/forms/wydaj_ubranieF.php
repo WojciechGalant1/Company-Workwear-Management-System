@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate CSRF token
     if (!CsrfHelper::validateToken()) {
         $response['success'] = false;
-        $response['message'] = "Błąd bezpieczeństwa. Odśwież stronę i spróbuj ponownie.";
+        $response['message'] = "Blad bezpieczenstwa. Odśwież stronę i spróbuj ponownie.";
         header("Content-Type: application/json");
         echo json_encode($response);
         exit;

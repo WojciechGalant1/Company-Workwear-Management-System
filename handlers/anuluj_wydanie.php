@@ -1,10 +1,18 @@
 <?php
 include_once __DIR__ . '/../app/services/ServiceContainer.php';
+include_once __DIR__ . '/../app/helpers/CsrfHelper.php';
 
 header('Content-Type: application/json; charset=utf-8');
 
 try {
     $data = json_decode(file_get_contents('php://input'), true);
+    
+    // Validate CSRF token
+    if (!CsrfHelper::validateTokenFromJson($data)) {
+        http_response_code(403);
+        echo json_encode(CsrfHelper::getErrorResponse());
+        exit;
+    }
 
     if (!isset($data['id']) || !is_numeric($data['id'])) {
         throw new Exception('Nieprawidłowe dane wejściowe.');

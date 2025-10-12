@@ -1,4 +1,4 @@
-import { getBaseUrl } from './utils.js';
+import { getBaseUrl, addCsrfToObject } from './utils.js';
 
 export const AnulujWydanie = (function () {
     let ubranieId = null;
@@ -30,12 +30,14 @@ export const AnulujWydanie = (function () {
         const baseUrl = getBaseUrl();
         
         try { 
+            const requestData = addCsrfToObject({ id: ubranieId });
+            
             const response = await fetch(`${baseUrl}/handlers/anuluj_wydanie.php`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ id: ubranieId  })
+                body: JSON.stringify(requestData)
             });
             
             const data = await response.json();

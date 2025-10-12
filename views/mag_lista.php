@@ -5,6 +5,7 @@ include_once __DIR__ . '../../layout/header.php';
 include_once __DIR__ . '../../app/auth/Auth.php';
 checkAccess(2);
 include_once __DIR__ . '../../app/services/ServiceContainer.php';
+include_once __DIR__ . '../../app/helpers/CsrfHelper.php';
 
 $serviceContainer = ServiceContainer::getInstance();
 $stanMagazynuC = $serviceContainer->getController('StanMagazynuC');
@@ -54,6 +55,7 @@ $ubrania = $stanMagazynuC->readAll();
             </div>
             <div class="modal-body">
                 <form id="edycjaUbraniaForm" action="test" method="post" class="needs-validation" novalidate>
+                    <?php echo CsrfHelper::getTokenField(); ?>
                     <input type="hidden" id="id_ubrania" name="id">
                     <div class="mb-3 mt-2">
                         <label for="productName" class="form-label"><?php echo __('clothing_name'); ?>:</label>

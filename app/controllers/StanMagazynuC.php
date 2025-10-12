@@ -134,11 +134,11 @@ class StanMagazynuC extends BaseController {
                 if ($iloscDiff !== 0) {
                     $this->addHistoriaZamowien($idUbrania, $idRozmiaru, $iloscDiff, $uwagi, $currentUserId);
                 }
-                $this->pdo->commit();
-                return ['status' => 'success', 'message' => 'Stan magazynu został zaktualizowany.'];
+                //$this->pdo->commit();
+                return ['status' => 'success', 'message' => 'Stan magazynu zostal zaktualizowany.'];
             } else {
-                $this->pdo->rollBack();
-                return ['status' => 'error', 'message' => 'Błąd podczas aktualizacji ilości.'];
+                //$this->pdo->rollBack();
+                return ['status' => 'error', 'message' => 'Blad podczas aktualizacji ilości.'];
             }
         } catch (Exception $e) {
             // if ($this->pdo->inTransaction()) {
