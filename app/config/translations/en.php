@@ -136,6 +136,8 @@ return array(
     'warehouse_low_stock' => 'Low Stock Alert',
     'warehouse_update_success' => 'Warehouse updated successfully',
     'warehouse_update_error' => 'Error updating warehouse',
+    'warehouse_order' => 'Order',
+    'warehouse_order_now' => 'ORDER NOW!',
     
     // History
     'history_title' => 'History',
@@ -153,6 +155,27 @@ return array(
     'history_added' => 'Added',
     'history_updated' => 'Updated',
     'history_deleted' => 'Deleted',
+    'history_view' => 'View',
+    'history_details' => 'Details',
+    'history_issued_to' => 'Issued To',
+    'history_added_by' => 'Added By',
+    'history_issued_by' => 'Issued By',
+    'history_issue_date' => 'Issue Date',
+    'history_issue_for' => 'Issue History For',
+    'history_cancel_issue' => 'Cancel Issue',
+    'history_issue_status' => 'Issue Status',
+    'history_status_change' => 'Status Change',
+    'history_cancelled' => 'Cancelled',
+    'history_removed_from_report' => 'Removed from Report',
+    'history_destroyed_clothing' => 'Destroyed Clothing',
+    'history_remove_from_report' => 'Remove from Report',
+    'history_add_to_report' => 'Add to Report',
+    'history_inactive' => 'Inactive',
+    'history_active' => 'Active',
+    'history_cancel_time_expired' => 'Time expired for cancellation',
+    'history_destroy_clothing' => 'Destroy Clothing',
+    'history_no_data_for_user' => 'No history for selected user',
+    'history_employee_not_found' => 'Employee not found with given ID',
     
     // Reports
     'reports_title' => 'Reports',
@@ -206,6 +229,21 @@ return array(
     'status_saving' => 'Saving...',
     'status_deleting' => 'Deleting...',
     'status_updating' => 'Updating...',
+    
+    // Table Messages
+    'table_all' => 'All',
+    'table_processing' => 'Processing...',
+    'table_show_menu' => 'Show _MENU_ entries',
+    'table_info' => 'Showing _START_ to _END_ of _TOTAL_ entries',
+    'table_info_empty' => 'Showing 0 to 0 of 0 entries',
+    'table_info_filtered' => '(filtered from _MAX_ total entries)',
+    'table_loading' => 'Loading...',
+    'table_zero_records' => 'No matching records found',
+    'table_empty' => 'No data available',
+    'table_first' => 'First',
+    'table_previous' => 'Previous',
+    'table_next' => 'Next',
+    'table_last' => 'Last',
     
     // Time and Date
     'time_today' => 'Today',

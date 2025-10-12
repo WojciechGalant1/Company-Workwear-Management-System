@@ -135,6 +135,8 @@ return array(
     'warehouse_low_stock' => 'Alert o niskim stanie',
     'warehouse_update_success' => 'Magazyn został zaktualizowany pomyślnie',
     'warehouse_update_error' => 'Błąd podczas aktualizacji magazynu',
+    'warehouse_order' => 'Zamówić',
+    'warehouse_order_now' => 'ZAMÓW!',
     
     // History
     'history_title' => 'Historia',
@@ -152,6 +154,27 @@ return array(
     'history_added' => 'Dodane',
     'history_updated' => 'Zaktualizowane',
     'history_deleted' => 'Usunięte',
+    'history_view' => 'Wyświetl',
+    'history_details' => 'Szczegóły',
+    'history_issued_to' => 'Wydane dla',
+    'history_added_by' => 'Dodane przez',
+    'history_issued_by' => 'Wydane przez',
+    'history_issue_date' => 'Data Wydania',
+    'history_issue_for' => 'Historia wydań dla',
+    'history_cancel_issue' => 'Anuluj wydanie',
+    'history_issue_status' => 'Status wydania',
+    'history_status_change' => 'Zmiana statusu',
+    'history_cancelled' => 'Anulowane',
+    'history_removed_from_report' => 'Usunięte z raportu',
+    'history_destroyed_clothing' => 'Zniszczone ubranie',
+    'history_remove_from_report' => 'Usuń z raportu',
+    'history_add_to_report' => 'Dodaj do raportu',
+    'history_inactive' => 'Nieaktywne',
+    'history_active' => 'Aktywne',
+    'history_cancel_time_expired' => 'Upłynął czas na anulowanie wydania',
+    'history_destroy_clothing' => 'Zniszcz ubranie',
+    'history_no_data_for_user' => 'Brak historii dla wybranego użytkownika',
+    'history_employee_not_found' => 'Nie znaleziono pracownika o podanym ID',
     
     // Reports
     'reports_title' => 'Raporty',
@@ -205,6 +228,21 @@ return array(
     'status_saving' => 'Zapisywanie...',
     'status_deleting' => 'Usuwanie...',
     'status_updating' => 'Aktualizowanie...',
+    
+    // Table Messages
+    'table_all' => 'Wszystkie',
+    'table_processing' => 'Przetwarzanie...',
+    'table_show_menu' => 'Pokaż _MENU_ pozycji',
+    'table_info' => 'Pozycje od _START_ do _END_ z _TOTAL_ łącznie',
+    'table_info_empty' => 'Pozycji 0 z 0 dostępnych',
+    'table_info_filtered' => '(filtrowanie spośród _MAX_ dostępnych pozycji)',
+    'table_loading' => 'Wczytywanie...',
+    'table_zero_records' => 'Nie znaleziono pasujących pozycji',
+    'table_empty' => 'Brak danych',
+    'table_first' => 'Pierwsza',
+    'table_previous' => 'Poprzednia',
+    'table_next' => 'Następna',
+    'table_last' => 'Ostatnia',
     
     // Time and Date
     'time_today' => 'Dzisiaj',

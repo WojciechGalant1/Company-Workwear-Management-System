@@ -17,9 +17,9 @@ $modal = new ClassModal();
 <div id="alertContainer"></div>
 
 <div class="d-flex align-items-center">
-    <h2 class="mb-4">Historia wydawania</h2>
+    <h2 class="mb-4"><?php echo __('history_issue_title'); ?></h2>
     <div id="loadingSpinnerName" class="spinner-border mb-2 mx-4" style="display: none;" role="status">
-        <span class="visually-hidden">Loading...</span>
+        <span class="visually-hidden"><?php echo __('loading'); ?>...</span>
     </div>
 </div>
 
@@ -27,19 +27,19 @@ $modal = new ClassModal();
     <div class="col-md-5">
         <div class="mb-3">
             <div class="d-flex justify-content-between">
-                <label for="id_pracownika" class="form-label">Pracownik:</label>
+                <label for="id_pracownika" class="form-label"><?php echo __('employee_title'); ?>:</label>
                 <div id="loadingSpinner" class="spinner-border mb-2" style="display: none;" role="status">
-                    <span class="visually-hidden">Loading...</span>
+                    <span class="visually-hidden"><?php echo __('loading'); ?>...</span>
                 </div>
             </div>
             <div class="mb-3 position-relative inputcontainer">
-                <input type="text" class="form-control" maxlength="30" placeholder="Imię i nazwisko" id="username" required>
+                <input type="text" class="form-control" maxlength="30" placeholder="<?php echo __('employee_first_name'); ?> <?php echo __('employee_last_name'); ?>" id="username" required>
                 <input type="hidden" id="pracownikID" name="pracownikID" value="" />
                 <ul id="suggestions" class="list-group position-absolute" style="display: none; z-index: 1000; width: 100%; top: 100%;"></ul>
             </div>
         </div>
         <br />
-        <button type="submit" class="btn btn-secondary submitBtn mb-4 p-3">Wyświetl</button>
+        <button type="submit" class="btn btn-secondary submitBtn mb-4 p-3"><?php echo __('history_view'); ?></button>
     </div>
 </form>
 
@@ -55,17 +55,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['pracownikID']) && !empt
         $historia = $wydaniaC->getWydaniaByPracownikId($pracownikID);
 
         if ($historia) {
-            echo "<h2>Historia wydań dla: $imie $nazwisko</h2> <br/>";
+            echo "<h2>" . __('history_issue_for') . ": $imie $nazwisko</h2> <br/>";
             echo '<table id="example" class="table table-hover table-striped table-bordered text-center align-middle" style="width:100%">';
             echo '<thead class="table-dark"><tr>
-            <th scope="col">Data Wydania</th>
-            <th scope="col">Nazwa ubrania</th>
-            <th scope="col">Rozmiar</th>
-            <th scope="col">Ilość</th>
-            <th scope="col">Wydane przez</th>
-            <th scope="col">Anuluj wydanie</th>
-            <th scope="col">Status wydania</th>
-            <th scope="col">Zmiana statusu</th>
+            <th scope="col">' . __('history_issue_date') . '</th>
+            <th scope="col">' . __('clothing_name') . '</th>
+            <th scope="col">' . __('clothing_size') . '</th>
+            <th scope="col">' . __('clothing_quantity') . '</th>
+            <th scope="col">' . __('history_issued_by') . '</th>
+            <th scope="col">' . __('history_cancel_issue') . '</th>
+            <th scope="col">' . __('history_issue_status') . '</th>
+            <th scope="col">' . __('history_status_change') . '</th>
         </tr></thead>
         <tbody>';
 
@@ -86,13 +86,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['pracownikID']) && !empt
                     $data_waznosci = date('Y-m-d', strtotime($ubranie['data_waznosci']));
                     $canBeReported = $ubranie['canBeReported'] == 1;
 
-                    $statusText = $status == 1 ? "Wydane" : ($status == 0 ? "Usunięte z raportu" : ($status == 3 ? "Anulowane" : "Zniszczone ubranie: {$data_waznosci}"));
-                    $cancelBtn = $status == 3 ? "Anulowano" : "Anuluj wydanie";
+                    $statusText = $status == 1 ? __('history_issued') : ($status == 0 ? __('history_removed_from_report') : ($status == 3 ? __('history_cancelled') : __('history_destroyed_clothing') . ": {$data_waznosci}"));
+                    $cancelBtn = $status == 3 ? __('history_cancelled') : __('history_cancel_issue');
                     $withinOneMonth = ($status == 1 && $currentDate <= $oneMonthAfter);
                     $disabledBtn = !$withinOneMonth ? "disabled" : "";
                     $rowClass = $status == 0 ? "table-warning" : ($status == 2 ? "table-danger" : "");
-                    $buttonText = $status == 1 ? "Usuń z raportu" : "Dodaj do raportu";
-                    $buttonAction = $status == 1 ? "nieaktywne" : "aktywne";
+                    $buttonText = $status == 1 ? __('history_remove_from_report') : __('history_add_to_report');
+                    $buttonAction = $status == 1 ? __('history_inactive') : __('history_active');
                     $reportDisabledBtn = !$canBeReported || $status == 2 ? "disabled" : "";
                     $destroyDisabled = $status != 1 ? "disabled" : "";
                     $buttonHtml = "<button class='btn btn-warning cancel-btn' data-id='{$ubranie['id']}' {$disabledBtn}>{$cancelBtn}</button>";
@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['pracownikID']) && !empt
                     echo "<td>{$wydane_przez}</td>";
                     if ($disabledBtn) {
                         echo "<td>
-                        <span class='d-inline-block' tabindex='0' data-bs-toggle='tooltip' data-bs-placement='top' title='Upłynął czas na anulowanie wydania'>
+                        <span class='d-inline-block' tabindex='0' data-bs-toggle='tooltip' data-bs-placement='top' title='" . __('history_cancel_time_expired') . "'>
                             {$buttonHtml}
                         </span>
                       </td>";
@@ -116,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['pracownikID']) && !empt
                     echo "<td>
                     <div class='d-flex flex-column align-items-center'>
                         <button class='btn btn-info inform-btn mb-2' data-id='{$ubranie['id']}' data-action='{$buttonAction}' {$reportDisabledBtn}>{$buttonText}</button>
-                        <button class='btn btn-danger destroy-btn' data-id='{$ubranie['id']}' {$destroyDisabled}>Zniszcz ubranie</button>
+                        <button class='btn btn-danger destroy-btn' data-id='{$ubranie['id']}' {$destroyDisabled}>' . __('history_destroy_clothing') . '</button>
                     </div>
                   </td>";
                     echo "</tr>";
@@ -125,10 +125,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['pracownikID']) && !empt
 
             echo '</tbody></table>';
         } else {
-            echo "<p>Brak historii dla wybranego użytkownika.</p>";
+            echo "<p>" . __('history_no_data_for_user') . "</p>";
         }
     } else {
-        echo "<p>Nie znaleziono pracownika o podanym ID.</p>";
+        echo "<p>" . __('history_employee_not_found') . "</p>";
     }
 }
 
@@ -141,24 +141,24 @@ include_once __DIR__ . '../../layout/footer.php';
     new DataTable('#example', {
         lengthMenu: [
             [15, 25, 50, -1],
-            [15, 25, 50, "Wszystkie"],
+            [15, 25, 50, "<?php echo __('table_all'); ?>"],
         ],
         language: {
-            processing: "Przetwarzanie...",
-            search: "Szukaj:",
-            lengthMenu: "Pokaż _MENU_ pozycji",
-            info: "Pozycje od _START_ do _END_ z _TOTAL_ łącznie",
-            infoEmpty: "Pozycji 0 z 0 dostępnych",
-            infoFiltered: "(filtrowanie spośród _MAX_ dostępnych pozycji)",
+            processing: "<?php echo __('table_processing'); ?>",
+            search: "<?php echo __('search'); ?>:",
+            lengthMenu: "<?php echo __('table_show_menu'); ?>",
+            info: "<?php echo __('table_info'); ?>",
+            infoEmpty: "<?php echo __('table_info_empty'); ?>",
+            infoFiltered: "<?php echo __('table_info_filtered'); ?>",
             infoPostFix: "",
-            loadingRecords: "Wczytywanie...",
-            zeroRecords: "Nie znaleziono pasujących pozycji",
-            emptyTable: "Brak danych",
+            loadingRecords: "<?php echo __('table_loading'); ?>",
+            zeroRecords: "<?php echo __('table_zero_records'); ?>",
+            emptyTable: "<?php echo __('table_empty'); ?>",
             paginate: {
-                first: "Pierwsza",
-                previous: "Poprzednia",
-                next: "Następna",
-                last: "Ostatnia",
+                first: "<?php echo __('table_first'); ?>",
+                previous: "<?php echo __('table_previous'); ?>",
+                next: "<?php echo __('table_next'); ?>",
+                last: "<?php echo __('table_last'); ?>",
             },
         }
     });
