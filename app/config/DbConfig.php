@@ -1,10 +1,11 @@
 <?php
-/**
- * Configuration for the database connection.
- */
+require_once __DIR__ . '/../helpers/EnvLoader.php';
+
+EnvLoader::load(__DIR__ . '/../../.env');
+
 return array(
-    'host' => '127.0.0.1',
-    'database' => 'ubrania',
-    'username' => 'root',
-    'password' => '',
+    'host' => EnvLoader::get('DB_HOST'),
+    'database' => EnvLoader::get('DB_NAME'),
+    'username' => EnvLoader::get('DB_USER'),
+    'password' => EnvLoader::get('DB_PASSWORD'),
 );

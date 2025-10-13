@@ -47,13 +47,13 @@ export const AnulujWydanie = (function () {
             if (data.success) {
                 selectedButton.disabled = true;
                 selectedButton.textContent = Translations.translate('status_cancelled');
-                window.location.reload();
+                //window.location.reload();
             } else {
                 alert(Translations.translate('operation_error'));
             }
 
         } catch (error) {
-            console.error('Błąd:', error);
+            console.error('Error:', error);
             alert(Translations.translate('network_error'));
         }
     };

@@ -3,6 +3,11 @@ header("Content-Type: application/json; charset=UTF-8");
 
 include_once __DIR__ . '/../app/services/ServiceContainer.php';
 include_once __DIR__ . '/../app/helpers/CsrfHelper.php';
+include_once __DIR__ . '/../app/helpers/LocalizationHelper.php';
+include_once __DIR__ . '/../app/helpers/LanguageSwitcher.php';
+
+// Initialize language system
+LanguageSwitcher::initializeWithRouting();
 
 try {
     $serviceContainer = ServiceContainer::getInstance();
@@ -10,7 +15,7 @@ try {
     $data = json_decode(file_get_contents("php://input"), true);
 
     if (!isset($data['id'], $data['currentStatus'])) {
-        throw new Exception('Invalid input data');
+        throw new Exception(LocalizationHelper::translate('validation_invalid_input'));
     }
 
     // Validate CSRF token
@@ -26,7 +31,7 @@ try {
     if ($wydaneUbraniaC->updateStatus($id, $newStatus)) {
         echo json_encode(['success' => true, 'newStatus' => $newStatus]);
     } else {
-        echo json_encode(['success' => false, 'message' => 'Failed to update status']);
+        echo json_encode(['success' => false, 'message' => LocalizationHelper::translate('status_update_failed')]);
     }
 } catch (Exception $e) {
     echo json_encode(['success' => false, 'error' => $e->getMessage()]);

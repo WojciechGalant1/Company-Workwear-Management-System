@@ -1,8 +1,13 @@
 <?php
 include_once __DIR__ . '/../../app/models/User.php';
-include_once __DIR__ . '/../../app/database/Database.php';
+include_once __DIR__ . '/../../app/services/database/Database.php';
 include_once __DIR__ . '/../../app/auth/SessionManager.php';
 include_once __DIR__ . '/../../app/helpers/CsrfHelper.php';
+include_once __DIR__ . '/../../app/helpers/LocalizationHelper.php';
+include_once __DIR__ . '/../../app/helpers/LanguageSwitcher.php';
+
+// Initialize language system
+LanguageSwitcher::initializeWithRouting();
 
 header('Content-Type: application/json');
 
@@ -13,7 +18,7 @@ if (session_status() === PHP_SESSION_NONE) {
 // CSRF basic check 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['csrf']) && isset($_SESSION['csrf']) && $_POST['csrf'] !== $_SESSION['csrf']) {
-        echo json_encode(array('status' => 'error', 'message' => 'Błąd CSRF'));
+        echo json_encode(array('status' => 'error', 'message' => LocalizationHelper::translate('error_csrf')));
         exit;
     }
 }
@@ -37,12 +42,12 @@ try {
                 $sessionManager = new SessionManager();
                 $sessionManager->login($user['id'], $user['status']);
 
-                echo json_encode(array('status' => 'success', 'message' => 'Poprawne dane'));
+                echo json_encode(array('status' => 'success', 'message' => LocalizationHelper::translate('login_success')));
             } else {
-                echo json_encode(array('status' => 'error', 'message' => 'Błędne dane 0'));
+                echo json_encode(array('status' => 'error', 'message' => LocalizationHelper::translate('login_invalid_credentials')));
             }
         } else {
-            echo json_encode(array('status' => 'error', 'message' => 'Błędne dane'));
+            echo json_encode(array('status' => 'error', 'message' => LocalizationHelper::translate('login_invalid_credentials')));
         }
     } elseif (!empty($kodID)) {
         // Very basic rate-limit using session (optional)
@@ -62,15 +67,15 @@ try {
             $sessionManager = new SessionManager();
             $sessionManager->login($user['id'], $user['status']);
 
-            echo json_encode(array('status' => 'success', 'message' => 'Poprawne dane'));
+            echo json_encode(array('status' => 'success', 'message' => LocalizationHelper::translate('login_success')));
         } else {
-            echo json_encode(array('status' => 'error', 'message' => 'Błędny kod'));
+            echo json_encode(array('status' => 'error', 'message' => LocalizationHelper::translate('login_invalid_code')));
         }
     } else {
-        echo json_encode(array('status' => 'error', 'message' => 'Nie podano danych logowania'));
+        echo json_encode(array('status' => 'error', 'message' => LocalizationHelper::translate('login_no_credentials')));
     }
 } catch (PDOException $e) {
-    echo json_encode(array('status' => 'error', 'message' => 'Connection failed: ' . $e->getMessage()));
+    echo json_encode(array('status' => 'error', 'message' => LocalizationHelper::translate('login_connection_failed') . ': ' . $e->getMessage()));
 }
 
 

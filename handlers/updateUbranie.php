@@ -2,6 +2,11 @@
 include_once __DIR__ . '/../app/services/ServiceContainer.php';
 include_once __DIR__ . '/../app/auth/SessionManager.php';
 include_once __DIR__ . '/../app/helpers/CsrfHelper.php';
+include_once __DIR__ . '/../app/helpers/LocalizationHelper.php';
+include_once __DIR__ . '/../app/helpers/LanguageSwitcher.php';
+
+// Initialize language system
+LanguageSwitcher::initializeWithRouting();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validate CSRF token
@@ -25,19 +30,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Basic validation
     if ($id <= 0) {
         http_response_code(400);
-        echo json_encode(['status' => 'error', 'message' => 'Nieprawidłowe ID.']);
+        echo json_encode(['status' => 'error', 'message' => LocalizationHelper::translate('validation_invalid_id')]);
         exit;
     }
 
     if (empty($nazwa) || empty($rozmiar)) {
         http_response_code(400);
-        echo json_encode(['status' => 'error', 'message' => 'Nazwa i rozmiar są wymagane.']);
+        echo json_encode(['status' => 'error', 'message' => LocalizationHelper::translate('validation_name_size_required')]);
         exit;
     }
 
     if ($ilosc < 0 || $iloscMin < 0) {
         http_response_code(400);
-        echo json_encode(['status' => 'error', 'message' => 'Ilość nie może być ujemna.']);
+        echo json_encode(['status' => 'error', 'message' => LocalizationHelper::translate('validation_quantity_negative')]);
         exit;
     }
 
@@ -56,6 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo json_encode($result);
 } else {
     http_response_code(405);
-    echo json_encode(['status' => 'method_not_allowed', 'message' => 'Metoda niedozwolona.']);
+    echo json_encode(['status' => 'method_not_allowed', 'message' => LocalizationHelper::translate('error_method_not_allowed')]);
 }
 ?>

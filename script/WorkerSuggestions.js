@@ -1,5 +1,6 @@
 import { getBaseUrl } from './utils.js';
 import { debounce } from './utils.js';
+import { Translations } from './translations.js';
 
 export const WorkerSuggestions = (() => {
     let currentController = null;
@@ -54,7 +55,7 @@ export const WorkerSuggestions = (() => {
             cache[query] = data;
 
             if (data.length === 0) {
-                alertManager.createAlert('Nie znaleziono pracownika o podanym imieniu i nazwisku.');
+                alertManager.createAlert(Translations.translate('employee_not_found'));
             } else {
                 showSuggestions(data, suggestions, usernameInput, hiddenInput, alertManager);
             }
@@ -63,7 +64,7 @@ export const WorkerSuggestions = (() => {
                 // Ignoruj anulowane żądania
                 return;
             }
-            console.error('Nie udało się wczytać danych:', error);
+            console.error('Failed to load data:', error);
         } finally {
             loadingSpinner.style.display = 'none';
         }
@@ -84,7 +85,7 @@ export const WorkerSuggestions = (() => {
             const invalidCharPattern = /[0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
             if (invalidCharPattern.test(query)) {
                 loadingSpinner.style.display = 'none';
-                alertManager.createAlert('Imię i nazwisko nie może zawierać cyfr ani znaków specjalnych.');
+                alertManager.createAlert(Translations.translate('validation_name_invalid_characters'));
             } else {
                 fetchSuggestions(query, baseUrl, suggestions, usernameInput, hiddenInput, alertManager, loadingSpinner);
             }

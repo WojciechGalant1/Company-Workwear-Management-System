@@ -1,4 +1,5 @@
 import { getBaseUrl } from './utils.js';
+import { Translations } from './translations.js';
 
 export const UbraniaKod = (() => {
     const initializeKodInput = (inputElement, alertManager) => {
@@ -16,7 +17,7 @@ export const UbraniaKod = (() => {
             if (!kod) {
                 ubranieIdInput.value = '';
                 rozmiarIdInput.value = '';
-                alertManager.createAlert('Pole kodu nie może być puste.');
+                alertManager.createAlert(Translations.translate('clothing_code_empty'));
                 return;
             }
 
@@ -27,15 +28,15 @@ export const UbraniaKod = (() => {
                 if (data && !data.error) {
                     ubranieIdInput.value = data.id_ubrania;
                     rozmiarIdInput.value = data.id_rozmiar;
-                    alertManager.createAlert(`Znaleziono ubranie: ${data.nazwa_ubrania}, rozmiar: ${data.nazwa_rozmiaru}`);
+                    alertManager.createAlert(`${Translations.translate('clothing_found')}: ${data.nazwa_ubrania}, ${Translations.translate('clothing_size')}: ${data.nazwa_rozmiaru}`);
                 } else {
                     ubranieIdInput.value = '';
                     rozmiarIdInput.value = '';
-                    alertManager.createAlert('Nie znaleziono ubrania o podanym kodzie.');
+                    alertManager.createAlert(Translations.translate('clothing_not_found'));
                 }
             } catch (error) {
-                console.error('Wystąpił błąd podczas wyszukiwania ubrania:', error);
-                alertManager.createAlert('Wystąpił błąd podczas wyszukiwania ubrania.');
+                console.error('Error searching for clothing:', error);
+                alertManager.createAlert(Translations.translate('clothing_search_error'));
             }
         });
     };

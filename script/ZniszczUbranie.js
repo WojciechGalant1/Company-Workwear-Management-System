@@ -30,7 +30,7 @@ export const ZniszczUbranie = (function () {
                 alert(Translations.translate('delete_error'));
             }
         } catch (error) {
-            console.error('Błąd:', error);
+            console.error('Error:', error);
             alert(Translations.translate('network_error'));
         }
     };

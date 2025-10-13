@@ -5,6 +5,11 @@ if (session_status() === PHP_SESSION_NONE) {
 
 include_once __DIR__ . '/../app/services/ServiceContainer.php';
 include_once __DIR__ . '/../app/helpers/CsrfHelper.php';
+include_once __DIR__ . '/../app/helpers/LocalizationHelper.php';
+include_once __DIR__ . '/../app/helpers/LanguageSwitcher.php';
+
+// Initialize language system
+LanguageSwitcher::initializeWithRouting();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
@@ -26,13 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($success) {
             echo json_encode(['success' => true]);
         } else {
-            echo json_encode(['success' => false, 'error' => 'Nie udało się zaktualizować statusu.']);
+            echo json_encode(['success' => false, 'error' => LocalizationHelper::translate('status_update_failed')]);
         }
     } else {
-        echo json_encode(['success' => false, 'error' => 'Nie podano ID ubrania.']);
+        echo json_encode(['success' => false, 'error' => LocalizationHelper::translate('validation_clothing_id_required')]);
     }
 } else {
-    echo json_encode(['success' => false, 'error' => 'Metoda niedozwolona.']);
+    echo json_encode(['success' => false, 'error' => LocalizationHelper::translate('error_method_not_allowed')]);
     exit;
 }
 

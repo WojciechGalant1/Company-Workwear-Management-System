@@ -210,6 +210,27 @@ return array(
     'reports_export' => 'Export',
     'reports_print' => 'Print',
     
+    // Login messages
+    'login_success' => 'Login successful',
+    'login_invalid_credentials' => 'Invalid credentials',
+    'login_invalid_code' => 'Invalid code',
+    'login_no_credentials' => 'No login credentials provided',
+    'login_connection_failed' => 'Connection failed',
+    
+    // Validation messages
+    'validation_invalid_id' => 'Invalid ID',
+    'validation_name_size_required' => 'Name and size are required',
+    'validation_quantity_negative' => 'Quantity cannot be negative',
+    'validation_invalid_input' => 'Invalid input data',
+    'validation_clothing_id_required' => 'Clothing ID is required',
+    'validation_name_invalid_characters' => 'Name cannot contain numbers or special characters',
+    
+    // Status messages
+    'status_update_failed' => 'Failed to update status',
+    'cancel_issue_failed' => 'Failed to cancel issue',
+    'clothing_issued_not_found' => 'Issued clothing not found',
+    'clothing_search_error' => 'Error searching for clothing',
+    
     // Modals and Alerts
     'modal_confirm' => 'Confirm Action',
     'modal_confirm_delete' => 'Are you sure you want to delete this item?',

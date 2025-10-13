@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['pracownikID']) && !empt
                     $rowClass = $status == 0 ? "table-warning" : ($status == 2 ? "table-danger" : "");
                     $buttonText = $status == 1 ? __('history_remove_from_report') : __('history_add_to_report');
                     $buttonAction = $status == 1 ? __('history_inactive') : __('history_active');
-                    $reportDisabledBtn = !$canBeReported || $status == 2 ? "disabled" : "";
+                    $reportDisabledBtn = !$canBeReported || $status == 2 || $status == 3 ? "disabled" : "";
                     $destroyDisabled = $status != 1 ? "disabled" : "";
                     $buttonHtml = "<button class='btn btn-warning cancel-btn' data-id='{$ubranie['id']}' {$disabledBtn}>{$cancelBtn}</button>";
 

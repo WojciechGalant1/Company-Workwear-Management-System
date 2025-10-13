@@ -209,6 +209,27 @@ return array(
     'reports_export' => 'Eksportuj',
     'reports_print' => 'Drukuj',
     
+    // Login messages
+    'login_success' => 'Poprawne dane',
+    'login_invalid_credentials' => 'Błędne dane',
+    'login_invalid_code' => 'Błędny kod',
+    'login_no_credentials' => 'Nie podano danych logowania',
+    'login_connection_failed' => 'Błąd połączenia',
+    
+    // Validation messages
+    'validation_invalid_id' => 'Nieprawidłowe ID',
+    'validation_name_size_required' => 'Nazwa i rozmiar są wymagane',
+    'validation_quantity_negative' => 'Ilość nie może być ujemna',
+    'validation_invalid_input' => 'Nieprawidłowe dane wejściowe',
+    'validation_clothing_id_required' => 'Nie podano ID ubrania',
+    'validation_name_invalid_characters' => 'Imię i nazwisko nie może zawierać cyfr ani znaków specjalnych',
+    
+    // Status messages
+    'status_update_failed' => 'Nie udało się zaktualizować statusu',
+    'cancel_issue_failed' => 'Nie udało się anulować wydania',
+    'clothing_issued_not_found' => 'Nie znaleziono wydanego ubrania',
+    'clothing_search_error' => 'Wystąpił błąd podczas wyszukiwania ubrania',
+    
     // Modals and Alerts
     'modal_confirm' => 'Potwierdź akcję',
     'modal_confirm_delete' => 'Czy na pewno chcesz usunąć ten element?',

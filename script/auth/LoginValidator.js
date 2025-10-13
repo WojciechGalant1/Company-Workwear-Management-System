@@ -1,4 +1,5 @@
 import { AlertManager } from '../AlertManager.js';
+import { Translations } from '../translations.js';
 
 export const LoginValidator = (function () {
     let kodInput = '';
@@ -51,7 +52,7 @@ export const LoginValidator = (function () {
                 }
             },
             error: () => {
-                alertManager.createAlert('Błąd serwera');
+                alertManager.createAlert(Translations.translate('server_error'));
                 this.hideSpinner();
             },
         });

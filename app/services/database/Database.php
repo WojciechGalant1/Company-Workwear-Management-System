@@ -1,4 +1,8 @@
 <?php
+/**
+ * Database service class
+ * Handles database connection and provides PDO instance
+ */
 class Database
 {
     private static $pdo = null;
@@ -6,7 +10,7 @@ class Database
 
     public function __construct()
     {
-        $this->config = require __DIR__ . '/../config/DbConfig.php';
+        $this->config = require __DIR__ . '/../../config/DbConfig.php';
     }
 
     public function getPdo()

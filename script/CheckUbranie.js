@@ -1,4 +1,5 @@
 import { getBaseUrl } from './utils.js';
+import { Translations } from './translations.js';
 
 export const CheckUbranie = (() => {
     const baseUrl = getBaseUrl();
@@ -48,19 +49,19 @@ export const CheckUbranie = (() => {
                 const data = await response.json();
 
                 if (data && !data.error) {
-                    alertManager.createAlert(`Znaleziono ubranie: ${data.nazwa_ubrania}, rozmiar: ${data.nazwa_rozmiaru}`);
+                    alertManager.createAlert(`${Translations.translate('clothing_found')}: ${data.nazwa_ubrania}, ${Translations.translate('clothing_size')}: ${data.nazwa_rozmiaru}`);
                     toggleIloscMinField(iloscMinField, false);
                     row.dataset.ubrFoundByKod = 'true';
                     row.querySelector('input[name$="[nazwa]"]').value = data.nazwa_ubrania;
                     row.querySelector('input[name$="[rozmiar]"]').value = data.nazwa_rozmiaru;
                 } else {
-                    alertManager.createAlert('Nie znaleziono ubrania o podanym kodzie.');
+                    alertManager.createAlert(Translations.translate('clothing_not_found'));
                     toggleIloscMinField(iloscMinField, true);
                     row.dataset.ubrFoundByKod = 'false';
                 }
             } catch (error) {
-                console.error('Błąd przy sprawdzaniu magazynu:', error);
-                alertManager.createAlert('Wystąpił błąd podczas sprawdzania kodu.');
+                console.error('Error checking warehouse:', error);
+                alertManager.createAlert(Translations.translate('clothing_search_error'));
             }
         };
 

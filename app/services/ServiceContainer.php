@@ -1,5 +1,5 @@
 <?php
-include_once __DIR__ . '/../database/Database.php';
+include_once __DIR__ . '/database/Database.php'; 
 include_once __DIR__ . '/../controllers/BaseController.php';
 include_once __DIR__ . '/../controllers/StanMagazynuC.php';
 include_once __DIR__ . '/../controllers/UbranieC.php';

@@ -5,6 +5,11 @@ if (session_status() === PHP_SESSION_NONE) {
 
 include_once __DIR__ . '/../app/services/ServiceContainer.php';
 include_once __DIR__ . '/../app/helpers/CsrfHelper.php';
+include_once __DIR__ . '/../app/helpers/LocalizationHelper.php';
+include_once __DIR__ . '/../app/helpers/LanguageSwitcher.php';
+
+// Initialize language system
+LanguageSwitcher::initializeWithRouting();
 
 header('Content-Type: application/json; charset=utf-8');
 
@@ -19,7 +24,7 @@ try {
     }
 
     if (!isset($data['id']) || !is_numeric($data['id'])) {
-        throw new Exception('Nieprawidłowe dane wejściowe.');
+        throw new Exception(LocalizationHelper::translate('validation_invalid_input'));
     }
 
     $ubranieId = $data['id'];
@@ -31,7 +36,7 @@ try {
 
     $wydaneUbranie = $wydaneUbraniaC->getUbraniaById($ubranieId);
     if (!$wydaneUbranie) {
-        throw new Exception('Nie znaleziono wydanego ubrania.');
+        throw new Exception(LocalizationHelper::translate('clothing_issued_not_found'));
     }
 
     $idWydania = $wydaneUbranie['id_wydania'];
@@ -49,7 +54,7 @@ try {
  */
         echo json_encode(['success' => true]);
     } else {
-        throw new Exception('Nie udało się anulować wydania.');
+        throw new Exception(LocalizationHelper::translate('cancel_issue_failed'));
     }
 } catch (Exception $e) {
     echo json_encode(['success' => false, 'message' => $e->getMessage()]);

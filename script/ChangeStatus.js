@@ -1,4 +1,5 @@
 import { getBaseUrl, addCsrfToObject } from './utils.js';
+import { Translations } from './translations.js';
 
 export const ChangeStatus = (function () {
     let selectedId = null;
@@ -15,7 +16,9 @@ export const ChangeStatus = (function () {
 
                 if (document.getElementById('historia-page')) {
                     const currentAction = clickedButton.getAttribute('data-action');
-                    const currentStatus = currentAction === 'nieaktywne' ? 1 : 0;
+                    // Check for inactive status (both English "Inactive" and Polish "Nieaktywne")
+                    const isInactive = currentAction === 'Inactive' || currentAction === 'Nieaktywne';
+                    const currentStatus = isInactive ? 1 : 0;
                     updateStatus(currentStatus);
                 } else {
                     updateStatusForModal();
@@ -26,8 +29,12 @@ export const ChangeStatus = (function () {
 
     const updateStatus = async (currentStatus) => {
         const baseUrl = getBaseUrl();
+        const originalText = selectedButton.textContent;
 
         try {
+            selectedButton.disabled = true;
+            selectedButton.textContent = Translations.translate('processing');
+
             const requestData = addCsrfToObject({ id: selectedId, currentStatus });
             
             const response = await fetch(`${baseUrl}/handlers/changeStatus.php`, {
@@ -41,31 +48,30 @@ export const ChangeStatus = (function () {
             const data = await response.json();
 
             if (data.success) {
-                const newStatus = data.newStatus;
-                if (newStatus === 1) {
-                    selectedButton.disabled = true;
-                    selectedButton.textContent = "Usuń z raportu";
-                    selectedButton.setAttribute("data-action", "nieaktywne");
-                } else {
-                    selectedButton.disabled = true;
-                    selectedButton.textContent = "Dodaj do raportu";
-                    selectedButton.setAttribute("data-action", "aktywne");
-                }
-                window.location.reload();
+                selectedButton.textContent = Translations.translate('status_changed');
+                setTimeout(() => window.location.reload(), 100);
             } else {
-                alert(data.message || 'Błąd podczas aktualizacji statusu.');
+                alert(data.message || Translations.translate('status_update_failed'));
+                selectedButton.disabled = false;
+                selectedButton.textContent = originalText;
             }
         } catch (error) {
-            console.error('Błąd:', error);
-            alert('Wystąpił błąd podczas aktualizacji statusu.');
+            console.error('Error:', error);
+            alert(Translations.translate('status_update_failed'));
+            selectedButton.disabled = false;
+            selectedButton.textContent = originalText;
         }
     };
 
     const updateStatusForModal = async () => {
         const isRaport = selectedButton.getAttribute('data-raport') === 'true';
         const baseUrl = getBaseUrl();
+        const originalText = selectedButton.textContent;
 
         try {
+            selectedButton.disabled = true;
+            selectedButton.textContent = Translations.translate('processing');
+
             const requestData = addCsrfToObject({ id: selectedId, currentStatus: 1 });
             
             const response = await fetch(`${baseUrl}/handlers/changeStatus.php`, {
@@ -79,19 +85,53 @@ export const ChangeStatus = (function () {
             const data = await response.json();
 
             if (data.success) {
-                selectedButton.disabled = true;
-                selectedButton.textContent = "Usunięto z raportu";
-                if (isRaport) {
-                    window.location.reload();
-                }
+                selectedButton.textContent = Translations.translate('status_changed');
             } else {
-                alert(data.message || 'Błąd podczas aktualizacji statusu.');
+                alert(data.message || Translations.translate('status_update_failed'));
+                selectedButton.disabled = false;
+                selectedButton.textContent = originalText;
             }
         } catch (error) {
-            console.error('Błąd:', error);
-            alert('Wystąpił błąd podczas aktualizacji statusu.');
+            console.error('Error:', error);
+            alert(Translations.translate('status_update_failed'));
+            selectedButton.disabled = false;
+            selectedButton.textContent = originalText;
         }
     };
+
+
+
+    // const updateStatusForModal = async () => {
+    //     const isRaport = selectedButton.getAttribute('data-raport') === 'true';
+    //     const baseUrl = getBaseUrl();
+
+    //     try {
+    //         const requestData = addCsrfToObject({ id: selectedId, currentStatus: 1 });
+            
+    //         const response = await fetch(`${baseUrl}/handlers/changeStatus.php`, {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify(requestData)
+    //         });
+
+    //         const data = await response.json();
+
+    //         if (data.success) {
+    //             selectedButton.disabled = true;
+    //             selectedButton.textContent = "Usunięto z raportu";
+    //             if (isRaport) {
+    //                 window.location.reload();
+    //             }
+    //         } else {
+    //             alert(data.message || 'Błąd podczas aktualizacji statusu.');
+    //         }
+    //     } catch (error) {
+    //         console.error('Błąd:', error);
+    //         alert('Wystąpił błąd podczas aktualizacji statusu.');
+    //     }
+    // };
 
     return { initialize };
 })();

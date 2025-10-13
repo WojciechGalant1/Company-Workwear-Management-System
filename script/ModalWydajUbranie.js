@@ -1,4 +1,5 @@
 import { getBaseUrl } from './utils.js';
+import { Translations } from './translations.js';
 
 export const ModalWydajUbranie = (function () {
     const init = function (alertManager) {
@@ -22,7 +23,7 @@ export const ModalWydajUbranie = (function () {
                     location.reload();
                 }
             } else {
-                alertManager.createAlert(message || 'Wystąpił błąd podczas przetwarzania żądania.', 'danger');
+                alertManager.createAlert(message || Translations.translate('server_error'), 'danger');
             }
         });
 
