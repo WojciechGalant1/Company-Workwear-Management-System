@@ -9,6 +9,14 @@ export const Translations = (() => {
 
     // English translations
     const enTranslations = {
+
+        // login messages
+        'login_success': 'Login successful',
+        'login_invalid_credentials': 'Invalid credentials',
+        'login_invalid_code': 'Invalid code',
+        'login_no_credentials': 'No login credentials provided',
+        'login_connection_failed': 'Connection failed',
+
         // Success messages
         'edit_success': 'Edit completed successfully',
         'operation_success': 'Operation completed successfully',
@@ -42,6 +50,9 @@ export const Translations = (() => {
         'clothing_not_found': 'Clothing not found with given code',
         'clothing_code_empty': 'Code field cannot be empty',
         'clothing_insufficient_stock': 'Insufficient stock available',
+        'clothing_exists': 'Clothing with this name and size exists in the warehouse.',
+        'clothing_not_exists': 'Clothing with this name and size does not exist in the warehouse.',
+        'clothing_error_warehouse':'Error checking warehouse',
         
         // Employee messages
         'employee_found': 'Employee found',
@@ -76,12 +87,18 @@ export const Translations = (() => {
 
         // issue clothing
         'select_size_name': 'Select Size',
-
-
     };
 
     // Polish translations
     const plTranslations = {
+
+        // login messages
+        'login_success': 'Poprawne dane',
+        'login_invalid_credentials': 'Błędne dane logowania',
+        'login_invalid_code': 'Błędny kod',
+        'login_no_credentials': 'Nie podano danych logowania',
+        'login_connection_failed': 'Błąd połączenia',
+
         // Success messages
         'edit_success': 'Edycja zakończona sukcesem',
         'operation_success': 'Operacja zakończona sukcesem',
@@ -115,7 +132,9 @@ export const Translations = (() => {
         'clothing_not_found': 'Nie znaleziono ubrania o podanym kodzie',
         'clothing_code_empty': 'Pole kodu nie może być puste',
         'clothing_insufficient_stock': 'Niewystarczający stan magazynowy',
-        
+        'clothing_exists': 'Ubranie o tej nazwie i rozmiarze istnieje w magazynie.',
+        'clothing_not_exists': 'Ubranie o tej nazwie i rozmiarze nie istnieje w magazynie.',
+        'clothing_error_warehouse':'Błąd podczas sprawdzania magazynu',
         // Employee messages
         'employee_found': 'Znaleziono pracownika',
         'employee_not_found': 'Nie znaleziono pracownika',

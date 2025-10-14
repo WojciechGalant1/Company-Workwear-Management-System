@@ -27,7 +27,7 @@ export const LoginValidator = (function () {
         const kodID = kodInput.value.trim();
 
         if (kodID.length === 0) {
-            alertManager.createAlert('Wprowadź kod.');
+            alertManager.createAlert(Translations.translate('login_no_credentials'));
             return;
         }
 
@@ -41,11 +41,11 @@ export const LoginValidator = (function () {
             data: { kodID: kodID, csrf: getCsrfToken() },
             success: (data) => {
                 if (data.status === 'success') {
-                    alertManager.createAlert('Poprawne dane', 'success');
+                    alertManager.createAlert(Translations.translate('login_success'), 'success');
                     window.location.href = baseUrl + '/wydaj-ubranie';
                     this.hideSpinner();
                 } else {
-                    alertManager.createAlert('Błędny kod');
+                    alertManager.createAlert(Translations.translate('login_invalid_code'));
                     kodInput.value = '';
                     kodInput.focus();
                     this.hideSpinner();

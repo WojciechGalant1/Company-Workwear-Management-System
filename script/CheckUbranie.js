@@ -85,14 +85,14 @@ export const CheckUbranie = (() => {
                 const data = await response.json();
 
                 if (data.exists) {
-                    alertManager.createAlert('Ubranie o tej nazwie i rozmiarze istnieje w magazynie.');
+                    alertManager.createAlert(`${Translations.translate('clothing_exists')}`);
                     toggleIloscMinField(iloscMinField, false);
                 } else {
-                    alertManager.createAlert('Ubranie o tej nazwie i rozmiarze nie istnieje w magazynie.');
+                    alertManager.createAlert(`${Translations.translate('clothing_not_exists')}`);
                     toggleIloscMinField(iloscMinField, true);
                 }
             } catch (error) {
-                console.error('Błąd przy sprawdzaniu magazynu:', error);
+                console.error(`${Translations.translate('clothing_error_warehouse')}:`, error);
             }
         };
 
