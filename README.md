@@ -41,6 +41,9 @@ A full-featured web platform designed to manage corporate workwear distribution 
 - **Real-time Dashboard** - Monitor inventory levels and advanced search/sorting
 - **Smart Notifications** - Automatic alerts for low stock items and expiration-based reporting
 - **Barcode integration** - Items added/edited via scanner input with auto-form submission
+- **Multilingual Support** - Full English and Polish language support with dynamic switching
+- **CSRF Protection** - Comprehensive security implementation across all forms and AJAX requests
+- **Responsive Design** - Mobile-friendly interface optimized for warehouse environments
 > **Warning:**
 > Barcode scanners must be configured to automatically append an "Enter" keystroke after each scan for proper form submission and system interaction.
 
@@ -48,9 +51,11 @@ A full-featured web platform designed to manage corporate workwear distribution 
 
 |Layer|Tech|
 |:-|:-|
-|Backend|PHP(custom MVC), REST-style endpoints|
+|Backend|PHP (custom MVC), REST-style endpoints|
 |Frontend|JavaScript (ES6), Bootstrap, jQuery|
 |Database|MySQL (relational, optimized queries)|
+|Security|CSRF protection, XSS prevention, role-based access|
+|Localization|Custom i18n system (English/Polish)|
 |Performance|Designed for low-resource deployment|
 > **Note:**
 > Optimized for performance in PHP 5.3 environments due to infrastructure constraints at the time of development
@@ -61,14 +66,15 @@ A full-featured web platform designed to manage corporate workwear distribution 
 ```
 project/
 ├── app/                    # Application core
-│   ├── auth/               # authorization and session management
+│   ├── auth/               # Authorization and session management
 │   ├── controllers/        # Business logic controllers
 │   ├── models/             # Data models
 │   ├── config/             # Configuration files
-│   ├── database/           # Database connection 
+│   │   └── translations/   # Multilingual support (EN/PL)
+│   ├── services/           # Database connection and service container
 │   ├── forms/              # Form processing handlers
 │   ├── handlers/           # AJAX request handlers
-│   └── helpers/            # Utility functions
+│   └── helpers/            # Utility functions (CSRF, i18n, etc.)
 ├── views/                  # View templates
 ├── img/                    # Image assets
 ├── layout/                 # Layout templates
@@ -92,16 +98,19 @@ project/
 
 ## Potential Enhancements & Future Development
 - **Codebase Modernization** – Upgrade PHP version and refactor legacy components for modern standards (e.g., PHP 8+, namespaces, Composer)
-- **Multi-language Support** – Implement English-language version for broader usability
 - **Mobile Optimization** – Enhance touch interactions and responsive views for tablet/handheld use in warehouse environments
 - **API Integration** – Introduce REST API endpoints for external system sync (e.g., ERP or HR software)
 - **Batch Processing** – Enable bulk import/export of inventory data via CSV 
 - **MVC Architecture Improvements** – Refine custom MVC structure for better modularity, testability, and separation of concerns
 - **Robust Error Handling** – Implement a global error handler and proper error boundaries across the stack
-- **Security Enhancements**:
-  - CSRF protection for all forms
+- **Additional Security Enhancements**:
   - Rate limiting to prevent brute-force form submissions
   - API request throttling to mitigate abuse and maintain performance
+  - Enhanced password hashing (upgrade from crypt() to password_hash())
+- **Performance Optimizations**:
+  - Database query optimization and caching
+  - Asset minification and compression
+  - CDN integration for static resources
 - Implementation of automated test suites to improve future maintainability and reduce regression risk
 
 

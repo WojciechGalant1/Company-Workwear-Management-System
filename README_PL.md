@@ -41,6 +41,9 @@ Kompletny system webowy stworzony do zarządzania odzieżą roboczą w firmie �
 - **Powiadomienia** — automatyczne alerty o niskim stanie lub konieczności wymiany
 - **Raportowanie** — generowanie raportów zużycia, wydań i zapotrzebowania
 - **Obsługa kodów kreskowych** — szybkie dodawanie i edycja ubrań przez skaner
+- **Wsparcie wielojęzyczne** — pełne wsparcie języka polskiego i angielskiego z dynamicznym przełączaniem
+- **Ochrona CSRF** — kompleksowa implementacja bezpieczeństwa we wszystkich formularzach i żądaniach AJAX
+- **Design responsywny** — interfejs przyjazny dla urządzeń mobilnych, zoptymalizowany dla środowisk magazynowych
 > **Uwaga**
 > Czytniki kodów kreskowych muszą być skonfigurowane tak, aby po skanowaniu automatycznie dodawały znak "Enter".
 
@@ -51,6 +54,8 @@ Kompletny system webowy stworzony do zarządzania odzieżą roboczą w firmie �
 |Backend|PHP (własny MVC), REST-owe punkty końcowe|
 |Frontend|JavaScript (ES6), Bootstrap, jQuery|
 |Baza danych|MySQL (relacyjna, zoptymalizowane zapytania)|
+|Bezpieczeństwo|Ochrona CSRF, zapobieganie XSS, kontrola dostępu oparta na rolach|
+|Lokalizacja|Własny system i18n (polski/angielski)|
 |Wydajność|Dostosowany do środowisk o niskich zasobach|
 
 > **Notatka**
@@ -61,21 +66,22 @@ Kompletny system webowy stworzony do zarządzania odzieżą roboczą w firmie �
 ```
 project/
 ├── app/                    # Logika aplikacji
-│   ├── auth/               # authorization and session management
+│   ├── auth/               # Autoryzacja i zarządzanie sesjami
 │   ├── controllers/        # Kontrolery biznesowe
 │   ├── models/             # Modele danych
 │   ├── config/             # Pliki konfiguracyjne
-│   ├── services/           # Database connection 
+│   │   └── translations/   # Wsparcie wielojęzyczne (PL/EN)
+│   ├── services/           # Połączenie z bazą danych i kontener usług
 │   ├── forms/              # Obsługa formularzy
 │   ├── handlers/           # Obsługa żądań AJAX
-│   └── helpers/            # Funkcje pomocnicze
+│   └── helpers/            # Funkcje pomocnicze (CSRF, i18n, itp.)
 ├── views/                  # Szablony widoków
 ├── img/                    # Zasoby graficzne
 ├── layout/                 # Układ strony
 ├── script/                 # Moduły JS
 ├── styl/                   # Arkusze CSS
 ├── .htaccess               # Konfiguracja Apache
-├── App.js                  # Główny plik JS
+├── App.js                  # Główny plik JavaScript
 └── index.php               # Punkt wejścia aplikacji
 ```
 
@@ -93,16 +99,19 @@ project/
 ## Możliwe Ulepszenia i Rozwój
 
 - **Modernizacja kodu** – aktualizacja do PHP 8+, użycie Composer, wprowadzenie namespace'ów
-- **Wersja wielojęzyczna** – angielska wersja interfejsu
 - **Responsywność** – optymalizacja pod tablety i urządzenia mobilne
 - **Integracja z API** – możliwość połączenia z systemami zewnętrznymi (np. ERP, HR)
 - **Przetwarzanie wsadowe** – import i eksport danych w formacie CSV
 - **Usprawnienie MVC** – większy podział na moduły, testowalność, separacja odpowiedzialności
 - **Obsługa błędów** – globalny handler błędów i kontrola wyjątków
-- **Zabezpieczenia**:
-  - Ochrona CSRF dla wszystkich formularzy
+- **Dodatkowe zabezpieczenia**:
   - Limity prób logowania (brute-force)
   - Throttling żądań do API
+  - Ulepszone hashowanie haseł (upgrade z crypt() do password_hash())
+- **Optymalizacje wydajności**:
+  - Optymalizacja zapytań do bazy danych i cachowanie
+  - Minifikacja i kompresja zasobów
+  - Integracja z CDN dla zasobów statycznych
 - **Testy automatyczne** – zestaw testów jednostkowych i integracyjnych
 
 ## Moja Rola i Odpowiedzialność
