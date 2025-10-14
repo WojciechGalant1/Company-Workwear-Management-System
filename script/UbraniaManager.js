@@ -161,7 +161,7 @@ export const UbraniaManager = (() => {
             if (selectedUbranieId) {
                 rozmiarSelect.disabled = false;
                 try {
-                    const response = await fetch(`${baseUrl}/handlers/getRozmiary.php?ubranie_id=${selectedUbranieId}`);
+                    const response = await fetch(`${baseUrl}/app/handlers/getRozmiary.php?ubranie_id=${selectedUbranieId}`);
                     const data = await response.json();
 
                     rozmiarSelect.innerHTML = `<option value="">${Translations.translate('select_size_name')}</option>`;

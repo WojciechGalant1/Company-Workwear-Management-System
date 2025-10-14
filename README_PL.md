@@ -59,23 +59,24 @@ Kompletny system webowy stworzony do zarządzania odzieżą roboczą w firmie �
 ## Struktura Projektu (uproszczona)
 
 ```
-├── app/ # Logika aplikacji
-│ ├── controllers/ # Kontrolery biznesowe
-│ ├── models/ # Modele danych
-│ ├── config/ # Pliki konfiguracyjne
-│ ├── database/ # Połączenie z bazą danych
-│ ├── forms/ # Obsługa formularzy
-│ └── helpers/ # Funkcje pomocnicze
-├── views/ # Szablony widoków
-├── handlers/ # Obsługa żądań AJAX
-├── img/ # Zasoby graficzne
-├── layout/ # Układ strony
-├── log/ # Logi i sesje
-├── script/ # Moduły JS
-├── styl/ # Arkusze CSS
-├── .htaccess # Konfiguracja Apache
-├── App.js # Główny plik JS
-└── index.php # Punkt wejścia aplikacji
+project/
+├── app/                    # Logika aplikacji
+│   ├── auth/               # authorization and session management
+│   ├── controllers/        # Kontrolery biznesowe
+│   ├── models/             # Modele danych
+│   ├── config/             # Pliki konfiguracyjne
+│   ├── services/           # Database connection 
+│   ├── forms/              # Obsługa formularzy
+│   ├── handlers/           # Obsługa żądań AJAX
+│   └── helpers/            # Funkcje pomocnicze
+├── views/                  # Szablony widoków
+├── img/                    # Zasoby graficzne
+├── layout/                 # Układ strony
+├── script/                 # Moduły JS
+├── styl/                   # Arkusze CSS
+├── .htaccess               # Konfiguracja Apache
+├── App.js                  # Główny plik JS
+└── index.php               # Punkt wejścia aplikacji
 ```
 
 ## Moduły Systemu

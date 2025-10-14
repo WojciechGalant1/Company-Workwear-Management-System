@@ -47,6 +47,7 @@ export const Translations = (() => {
         
         // Clothing messages
         'clothing_found': 'Clothing found',
+        'clothing_size': 'Size',
         'clothing_not_found': 'Clothing not found with given code',
         'clothing_code_empty': 'Code field cannot be empty',
         'clothing_insufficient_stock': 'Insufficient stock available',
@@ -129,6 +130,7 @@ export const Translations = (() => {
         
         // Clothing messages
         'clothing_found': 'Znaleziono ubranie',
+        'clothing_size': 'Rozmiar',
         'clothing_not_found': 'Nie znaleziono ubrania o podanym kodzie',
         'clothing_code_empty': 'Pole kodu nie może być puste',
         'clothing_insufficient_stock': 'Niewystarczający stan magazynowy',

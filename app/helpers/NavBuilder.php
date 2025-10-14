@@ -53,7 +53,7 @@ class NavBuilder {
         
         $output .= self::separator();
         $output .= '<li class="nav-item">
-                        <a class="nav-link text-warning" href="' . $baseUrl . '/handlers/auth/logout.php">
+                        <a class="nav-link text-warning" href="' . $baseUrl . '/app/handlers/auth/logout.php">
                             ' . LocalizationHelper::translate('nav_logout') . '
                         </a>
                     </li>';

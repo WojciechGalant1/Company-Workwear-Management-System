@@ -11,7 +11,7 @@ export const ZniszczUbranie = (function () {
         try {
             const requestData = addCsrfToObject({ id: ubranieId });
             
-            const response = await fetch(`${baseUrl}/handlers/zniszcz_ubranie.php`, {
+            const response = await fetch(`${baseUrl}/app/handlers/zniszcz_ubranie.php`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

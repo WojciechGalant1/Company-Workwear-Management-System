@@ -37,7 +37,7 @@ export const LoginValidator = (function () {
 
         $.ajax({
             type: 'POST',
-            url: baseUrl + '/handlers/auth/validateLogin.php',
+            url: baseUrl + '/app/handlers/auth/validateLogin.php',
             data: { kodID: kodID, csrf: getCsrfToken() },
             success: (data) => {
                 if (data.status === 'success') {

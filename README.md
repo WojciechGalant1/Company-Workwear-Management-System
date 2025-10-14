@@ -67,9 +67,9 @@ project/
 │   ├── config/             # Configuration files
 │   ├── database/           # Database connection 
 │   ├── forms/              # Form processing handlers
+│   ├── handlers/           # AJAX request handlers
 │   └── helpers/            # Utility functions
 ├── views/                  # View templates
-├── handlers/               # AJAX request handlers
 ├── img/                    # Image assets
 ├── layout/                 # Layout templates
 ├── script/                 # JavaScript modules

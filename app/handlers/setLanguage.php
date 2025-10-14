@@ -8,7 +8,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-include_once __DIR__ . '/../app/helpers/LanguageSwitcher.php';
+include_once __DIR__ . '/../helpers/LanguageSwitcher.php';
 
 header('Content-Type: application/json');
 

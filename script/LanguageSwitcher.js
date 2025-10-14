@@ -22,7 +22,7 @@ export const LanguageSwitcher = (() => {
      */
     const switchLanguageAjax = async (language) => {
         try {
-            const response = await fetch('/handlers/setLanguage.php', {
+            const response = await fetch('/app/handlers/setLanguage.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

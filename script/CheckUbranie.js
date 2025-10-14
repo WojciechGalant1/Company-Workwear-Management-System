@@ -45,7 +45,7 @@ export const CheckUbranie = (() => {
             if (!kod) return;
 
             try {
-                const response = await fetch(`${baseUrl}/handlers/getUbranieByKod.php?kod=${encodeURIComponent(kod)}`);
+                const response = await fetch(`${baseUrl}/app/handlers/getUbranieByKod.php?kod=${encodeURIComponent(kod)}`);
                 const data = await response.json();
 
                 if (data && !data.error) {
@@ -81,7 +81,7 @@ export const CheckUbranie = (() => {
             if (!productName || !sizeName) return;
 
             try {
-                const response = await fetch(`${baseUrl}/handlers/checkUbranieExists.php?nazwa=${encodeURIComponent(productName)}&rozmiar=${encodeURIComponent(sizeName)}`);
+                const response = await fetch(`${baseUrl}/app/handlers/checkUbranieExists.php?nazwa=${encodeURIComponent(productName)}&rozmiar=${encodeURIComponent(sizeName)}`);
                 const data = await response.json();
 
                 if (data.exists) {

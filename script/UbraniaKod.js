@@ -22,7 +22,7 @@ export const UbraniaKod = (() => {
             }
 
             try {
-                const response = await fetch(`${baseUrl}/handlers/getUbranieByKod.php?kod=${encodeURIComponent(kod)}`);
+                const response = await fetch(`${baseUrl}/app/handlers/getUbranieByKod.php?kod=${encodeURIComponent(kod)}`);
                 const data = await response.json();
 
                 if (data && !data.error) {

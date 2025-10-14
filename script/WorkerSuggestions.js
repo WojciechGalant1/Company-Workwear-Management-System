@@ -48,7 +48,7 @@ export const WorkerSuggestions = (() => {
                 currentController.abort();
             }
             currentController = new AbortController();
-            const response = await fetch(`${baseUrl}/handlers/fetchWorkers.php?query=${encodeURIComponent(query)}`, { signal: currentController.signal });
+            const response = await fetch(`${baseUrl}/app/handlers/fetchWorkers.php?query=${encodeURIComponent(query)}`, { signal: currentController.signal });
             if (!response.ok) throw new Error('Network response was not ok');
             
             const data = await response.json();

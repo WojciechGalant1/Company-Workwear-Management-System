@@ -60,7 +60,7 @@ if (!CsrfHelper::validateToken()) {
 ```
 
 #### AJAX Handlers
-AJAX handlers (`handlers/*.php`) validate JSON requests:
+AJAX handlers (`app/handlers/*.php`) validate JSON requests:
 ```php
 if (!CsrfHelper::validateTokenFromJson($data)) {
     echo json_encode(CsrfHelper::getErrorResponse());

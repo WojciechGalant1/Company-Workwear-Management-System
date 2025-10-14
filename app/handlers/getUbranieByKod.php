@@ -1,5 +1,5 @@
 <?php
-include_once __DIR__ . '/../app/services/ServiceContainer.php';
+include_once __DIR__ . '/../services/ServiceContainer.php';
 
 if (isset($_GET['kod'])) {
     $serviceContainer = ServiceContainer::getInstance();

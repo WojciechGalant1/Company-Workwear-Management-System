@@ -33,7 +33,7 @@ export const AnulujWydanie = (function () {
         try { 
             const requestData = addCsrfToObject({ id: ubranieId });
             
-            const response = await fetch(`${baseUrl}/handlers/anuluj_wydanie.php`, {
+            const response = await fetch(`${baseUrl}/app/handlers/anuluj_wydanie.php`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

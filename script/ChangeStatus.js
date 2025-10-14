@@ -37,7 +37,7 @@ export const ChangeStatus = (function () {
 
             const requestData = addCsrfToObject({ id: selectedId, currentStatus });
             
-            const response = await fetch(`${baseUrl}/handlers/changeStatus.php`, {
+            const response = await fetch(`${baseUrl}/app/handlers/changeStatus.php`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ export const ChangeStatus = (function () {
 
             const requestData = addCsrfToObject({ id: selectedId, currentStatus: 1 });
             
-            const response = await fetch(`${baseUrl}/handlers/changeStatus.php`, {
+            const response = await fetch(`${baseUrl}/app/handlers/changeStatus.php`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -108,7 +108,7 @@ export const ChangeStatus = (function () {
     //     try {
     //         const requestData = addCsrfToObject({ id: selectedId, currentStatus: 1 });
             
-    //         const response = await fetch(`${baseUrl}/handlers/changeStatus.php`, {
+    //         const response = await fetch(`${baseUrl}/app/handlers/changeStatus.php`, {
     //             method: 'POST',
     //             headers: {
     //                 'Content-Type': 'application/json',

@@ -25,7 +25,7 @@ export const ProductSuggestions = (function () {
                 currentController.abort();
             }
             currentController = new AbortController();
-            const response = await fetch(`${baseUrl}/handlers/${endpoint}?query=${encodeURIComponent(query)}`, { signal: currentController.signal });
+            const response = await fetch(`${baseUrl}/app/handlers/${endpoint}?query=${encodeURIComponent(query)}`, { signal: currentController.signal });
             const data = await response.json();
             cache[cacheKey] = data;
             showSuggestions(data, suggestionsList, inputField);

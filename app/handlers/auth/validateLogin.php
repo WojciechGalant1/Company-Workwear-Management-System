@@ -1,10 +1,10 @@
 <?php
-include_once __DIR__ . '/../../app/models/User.php';
-include_once __DIR__ . '/../../app/services/database/Database.php';
-include_once __DIR__ . '/../../app/auth/SessionManager.php';
-include_once __DIR__ . '/../../app/helpers/CsrfHelper.php';
-include_once __DIR__ . '/../../app/helpers/LocalizationHelper.php';
-include_once __DIR__ . '/../../app/helpers/LanguageSwitcher.php';
+include_once __DIR__ . '/../../models/User.php';
+include_once __DIR__ . '/../../services/database/Database.php';
+include_once __DIR__ . '/../../auth/SessionManager.php';
+include_once __DIR__ . '/../../helpers/CsrfHelper.php';
+include_once __DIR__ . '/../../helpers/LocalizationHelper.php';
+include_once __DIR__ . '/../../helpers/LanguageSwitcher.php';
 
 // Initialize language system
 LanguageSwitcher::initializeWithRouting();

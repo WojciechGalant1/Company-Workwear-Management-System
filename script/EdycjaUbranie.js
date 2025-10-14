@@ -40,7 +40,7 @@ export const EdycjaUbranie = (() => {
             const formData = form.serialize();
 
             $.ajax({
-                url: `${baseUrl}/handlers/updateUbranie.php`,
+                url: `${baseUrl}/app/handlers/updateUbranie.php`,
                 type: 'POST',
                 data: formData,
                 xhrFields: {
