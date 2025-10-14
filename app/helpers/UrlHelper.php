@@ -2,18 +2,13 @@
 require_once __DIR__ . '/../config/RouteConfig.php';
 
 class UrlHelper {
-    /**
-     * Get base URL for the application
-     */
+
     public static function getBaseUrl() {
         $basePath = dirname($_SERVER['SCRIPT_NAME']);
         return $basePath === '/' ? '' : $basePath;
     }
 
-    /**
-     * Get the application root base URL, trimming subpaths like handlers/, views/, log/
-     * Useful inside endpoints under nested directories.
-     */
+
     public static function getAppBaseUrl() {
         $basePath = dirname($_SERVER['SCRIPT_NAME']);
         $segments = array();
@@ -38,9 +33,7 @@ class UrlHelper {
         return $prefix;
     }
     
-    /**
-     * Get clean URI without query string and basePath
-     */
+
     public static function getCleanUri() {
         $uri = $_SERVER['REQUEST_URI'];
         

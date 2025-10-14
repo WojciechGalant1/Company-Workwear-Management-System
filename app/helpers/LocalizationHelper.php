@@ -1,9 +1,6 @@
 <?php
 
-/**
- * Simple Localization Helper for PHP 5.3
- * Provides translation functionality without external dependencies
- */
+
 class LocalizationHelper {
     
     private static $currentLanguage = 'en';
@@ -11,10 +8,7 @@ class LocalizationHelper {
     private static $fallbackLanguage = 'en';
     private static $initialized = false;
     
-    /**
-     * Initialize the localization system
-     * @param string $language Language code (e.g., 'en', 'pl')
-     */
+
     public static function initialize($language = 'en') {
         if (self::$initialized) {
             return;
@@ -25,10 +19,7 @@ class LocalizationHelper {
         self::$initialized = true;
     }
     
-    /**
-     * Set the current language
-     * @param string $language Language code
-     */
+
     public static function setLanguage($language) {
         if (self::$currentLanguage !== $language) {
             self::$currentLanguage = $language;
@@ -36,17 +27,12 @@ class LocalizationHelper {
         }
     }
     
-    /**
-     * Get the current language
-     * @return string
-     */
+
     public static function getCurrentLanguage() {
         return self::$currentLanguage;
     }
     
-    /**
-     * Load translations for the current language
-     */
+
     private static function loadTranslations() {
         $translationFile = __DIR__ . '/../config/translations/' . self::$currentLanguage . '.php';
         
@@ -63,12 +49,7 @@ class LocalizationHelper {
         }
     }
     
-    /**
-     * Translate a key
-     * @param string $key Translation key
-     * @param array $params Parameters for string replacement
-     * @return string Translated text
-     */
+
     public static function translate($key, $params = array()) {
         if (!self::$initialized) {
             self::initialize();
@@ -86,20 +67,12 @@ class LocalizationHelper {
         return $translation;
     }
     
-    /**
-     * Short alias for translate
-     * @param string $key Translation key
-     * @param array $params Parameters for string replacement
-     * @return string Translated text
-     */
+
     public static function t($key, $params = array()) {
         return self::translate($key, $params);
     }
     
-    /**
-     * Get all translations for the current language
-     * @return array
-     */
+
     public static function getAllTranslations() {
         if (!self::$initialized) {
             self::initialize();
@@ -108,11 +81,7 @@ class LocalizationHelper {
         return self::$translations;
     }
     
-    /**
-     * Check if a translation key exists
-     * @param string $key Translation key
-     * @return bool
-     */
+
     public static function hasTranslation($key) {
         if (!self::$initialized) {
             self::initialize();
@@ -121,10 +90,7 @@ class LocalizationHelper {
         return isset(self::$translations[$key]);
     }
     
-    /**
-     * Get available languages
-     * @return array
-     */
+
     public static function getAvailableLanguages() {
         $languages = array();
         $translationDir = __DIR__ . '/../config/translations/';
@@ -139,11 +105,7 @@ class LocalizationHelper {
         return $languages;
     }
     
-    /**
-     * Get language name in its own language
-     * @param string $languageCode Language code
-     * @return string
-     */
+
     public static function getLanguageName($languageCode) {
         $languageNames = array(
             'en' => 'English',

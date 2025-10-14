@@ -1,9 +1,7 @@
 <?php
 
 class NavBuilder {
-    /**
-     *  navigation item with active state
-     */
+
     public static function navItem($url, $label, $activeUri, $baseUrl, $extraClass = '') {
         $isActive = ($activeUri === $url) ? 'active' : '';
         $extraClass = $extraClass ? ' ' . $extraClass : '';
@@ -18,9 +16,7 @@ class NavBuilder {
         return '<a class="nav-link text-light">|</a>';
     }
     
-    /**
-     * Group navigation items by user status level
-     */
+
     public static function buildNavGroups($activeUri, $baseUrl, $userStatus, $hasShortages = false) {
         include_once __DIR__ . '/LocalizationHelper.php';
         include_once __DIR__ . '/LanguageSwitcher.php';
@@ -65,9 +61,7 @@ class NavBuilder {
         return $output;
     }
     
-    /**
-     * Build language switcher for navbar
-     */
+
     public static function buildLanguageSwitcher($baseUrl, $currentLanguage) {
         include_once __DIR__ . '/LocalizationHelper.php';
         include_once __DIR__ . '/LanguageSwitcher.php';
@@ -103,9 +97,6 @@ class NavBuilder {
         return $output;
     }
     
-    /**
-     * Get language flag emoji
-     */
     private static function getLanguageFlag($language) {
         $flags = array(
             'en' => '🇺🇸',

@@ -72,7 +72,12 @@ export const Translations = (() => {
         
         // Additional messages
         'status_update_failed': 'Failed to update status',
-        'clothing_search_error': 'Error searching for clothing'
+        'clothing_search_error': 'Error searching for clothing',
+
+        // issue clothing
+        'select_size_name': 'Select Size',
+
+
     };
 
     // Polish translations
@@ -140,7 +145,10 @@ export const Translations = (() => {
         
         // Additional messages
         'status_update_failed': 'Nie udało się zaktualizować statusu',
-        'clothing_search_error': 'Wystąpił błąd podczas wyszukiwania ubrania'
+        'clothing_search_error': 'Wystąpił błąd podczas wyszukiwania ubrania',
+
+        // issue clothing
+        'select_size_name': 'Wybierz rozmiar',
     };
 
     const initialize = () => {

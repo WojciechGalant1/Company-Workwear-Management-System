@@ -1,5 +1,6 @@
 import { UbraniaKod } from './UbraniaKod.js';
 import { getBaseUrl } from './utils.js';
+import { Translations } from './translations.js';
 
 export const UbraniaManager = (() => {
     const create = () => {
@@ -163,7 +164,7 @@ export const UbraniaManager = (() => {
                     const response = await fetch(`${baseUrl}/handlers/getRozmiary.php?ubranie_id=${selectedUbranieId}`);
                     const data = await response.json();
 
-                    rozmiarSelect.innerHTML = '<option value="">Wybierz rozmiar</option>';
+                    rozmiarSelect.innerHTML = `<option value="">${Translations.translate('select_size_name')}</option>`;
                     data.forEach(rozmiar => {
                         const option = document.createElement('option');
                         option.value = rozmiar.id;
@@ -175,7 +176,7 @@ export const UbraniaManager = (() => {
                     console.error('Error loading sizes:', error);
                 }
             } else {
-                rozmiarSelect.innerHTML = '<option value="">Wybierz rozmiar</option>';
+                rozmiarSelect.innerHTML = `<option value="">${Translations.translate('select_size_name')}</option>`;
                 rozmiarSelect.disabled = true;
             }
 

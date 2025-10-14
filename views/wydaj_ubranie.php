@@ -13,7 +13,7 @@ $ubrania = $ubranieC->getAllUnique();
 
 include_once __DIR__ . '../../app/helpers/DateHelper.php';
 
-$miesiace = [6, 12, 18, 24];
+$expire_date_months = [6, 12, 18, 24];
 
 $fromRaport = isset($_GET['fromRaport']) && $_GET['fromRaport'] == '1';
 $imie = '';
@@ -110,9 +110,9 @@ if ($fromRaport) {
             <div class="col-md-3">
                 <label for="data_waznosci" class="form-label"><?php echo __('issue_expiry_date'); ?>:</label>
                 <select id="data_waznosci" name="ubrania[0][data_waznosci]" class="form-select data_w-select" required>
-                <?php foreach ($miesiace as $miesiac): ?>
-                        <option value="<?= $miesiac; ?>">
-                            <?= $miesiac; ?> <?php echo __('issue_months'); ?> (<?= nowaData($miesiac); ?>)
+                <?php foreach ($expire_date_months as $expire_date_month): ?>
+                        <option value="<?= $expire_date_month; ?>">
+                            <?= $expire_date_month; ?> <?php echo __('issue_months'); ?> (<?= newExpirationDate($expire_date_month); ?>)
                         </option>
                     <?php endforeach; ?>
                 </select>

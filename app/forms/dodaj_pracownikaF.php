@@ -10,7 +10,7 @@ $currentLanguage = LanguageSwitcher::initializeWithRouting();
 $response = array();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Validate CSRF token
+
     if (!CsrfHelper::validateToken()) {
         $response['success'] = false;
         $response['message'] = LocalizationHelper::translate('error_csrf');
@@ -24,7 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stanowisko = isset($_POST['stanowisko']) ? trim($_POST['stanowisko']) : '';
     $status = 1;
 
-    // Basic input validation
     if (empty($imie) || empty($nazwisko) || empty($stanowisko)) {
         $response['success'] = false;
         $response['message'] = LocalizationHelper::translate('employee_required_fields');

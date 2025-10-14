@@ -7,13 +7,12 @@ include_once __DIR__ . '/../helpers/CsrfHelper.php';
 include_once __DIR__ . '/../helpers/LocalizationHelper.php';
 include_once __DIR__ . '/../helpers/LanguageSwitcher.php';
 
-// Initialize language system (compatible with routing)
 $currentLanguage = LanguageSwitcher::initializeWithRouting();
 
 $response = array();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Validate CSRF token
+
     if (!CsrfHelper::validateToken()) {
         $response['success'] = false;
         $response['message'] = LocalizationHelper::translate('error_csrf');
@@ -58,7 +57,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $iloscMin = isset($ubranie['iloscMin']) ? intval($ubranie['iloscMin']) : 0; 
                 $kod_nazwa = isset($ubranie['kod']) ? trim($ubranie['kod']) : '';
 
-                // Basic validation
                 if (empty($nazwa) || empty($rozmiar) || empty($firma) || $ilosc <= 0) {
                     $response['success'] = false;
                     $response['message'] = LocalizationHelper::translate('order_required_fields');

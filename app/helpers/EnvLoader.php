@@ -18,7 +18,6 @@ class EnvLoader {
             $name = trim($name);
             $value = trim($value);
             
-            // Remove quotes if they exist
             if (preg_match('/^([\'"])(.*)\1$/', $value, $matches)) {
                 $value = $matches[2];
             }

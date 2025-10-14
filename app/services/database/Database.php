@@ -1,8 +1,5 @@
 <?php
-/**
- * Database service class
- * Handles database connection and provides PDO instance
- */
+
 class Database
 {
     private static $pdo = null;

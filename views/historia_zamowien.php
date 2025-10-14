@@ -35,7 +35,7 @@ $zamowienia = $zamowieniaC->getAll();
                 <td><?php echo $zamowienie['firma']; ?></td>
                 <td><?php echo $zamowienie['nazwa_uzytkownika']; ?></td>
                 <td><?php echo $zamowienie['ilosc']; ?></td>
-                <td><?php echo $zamowienie['status'] == 1 ? __('order_approved') : ($zamowienie['status'] == 2 ? __('order_pending') : __('order_rejected')); ?></td>
+                <td><?php echo $zamowienie['status'] == 1 ? __('order_approved') : ($zamowienie['status'] == 2 ? __('order_stocktaking') : __('order_no_data')); ?></td>
                 <td><?php echo $zamowienie['uwagi']; ?></td>
             </tr>
         <?php } ?>

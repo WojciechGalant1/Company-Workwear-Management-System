@@ -7,13 +7,12 @@ include_once __DIR__ . '/../helpers/CsrfHelper.php';
 include_once __DIR__ . '/../helpers/LocalizationHelper.php';
 include_once __DIR__ . '/../helpers/LanguageSwitcher.php';
 
-// Initialize language system
 LanguageSwitcher::initializeWithRouting();
 
 $response = array();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Validate CSRF token
+
     if (!CsrfHelper::validateToken()) {
         $response['success'] = false;
         $response['message'] = LocalizationHelper::translate('error_csrf');
@@ -25,7 +24,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pracownikID = isset($_POST['pracownikID']) ? trim($_POST['pracownikID']) : '';
     $uwagi = isset($_POST['uwagi']) ? trim($_POST['uwagi']) : '';
 
-    // Validate required fields
     if (empty($pracownikID)) {
         $response['success'] = false;
         $response['message'] = LocalizationHelper::translate('issue_employee_required');
@@ -70,7 +68,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $all_items_valid = true;
 
-    // Validate ubrania data
     if (!isset($_POST['ubrania']) || !is_array($_POST['ubrania'])) {
         $response['success'] = false;
         $response['message'] = LocalizationHelper::translate('issue_no_clothing_data');
