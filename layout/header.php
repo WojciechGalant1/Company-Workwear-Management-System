@@ -92,7 +92,7 @@ $modulesConfig = include __DIR__ . '/../app/config/modules.php';
 // Get required modules for current page
 $modules = isset($modulesConfig[$current_page]) ? $modulesConfig[$current_page] : $modulesConfig['default'];
 
-$containerId = ($uri === '/historia-wydawania') ? 'id="historia-page"' : '';
+$containerId = ($uri === '/issue-history') ? 'id="historia-page"' : '';
 echo "<body data-modules='$modules'>";
 
 $nav->navBar($current_page, $currentLanguage);

@@ -6,7 +6,7 @@ try {
     $query = isset($_GET['query']) ? $_GET['query'] : '';
 
     $serviceContainer = ServiceContainer::getInstance();
-    $ubranieC = $serviceContainer->getController('UbranieC');
+    $ubranieC = $serviceContainer->getController('ClothingController');
     $ubrania = $ubranieC->searchByName($query);
 
     if ($ubrania === false) {

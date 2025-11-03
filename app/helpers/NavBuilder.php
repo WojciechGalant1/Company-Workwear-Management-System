@@ -28,27 +28,27 @@ class NavBuilder {
         $output = '';
         
         if ($userStatus >= 3) {
-            $output .= self::navItem('/dodaj-zamowienie', LocalizationHelper::translate('nav_add_order'), $activeUri, $baseUrl);
-            $output .= self::navItem('/historia', LocalizationHelper::translate('nav_history'), $activeUri, $baseUrl);
+            $output .= self::navItem('/add-order', LocalizationHelper::translate('nav_add_order'), $activeUri, $baseUrl);
+            $output .= self::navItem('/order-history', LocalizationHelper::translate('nav_history'), $activeUri, $baseUrl);
         }
         
         if ($userStatus >= 1) {
             $output .= self::separator();
-            $output .= self::navItem('/wydaj-ubranie', LocalizationHelper::translate('nav_issue_clothing'), $activeUri, $baseUrl);
+            $output .= self::navItem('/issue-clothing', LocalizationHelper::translate('nav_issue_clothing'), $activeUri, $baseUrl);
         }
         
         if ($userStatus >= 3) {
             $shortageCls = $hasShortages ? 'text-danger fw-bold text-uppercase' : '';
-            $output .= self::navItem('/magazyn', LocalizationHelper::translate('nav_warehouse'), $activeUri, $baseUrl, $shortageCls);
+            $output .= self::navItem('/warehouse', LocalizationHelper::translate('nav_warehouse'), $activeUri, $baseUrl, $shortageCls);
         }
         
         if ($userStatus >= 5) {
-            $output .= self::navItem('/historia-wydawania', LocalizationHelper::translate('nav_issue_history'), $activeUri, $baseUrl);
-            $output .= self::navItem('/historia-ubran', LocalizationHelper::translate('nav_clothing_history'), $activeUri, $baseUrl);
-            $output .= self::navItem('/raport', LocalizationHelper::translate('nav_reports'), $activeUri, $baseUrl);
+            $output .= self::navItem('/issue-history', LocalizationHelper::translate('nav_issue_history'), $activeUri, $baseUrl);
+            $output .= self::navItem('/clothing-history', LocalizationHelper::translate('nav_clothing_history'), $activeUri, $baseUrl);
+            $output .= self::navItem('/report', LocalizationHelper::translate('nav_reports'), $activeUri, $baseUrl);
             $output .= self::separator();
-            $output .= self::navItem('/dodaj-pracownika', LocalizationHelper::translate('nav_add_employee'), $activeUri, $baseUrl);
-            $output .= self::navItem('/pracownicy', LocalizationHelper::translate('nav_employees'), $activeUri, $baseUrl);
+            $output .= self::navItem('/add-employee', LocalizationHelper::translate('nav_add_employee'), $activeUri, $baseUrl);
+            $output .= self::navItem('/employees', LocalizationHelper::translate('nav_employees'), $activeUri, $baseUrl);
         }
         
         $output .= self::separator();

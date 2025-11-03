@@ -32,6 +32,7 @@ export const Translations = (() => {
         'update_error': 'Error during update',
         'network_error': 'Network error occurred',
         'server_error': 'Server error occurred',
+        'error_general': 'An error occurred while processing the request',
         
         // Status messages
         'status_changed': 'Status changed',
@@ -48,6 +49,8 @@ export const Translations = (() => {
         // Clothing messages
         'clothing_found': 'Clothing found',
         'clothing_size': 'Size',
+        'clothing_name': 'Clothing Name',
+        'clothing_quantity': 'Quantity',
         'clothing_not_found': 'Clothing not found with given code',
         'clothing_code_empty': 'Code field cannot be empty',
         'clothing_insufficient_stock': 'Insufficient stock available',
@@ -58,6 +61,12 @@ export const Translations = (() => {
         // Employee messages
         'employee_found': 'Employee found',
         'employee_not_found': 'Employee not found',
+        'employee_selected': 'Employee selected',
+        
+        // History messages
+        'history_issued_by': 'Issued by',
+        'history_issued_to': 'Issued to',
+        'history_date': 'Date',
         
         // General messages
         'loading': 'Loading...',
@@ -115,6 +124,7 @@ export const Translations = (() => {
         'update_error': 'Błąd podczas aktualizacji',
         'network_error': 'Wystąpił błąd sieci',
         'server_error': 'Wystąpił błąd serwera',
+        'error_general': 'Wystąpił błąd podczas przetwarzania żądania',
         
         // Status messages
         'status_changed': 'Status zmieniony',
@@ -131,6 +141,8 @@ export const Translations = (() => {
         // Clothing messages
         'clothing_found': 'Znaleziono ubranie',
         'clothing_size': 'Rozmiar',
+        'clothing_name': 'Nazwa ubrania',
+        'clothing_quantity': 'Ilość',
         'clothing_not_found': 'Nie znaleziono ubrania o podanym kodzie',
         'clothing_code_empty': 'Pole kodu nie może być puste',
         'clothing_insufficient_stock': 'Niewystarczający stan magazynowy',
@@ -140,6 +152,12 @@ export const Translations = (() => {
         // Employee messages
         'employee_found': 'Znaleziono pracownika',
         'employee_not_found': 'Nie znaleziono pracownika',
+        'employee_selected': 'Wybrano pracownika',
+        
+        // History messages
+        'history_issued_by': 'Wydane przez',
+        'history_issued_to': 'Wydane dla',
+        'history_date': 'Data',
         
         // General messages
         'loading': 'Ładowanie...',

@@ -1,6 +1,8 @@
 <?php
 include_once __DIR__ . '/../services/ServiceContainer.php';
 include_once __DIR__ . '/../helpers/UrlHelper.php';
+include_once __DIR__ . '/../helpers/LocalizationHelper.php';
+include_once __DIR__ . '/../helpers/LanguageSwitcher.php';
 
 function checkAccess($requiredStatus) {
     if (session_status() === PHP_SESSION_NONE) {
@@ -14,11 +16,18 @@ function checkAccess($requiredStatus) {
     }
 
     $serviceContainer = ServiceContainer::getInstance();
-    $userController = $serviceContainer->getController('UserC');
+    $userController = $serviceContainer->getController('UserController');
     $user = $userController->getUserById($_SESSION['user_id']);
 
     if (!$user || $user['status'] < $requiredStatus) {
-        echo '<div class="alert alert-danger text-center">Nie masz uprawnień do tej strony.</div>';
+        // Initialize language if not already set
+        if (!isset($_SESSION['current_language'])) {
+            LanguageSwitcher::initializeWithRouting();
+        }
+        $currentLanguage = LanguageSwitcher::getCurrentLanguage();
+        LocalizationHelper::setLanguage($currentLanguage);
+        
+        echo '<div class="alert alert-danger text-center">' . LocalizationHelper::translate('access_denied') . '</div>';
         die();
     }
 }

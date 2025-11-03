@@ -9,16 +9,16 @@ class RouteConfig {
      */
     public static function getRoutes() {
         return array(
-            '/' => './views/wydaj_ubranie.php',
-            '/wydaj-ubranie' => './views/wydaj_ubranie.php',
-            '/historia' => './views/historia_zamowien.php',
-            '/historia-ubran' => './views/historia_ubran.php',
-            '/historia-wydawania' => './views/historia.php',
-            '/pracownicy' => './views/prac_lista.php',
-            '/magazyn' => './views/mag_lista.php',
-            '/dodaj-zamowienie' => './views/dodaj_zamowienie.php',
-            '/raport' => './views/raport.php',
-            '/dodaj-pracownika' => './views/dodaj_pracownika.php',
+            '/' => './views/issue_clothing.php',
+            '/issue-clothing' => './views/issue_clothing.php',
+            '/order-history' => './views/order_history.php',
+            '/clothing-history' => './views/clothing_history.php',
+            '/issue-history' => './views/issue_history.php',
+            '/employees' => './views/employee_list.php',
+            '/warehouse' => './views/warehouse_list.php',
+            '/add-order' => './views/add_order.php',
+            '/report' => './views/raport.php',
+            '/add-employee' => './views/add_employee.php',
             '/login' => './views/auth/login.php'
         );
     }
@@ -28,16 +28,16 @@ class RouteConfig {
      */
     public static function getPageMap() {
         return array(
-            '/' => 'wydaj_ubranie.php',
-            '/wydaj-ubranie' => 'wydaj_ubranie.php',
-            '/historia' => 'historia_zamowien.php',
-            '/historia-ubran' => 'historia_ubran.php',
-            '/historia-wydawania' => 'historia.php',
-            '/pracownicy' => 'prac_lista.php',
-            '/magazyn' => 'mag_lista.php',
-            '/dodaj-zamowienie' => 'dodaj_zamowienie.php',
-            '/raport' => 'raport.php',
-            '/dodaj-pracownika' => 'dodaj_pracownika.php',
+            '/' => 'issue_clothing.php',
+            '/issue-clothing' => 'issue_clothing.php',
+            '/order-history' => 'order_history.php',
+            '/clothing-history' => 'clothing_history.php',
+            '/issue-history' => 'issue_history.php',
+            '/employees' => 'employee_list.php',
+            '/warehouse' => 'warehouse_list.php',
+            '/add-order' => 'add_order.php',
+            '/report' => 'raport.php',
+            '/add-employee' => 'add_employee.php',
             '/login' => 'login.php'
         );
     }
@@ -47,15 +47,15 @@ class RouteConfig {
      */
     public static function getUrlMap() {
         return array(
-            'historia.php' => '/historia-wydawania',
-            'historia_zamowien.php' => '/historia',
-            'historia_ubran.php' => '/historia-ubran',
-            'prac_lista.php' => '/pracownicy',
-            'mag_lista.php' => '/magazyn',
-            'dodaj_zamowienie.php' => '/dodaj-zamowienie',
-            'wydaj_ubranie.php' => '/wydaj-ubranie',
-            'raport.php' => '/raport',
-            'dodaj_pracownika.php' => '/dodaj-pracownika',
+            'issue_history.php' => '/issue-history',
+            'order_history.php' => '/order-history',
+            'clothing_history.php' => '/clothing-history',
+            'employee_list.php' => '/employees',
+            'warehouse_list.php' => '/warehouse',
+            'add_order.php' => '/add-order',
+            'issue_clothing.php' => '/issue-clothing',
+            'raport.php' => '/report',
+            'add_employee.php' => '/add-employee',
             'login.php' => '/login'
         );
     }

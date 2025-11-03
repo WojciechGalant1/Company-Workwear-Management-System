@@ -107,10 +107,18 @@ class CsrfHelper {
     }
     
     public static function getErrorResponse() {
+        include_once __DIR__ . '/LocalizationHelper.php';
+        include_once __DIR__ . '/LanguageSwitcher.php';
+        
+        // Initialize language if not already done
+        if (!isset($_SESSION['current_language'])) {
+            LanguageSwitcher::initializeWithRouting();
+        }
+        
         return array(
             'success' => false,
             'error' => 'CSRF token validation failed',
-            'message' => 'Błąd bezpieczeństwa. Odśwież stronę i spróbuj ponownie.'
+            'message' => LocalizationHelper::translate('error_csrf')
         );
     }
 }

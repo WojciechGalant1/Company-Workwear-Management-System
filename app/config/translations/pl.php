@@ -70,6 +70,7 @@ return array(
     'employee_delete_success' => 'Pracownik został usunięty pomyślnie',
     'employee_not_found' => 'Nie znaleziono pracownika',
     'employee_required_fields' => 'Wszystkie pola są wymagane',
+    'employee_selected' => 'Wybrano pracownika',
     
     // Clothing Management
     'clothing_title' => 'Zarządzanie ubraniami',
@@ -135,6 +136,8 @@ return array(
     'warehouse_low_stock' => 'Alert o niskim stanie',
     'warehouse_update_success' => 'Magazyn został zaktualizowany pomyślnie',
     'warehouse_update_error' => 'Błąd podczas aktualizacji magazynu',
+    'warehouse_update_clothing_error' => 'Błąd podczas aktualizacji nazwy ubrania',
+    'warehouse_update_size_error' => 'Błąd podczas aktualizacji nazwy rozmiaru',
     'warehouse_order' => 'Zamówić',
     'warehouse_order_now' => 'ZAMÓW!',
     
@@ -234,6 +237,10 @@ return array(
     'modal_confirm' => 'Potwierdź akcję',
     'modal_confirm_delete' => 'Czy na pewno chcesz usunąć ten element?',
     'modal_confirm_cancel' => 'Czy na pewno chcesz anulować tę akcję?',
+    'modal_cancel_issue_title' => 'Potwierdzenie anulowania',
+    'modal_cancel_issue_message' => 'Czy na pewno chcesz anulować to wydanie?',
+    'modal_destroy_clothing_title' => 'Potwierdzenie zwrotu zniszczonego ubrania',
+    'modal_destroy_clothing_message' => 'Czy na pewno chcesz zapisać to ubranie jako zniszczone?',
     'alert_success' => 'Sukces',
     'alert_error' => 'Błąd',
     'alert_warning' => 'Ostrzeżenie',
@@ -255,10 +262,14 @@ return array(
     'error_csrf' => 'Błąd bezpieczeństwa. Odśwież stronę i spróbuj ponownie',
     'error_permission' => 'Nie masz uprawnień do tej strony',
     'error_not_found' => 'Strona nie znaleziona',
+    'error_page_not_found' => 'Przepraszamy, ale strona której szukasz nie istnieje.',
+    'error_occurred' => 'Wystąpił błąd!',
+    'back_to_home' => 'Wróć do strony głównej',
     'error_server' => 'Wystąpił błąd serwera',
     'error_database' => 'Błąd połączenia z bazą danych',
     'error_session' => 'Sesja wygasła. Zaloguj się ponownie',
     'error_user_not_found' => 'Nie znaleziono zalogowanego użytkownika',
+    'access_denied' => 'Nie masz uprawnień do tej strony',
     
     // Success Messages
     'success_saved' => 'Dane zostały zapisane pomyślnie',

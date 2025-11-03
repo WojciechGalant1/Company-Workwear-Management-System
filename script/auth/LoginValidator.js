@@ -42,7 +42,7 @@ export const LoginValidator = (function () {
             success: (data) => {
                 if (data.status === 'success') {
                     alertManager.createAlert(Translations.translate('login_success'), 'success');
-                    window.location.href = baseUrl + '/wydaj-ubranie';
+                    window.location.href = baseUrl + '/issue-clothing';
                     this.hideSpinner();
                 } else {
                     alertManager.createAlert(Translations.translate('login_invalid_code'));

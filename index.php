@@ -1,29 +1,25 @@
 <?php
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
-
-// Include router and route configuration
 require_once './app/Router.php';
 require_once './app/config/RouteConfig.php';
 
-// Initialize router
 $router = new Router();
 
-// Add routes from configuration
 $routes = RouteConfig::getRoutes();
 foreach ($routes as $path => $viewFile) {
     $router->add($path, $viewFile);
 }
 
-// 404 
 $router->setNotFound(function() {
     include_once './layout/header.php';
+    include_once './app/helpers/LocalizationHelper.php';
+    include_once './app/helpers/LanguageSwitcher.php';
+    LanguageSwitcher::initializeWithRouting();
     echo '<div class="container mt-5">';
     echo '<div class="alert alert-danger" role="alert">';
-    echo '<h4 class="alert-heading">Strona nie znaleziona!</h4>';
-    echo '<p>Przepraszamy, ale strona której szukasz nie istnieje.</p>';
+    echo '<h4 class="alert-heading">' . LocalizationHelper::translate('error_not_found') . '</h4>';
+    echo '<p>' . LocalizationHelper::translate('error_page_not_found') . '</p>';
     echo '<hr>';
-    echo '<p class="mb-0"><a href="/" class="btn btn-primary">Wróć do strony głównej</a></p>';
+    echo '<p class="mb-0"><a href="/" class="btn btn-primary">' . LocalizationHelper::translate('back_to_home') . '</a></p>';
     echo '</div>';
     echo '</div>';
     include_once './layout/footer.php';
@@ -39,10 +35,13 @@ try {
     
     //error page
     include_once './layout/header.php';
+    include_once './app/helpers/LocalizationHelper.php';
+    include_once './app/helpers/LanguageSwitcher.php';
+    LanguageSwitcher::initializeWithRouting();
     echo '<div class="container mt-5">';
     echo '<div class="alert alert-danger" role="alert">';
-    echo '<h4 class="alert-heading">Wystąpił błąd!</h4>';
-    echo '<p>Przepraszamy, wystąpił błąd podczas przetwarzania żądania.</p>';
+    echo '<h4 class="alert-heading">' . LocalizationHelper::translate('error_occurred') . '</h4>';
+    echo '<p>' . LocalizationHelper::translate('error_general') . '</p>';
     echo '</div>';
     echo '</div>';
     include_once './layout/footer.php';

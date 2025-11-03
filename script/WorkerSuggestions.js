@@ -21,7 +21,7 @@ export const WorkerSuggestions = (() => {
                 usernameInput.value = item.textContent;
                 hiddenInput.value = item.dataset.id;
                 suggestions.style.display = 'none';
-                alertManager.createAlert(`Wybrano pracownika: ${item.textContent}`);
+                alertManager.createAlert(`${Translations.translate('employee_selected')}: ${item.textContent}`);
             });
         });
     };

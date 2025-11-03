@@ -11,7 +11,7 @@ LanguageSwitcher::initializeWithRouting();
 
 try {
     $serviceContainer = ServiceContainer::getInstance();
-    $wydaneUbraniaC = $serviceContainer->getController('WydaneUbraniaC');
+    $wydaneUbraniaC = $serviceContainer->getController('IssuedClothingController');
     $data = json_decode(file_get_contents("php://input"), true);
 
     if (!isset($data['id'], $data['currentStatus'])) {

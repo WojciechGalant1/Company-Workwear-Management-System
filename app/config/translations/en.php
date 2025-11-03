@@ -71,6 +71,7 @@ return array(
     'employee_delete_success' => 'Employee deleted successfully',
     'employee_not_found' => 'Employee not found',
     'employee_required_fields' => 'All fields are required',
+    'employee_selected' => 'Employee selected',
     
     // Clothing Management
     'clothing_title' => 'Clothing Management',
@@ -136,6 +137,8 @@ return array(
     'warehouse_low_stock' => 'Low Stock Alert',
     'warehouse_update_success' => 'Warehouse updated successfully',
     'warehouse_update_error' => 'Error updating warehouse',
+    'warehouse_update_clothing_error' => 'Error updating clothing name',
+    'warehouse_update_size_error' => 'Error updating size name',
     'warehouse_order' => 'Order',
     'warehouse_order_now' => 'ORDER NOW!',
     
@@ -235,6 +238,10 @@ return array(
     'modal_confirm' => 'Confirm Action',
     'modal_confirm_delete' => 'Are you sure you want to delete this item?',
     'modal_confirm_cancel' => 'Are you sure you want to cancel this action?',
+    'modal_cancel_issue_title' => 'Confirm Cancellation',
+    'modal_cancel_issue_message' => 'Are you sure you want to cancel this issue?',
+    'modal_destroy_clothing_title' => 'Confirm Destroyed Clothing Return',
+    'modal_destroy_clothing_message' => 'Are you sure you want to mark this clothing as destroyed?',
     'alert_success' => 'Success',
     'alert_error' => 'Error',
     'alert_warning' => 'Warning',
@@ -256,10 +263,14 @@ return array(
     'error_csrf' => 'Security error. Please refresh the page and try again',
     'error_permission' => 'You do not have permission to access this page',
     'error_not_found' => 'Page not found',
+    'error_page_not_found' => 'Sorry, the page you are looking for does not exist.',
+    'error_occurred' => 'An error occurred!',
+    'back_to_home' => 'Back to home page',
     'error_server' => 'Server error occurred',
     'error_database' => 'Database connection error',
     'error_session' => 'Session expired. Please log in again',
     'error_user_not_found' => 'Logged in user not found',
+    'access_denied' => 'You do not have permission to access this page',
     
     // Success Messages
     'success_saved' => 'Data saved successfully',

@@ -1,9 +1,4 @@
 <?php
-/**
- * Language Setting Handler
- * Handles AJAX language switching requests
- */
-
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }

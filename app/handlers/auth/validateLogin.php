@@ -6,7 +6,6 @@ include_once __DIR__ . '/../../helpers/CsrfHelper.php';
 include_once __DIR__ . '/../../helpers/LocalizationHelper.php';
 include_once __DIR__ . '/../../helpers/LanguageSwitcher.php';
 
-// Initialize language system
 LanguageSwitcher::initializeWithRouting();
 
 header('Content-Type: application/json');
@@ -50,7 +49,7 @@ try {
             echo json_encode(array('status' => 'error', 'message' => LocalizationHelper::translate('login_invalid_credentials')));
         }
     } elseif (!empty($kodID)) {
-        // Very basic rate-limit using session (optional)
+        // Very basic rate-limit using session 
         if (!isset($_SESSION['login_attempts'])) {
             $_SESSION['login_attempts'] = 0;
         }

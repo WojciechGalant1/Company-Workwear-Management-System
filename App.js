@@ -1,4 +1,7 @@
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', async (event) => {
+	// Import Translations early so it's available for error messages
+	const { Translations } = await import('./script/translations.js');
+	
 	const modulesAttr = document.body.getAttribute('data-modules') || '';
 	const modules = modulesAttr.split(',').map(m => m.trim()).filter(Boolean);
 
@@ -12,7 +15,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			const { addCsrfToFormData } = await import('./script/utils.js');
 			const alertManagerContainer = document.getElementById('alertContainer');
 			if (!alertManagerContainer) {
-				console.warn('AlertManager: Element alertContainer nie został znaleziony.');
+				console.warn('AlertManager: alertContainer element not found.');
 				return;
 			}
 			const alertManager = AlertManager.create(alertManagerContainer);
@@ -41,10 +44,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
 								location.reload();
 							}
 						} else {
-							alertManager.createAlert(data.message || 'Wystąpił błąd podczas przetwarzania żądania.', 'danger');
+							alertManager.createAlert(data.message || Translations.translate('error_general'), 'danger');
 						}
 					} catch (err) {
-						alertManager.createAlert('Wystąpił błąd podczas przetwarzania żądania.', 'danger');
+						alertManager.createAlert(Translations.translate('error_general'), 'danger');
 						const modalElement = document.getElementById('confirmModal');
 						if (modalElement) { new bootstrap.Modal(modalElement).show(); }
 					} finally {
@@ -54,13 +57,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
 				});
 			});
 		},
-		ModalWydajUbranie: async () => {
-			const [{ AlertManager }, { ModalWydajUbranie }] = await Promise.all([
+		ModalIssueClothing: async () => {
+			const [{ AlertManager }, { ModalIssueClothing }] = await Promise.all([
 				import('./script/AlertManager.js'),
-				import('./script/ModalWydajUbranie.js')
+				import('./script/ModalIssueClothing.js')
 			]);
 			const alertManager = AlertManager.create(document.getElementById('alertContainer'));
-			ModalWydajUbranie.init(alertManager);
+			ModalIssueClothing.init(alertManager);
 		},
 		WorkerSuggestions: async () => {
 			const [{ AlertManager }, { WorkerSuggestions }] = await Promise.all([
@@ -74,14 +77,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
 				WorkerSuggestions.create(usernameInput, suggestions, alertManager);
 			}
 		},
-		UbraniaManager: async () => {
-			const [{ AlertManager }, { UbraniaManager }, { UbraniaKod }] = await Promise.all([
+		ClothingManager: async () => {
+			const [{ AlertManager }, { ClothingManager }, { ClothingCode }] = await Promise.all([
 				import('./script/AlertManager.js'),
-				import('./script/UbraniaManager.js'),
-				import('./script/UbraniaKod.js')
+				import('./script/ClothingManager.js'),
+				import('./script/ClothingCode.js')
 			]);
 			const alertManager = AlertManager.create(document.getElementById('alertContainer'));
-			const manager = UbraniaManager.create();
+			const manager = ClothingManager.create();
 			const addUbranieBtn = document.querySelector('.addUbranieBtn');
 			if (addUbranieBtn) {
 				addUbranieBtn.addEventListener('click', () => { manager.addUbranie(alertManager); });
@@ -96,22 +99,22 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			const existingRadioButtons = document.querySelectorAll('input[type="radio"]');
 			if (existingRadioButtons.length) { manager.initializeRadioBehavior(existingRadioButtons); }
 			const kodInputs = document.querySelectorAll('.kodSection input');
-			if (kodInputs.length) { kodInputs.forEach(input => UbraniaKod.initializeKodInput(input, alertManager)); }
+			if (kodInputs.length) { kodInputs.forEach(input => ClothingCode.initializeKodInput(input, alertManager)); }
 		},
 		ProductSuggestions: async () => {
-			const [{ AlertManager }, { UbraniaManager }, { CheckUbranie }, { ProductSuggestions }] = await Promise.all([
+			const [{ AlertManager }, { ClothingManager }, { CheckClothing }, { ProductSuggestions }] = await Promise.all([
 				import('./script/AlertManager.js'),
-				import('./script/UbraniaManager.js'),
-				import('./script/CheckUbranie.js'),
+				import('./script/ClothingManager.js'),
+				import('./script/CheckClothing.js'),
 				import('./script/ProductSuggestions.js')
 			]);
 			const alertManager = AlertManager.create(document.getElementById('alertContainer'));
-			const manager = UbraniaManager.create();
-			const initCheckUbranieForRow = (row) => {
+			const manager = ClothingManager.create();
+			const initCheckClothingForRow = (row) => {
 				const inputs = row.querySelectorAll('input[name^="ubrania"]');
 				inputs.forEach(input => {
-					if (input.name.endsWith('[kod]')) { CheckUbranie.checkKod(input, alertManager); }
-					else if (input.name.endsWith('[nazwa]') || input.name.endsWith('[rozmiar]')) { CheckUbranie.checkNameSize(input, alertManager); }
+					if (input.name.endsWith('[kod]')) { CheckClothing.checkKod(input, alertManager); }
+					else if (input.name.endsWith('[nazwa]') || input.name.endsWith('[rozmiar]')) { CheckClothing.checkNameSize(input, alertManager); }
 				});
 			};
 			ProductSuggestions.init(document);
@@ -119,16 +122,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
 				manager.addZamowienieUbranie();
 				const lastUbranieRow = document.querySelector('.ubranieRow:last-of-type');
 				ProductSuggestions.init(lastUbranieRow);
-				initCheckUbranieForRow(lastUbranieRow);
+				initCheckClothingForRow(lastUbranieRow);
 			});
 			document.getElementById('ubraniaContainer').addEventListener('click', (event) => {
 				if (event.target.classList.contains('removeUbranieBtn')) { manager.removeUbranie(event); }
 			});
 		},
-		CheckUbranie: async () => {
-			const [{ AlertManager }, { CheckUbranie }] = await Promise.all([
+		CheckClothing: async () => {
+			const [{ AlertManager }, { CheckClothing }] = await Promise.all([
 				import('./script/AlertManager.js'),
-				import('./script/CheckUbranie.js')
+				import('./script/CheckClothing.js')
 			]);
 			const alertManager = AlertManager.create(document.getElementById('alertContainer'));
 			const rows = document.querySelectorAll('.ubranieRow');
@@ -136,18 +139,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
 				const nameInput = row.querySelector('input[name$="[nazwa]"]');
 				const sizeInput = row.querySelector('input[name$="[rozmiar]"]');
 				const kodInput = row.querySelector('input[name$="[kod]"]');
-				if (nameInput) CheckUbranie.checkNameSize(nameInput, alertManager);
-				if (sizeInput) CheckUbranie.checkNameSize(sizeInput, alertManager);
-				if (kodInput) CheckUbranie.checkKod(kodInput, alertManager);
+				if (nameInput) CheckClothing.checkNameSize(nameInput, alertManager);
+				if (sizeInput) CheckClothing.checkNameSize(sizeInput, alertManager);
+				if (kodInput) CheckClothing.checkKod(kodInput, alertManager);
 			});
 		},
-		EdycjaUbranie: async () => {
-			const [{ AlertManager }, { EdycjaUbranie }] = await Promise.all([
+		EditClothing: async () => {
+			const [{ AlertManager }, { EditClothing }] = await Promise.all([
 				import('./script/AlertManager.js'),
-				import('./script/EdycjaUbranie.js')
+				import('./script/EditClothing.js')
 			]);
 			const alertManager = AlertManager.create(document.getElementById('alertContainer'));
-			EdycjaUbranie.initialize(alertManager);
+			EditClothing.initialize(alertManager);
 		},
 		RedirectStatus: async () => {
 			const { RedirectStatus } = await import('./script/RedirectStatus.js');
@@ -157,21 +160,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			const { ChangeStatus } = await import('./script/ChangeStatus.js');
 			ChangeStatus.initialize();
 		},
-		AnulujWydanie: async () => {
-			const { AnulujWydanie } = await import('./script/AnulujWydanie.js');
-			AnulujWydanie.initialize();
+		CancelIssue: async () => {
+			const { CancelIssue } = await import('./script/CancelIssue.js');
+			CancelIssue.initialize();
 		},
-		ModalEdytujPracownika: async () => {
-			const { ModalEdytujPracownika } = await import('./script/ModalEdytujPracownika.js');
-			ModalEdytujPracownika.initialize();
+		ModalEditEmployee: async () => {
+			const { ModalEditEmployee } = await import('./script/ModalEditEmployee.js');
+			ModalEditEmployee.initialize();
 		},
-		ZniszczUbranie: async () => {
-			const { ZniszczUbranie } = await import('./script/ZniszczUbranie.js');
-			ZniszczUbranie.initialize();
+		DestroyClothing: async () => {
+			const { DestroyClothing } = await import('./script/DestroyClothing.js');
+			DestroyClothing.initialize();
 		},
-		HistoriaUbranSzczegoly: async () => {
-			const { HistoriaUbranSzczegoly } = await import('./script/HistoriaUbranSzczegoly.js');
-			HistoriaUbranSzczegoly.initialize();
+		ClothingHistoryDetails: async () => {
+			const { ClothingHistoryDetails } = await import('./script/ClothingHistoryDetails.js');
+			ClothingHistoryDetails.initialize();
 		}
 	};
 

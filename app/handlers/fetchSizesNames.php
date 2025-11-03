@@ -6,7 +6,7 @@ try {
     $query = isset($_GET['query']) ? $_GET['query'] : '';
 
     $serviceContainer = ServiceContainer::getInstance();
-    $rozmiarC = $serviceContainer->getController('RozmiarC');
+    $rozmiarC = $serviceContainer->getController('SizeController');
     $rozmiary = $rozmiarC->searchByName($query);
 
     header('Content-Type: application/json');

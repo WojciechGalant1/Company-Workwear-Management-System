@@ -50,7 +50,7 @@ class UrlHelper {
         
         // Default path for home page
         if ($uri === '' || $uri === '/') {
-            $uri = '/wydaj-ubranie';
+            $uri = '/issue-clothing';
         }
         
         return $uri;

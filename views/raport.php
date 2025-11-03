@@ -8,9 +8,9 @@ checkAccess(4);
 include_once __DIR__ . '../../app/services/ServiceContainer.php';
 
 $serviceContainer = ServiceContainer::getInstance();
-$pracownikC = $serviceContainer->getController('PracownikC');
-$wydaniaC = $serviceContainer->getController('WydaniaC');
-$wydaneUbraniaC = $serviceContainer->getController('WydaneUbraniaC');
+$pracownikC = $serviceContainer->getController('EmployeeController');
+$wydaniaC = $serviceContainer->getController('IssueController');
+$wydaneUbraniaC = $serviceContainer->getController('IssuedClothingController');
 $ubraniaPoTerminie = $wydaneUbraniaC->getUbraniaPoTerminie();
 ?>
 <div id="alertContainer"></div>

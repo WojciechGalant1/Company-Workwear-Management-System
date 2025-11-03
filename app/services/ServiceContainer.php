@@ -1,16 +1,16 @@
 <?php
 include_once __DIR__ . '/database/Database.php'; 
 include_once __DIR__ . '/../controllers/BaseController.php';
-include_once __DIR__ . '/../controllers/StanMagazynuC.php';
-include_once __DIR__ . '/../controllers/UbranieC.php';
-include_once __DIR__ . '/../controllers/RozmiarC.php';
-include_once __DIR__ . '/../controllers/HistoriaZamowienC.php';
-include_once __DIR__ . '/../controllers/SzczegolyZamowieniaC.php';
-include_once __DIR__ . '/../controllers/PracownikC.php';
-include_once __DIR__ . '/../controllers/UserC.php';
-include_once __DIR__ . '/../controllers/WydaniaC.php';
-include_once __DIR__ . '/../controllers/WydaneUbraniaC.php';
-include_once __DIR__ . '/../controllers/KodC.php';
+include_once __DIR__ . '/../controllers/WarehouseController.php';
+include_once __DIR__ . '/../controllers/ClothingController.php';
+include_once __DIR__ . '/../controllers/SizeController.php';
+include_once __DIR__ . '/../controllers/OrderHistoryController.php';
+include_once __DIR__ . '/../controllers/OrderDetailsController.php';
+include_once __DIR__ . '/../controllers/EmployeeController.php';
+include_once __DIR__ . '/../controllers/UserController.php';
+include_once __DIR__ . '/../controllers/IssueController.php';
+include_once __DIR__ . '/../controllers/IssuedClothingController.php';
+include_once __DIR__ . '/../controllers/CodeController.php';
 
 class ServiceContainer {
     private static $instance = null;
@@ -42,26 +42,26 @@ class ServiceContainer {
     
     private function createController($controllerName) {
         switch ($controllerName) {
-            case 'StanMagazynuC':
-                return new StanMagazynuC($this->pdo);
-            case 'UbranieC':
-                return new UbranieC($this->pdo);
-            case 'RozmiarC':
-                return new RozmiarC($this->pdo);
-            case 'HistoriaZamowienC':
-                return new HistoriaZamowienC($this->pdo);
-            case 'SzczegolyZamowieniaC':
-                return new SzczegolyZamowieniaC($this->pdo);
-            case 'PracownikC':
-                return new PracownikC($this->pdo);
-            case 'UserC':
-                return new UserC($this->pdo);
-            case 'WydaniaC':
-                return new WydaniaC($this->pdo);
-            case 'WydaneUbraniaC':
-                return new WydaneUbraniaC($this->pdo);
-            case 'KodC':
-                return new KodC($this->pdo);
+            case 'WarehouseController':
+                return new WarehouseController($this->pdo);
+            case 'ClothingController':
+                return new ClothingController($this->pdo);
+            case 'SizeController':
+                return new SizeController($this->pdo);
+            case 'OrderHistoryController':
+                return new OrderHistoryController($this->pdo);
+            case 'OrderDetailsController':
+                return new OrderDetailsController($this->pdo);
+            case 'EmployeeController':
+                return new EmployeeController($this->pdo);
+            case 'UserController':
+                return new UserController($this->pdo);
+            case 'IssueController':
+                return new IssueController($this->pdo);
+            case 'IssuedClothingController':
+                return new IssuedClothingController($this->pdo);
+            case 'CodeController':
+                return new CodeController($this->pdo);
             default:
                 throw new Exception("Controller $controllerName not found");
         }

@@ -16,7 +16,6 @@ export const ChangeStatus = (function () {
 
                 if (document.getElementById('historia-page')) {
                     const currentAction = clickedButton.getAttribute('data-action');
-                    // Check for inactive status (both English "Inactive" and Polish "Nieaktywne")
                     const isInactive = currentAction === 'Inactive' || currentAction === 'Nieaktywne';
                     const currentStatus = isInactive ? 1 : 0;
                     updateStatus(currentStatus);

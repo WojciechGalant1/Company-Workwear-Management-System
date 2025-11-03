@@ -12,7 +12,7 @@ class ClassMenu {
         $userStatus = $sessionManager->getUserStatus(); 
 
         $serviceContainer = ServiceContainer::getInstance();
-        $stanMagazynuC = $serviceContainer->getController('StanMagazynuC');
+        $stanMagazynuC = $serviceContainer->getController('WarehouseController');
         $hasShortages = $stanMagazynuC->checkIlosc();
 
         $baseUrl = UrlHelper::getBaseUrl();

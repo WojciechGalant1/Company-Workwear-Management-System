@@ -5,13 +5,13 @@
  */
 return array(
     'dodaj_ubranie.php' => '',
-    'dodaj_pracownika.php' => 'AlertManager',
-    'wydaj_ubranie.php' => 'UbraniaManager,AlertManager,WorkerSuggestions,ModalWydajUbranie,ChangeStatus',
-    'prac_lista.php' => 'AlertManager,ModalEdytujPracownika',
-    'dodaj_zamowienie.php' => 'AlertManager,ProductSuggestions,CheckUbranie',
-    'historia.php' => 'WorkerSuggestions,ChangeStatus,AnulujWydanie,ZniszczUbranie',
+    'add_employee.php' => 'AlertManager',
+    'issue_clothing.php' => 'ClothingManager,AlertManager,WorkerSuggestions,ModalIssueClothing,ChangeStatus',
+    'employee_list.php' => 'AlertManager,ModalEditEmployee',
+    'add_order.php' => 'AlertManager,ProductSuggestions,CheckClothing',
+    'issue_history.php' => 'WorkerSuggestions,ChangeStatus,CancelIssue,DestroyClothing',
     'raport.php' => 'RedirectStatus,ChangeStatus',
-    'mag_lista.php' => 'AlertManager,EdycjaUbranie',
-    'historia_ubran.php' => 'HistoriaUbranSzczegoly',
+    'warehouse_list.php' => 'AlertManager,EditClothing',
+    'clothing_history.php' => 'ClothingHistoryDetails',
     'default' => ''
 ); 

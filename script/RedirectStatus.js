@@ -14,7 +14,7 @@ export const RedirectStatus = (() => {
                 const pracownikStanowisko = clickedBtn.getAttribute('data-pracownik-stanowisko');
                 const baseUrl = getBaseUrl();
             
-                window.location.href = `${baseUrl}/wydaj-ubranie?pracownikId=${pracownikId}&imie=${pracownikImie}&nazwisko=${pracownikNazwisko}&stanowisko=${pracownikStanowisko}&fromRaport=1`;
+                window.location.href = `${baseUrl}/issue-clothing?pracownikId=${pracownikId}&imie=${pracownikImie}&nazwisko=${pracownikNazwisko}&stanowisko=${pracownikStanowisko}&fromRaport=1`;
             });
         });
     };
