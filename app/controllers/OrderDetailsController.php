@@ -1,22 +1,31 @@
 <?php
 include_once __DIR__ . '/BaseController.php';
 include_once __DIR__ . '/../models/OrderDetails.php';
-include_once __DIR__ . '/../repositories/OrderDetailsRepository.php';
 
 class OrderDetailsController extends BaseController {
-    private $repository;
     
     public function __construct(PDO $pdo) {
         parent::__construct($pdo);
-        $this->repository = new OrderDetailsRepository($pdo);
     }
 
     public function create(OrderDetails $szczegol) {
-        return $this->repository->create($szczegol);
+        $stmt = $this->pdo->prepare("INSERT INTO szczegoly_zamowienia (zamowienie_id, id_ubrania, id_rozmiaru, ilosc, iloscMin, firma, sz_kodID) VALUES (:zamowienie_id, :id_ubrania, :id_rozmiaru, :ilosc, :iloscMin, :firma, :sz_kodID)");
+        $stmt->bindValue(':zamowienie_id', $szczegol->getZamowienieId());
+        $stmt->bindValue(':id_ubrania', $szczegol->getIdUbrania());
+        $stmt->bindValue(':id_rozmiaru', $szczegol->getIdRozmiaru());
+        $stmt->bindValue(':ilosc', $szczegol->getIlosc());
+        $stmt->bindValue(':iloscMin', $szczegol->getIloscMin());
+        $stmt->bindValue(':firma', $szczegol->getFirma());
+        $stmt->bindValue(':sz_kodID', $szczegol->getSzKodID());
+
+        return $stmt->execute();
     }
 
     public function getByZamowienieId($zamowienieId) {
-        return $this->repository->getByZamowienieId($zamowienieId);
+        $stmt = $this->pdo->prepare("SELECT zamowienie_id, id_ubrania, id_rozmiaru, ilosc, iloscMin FROM szczegoly_zamowienia WHERE zamowienie_id = :zamowienie_id");
+        $stmt->bindValue(':zamowienie_id', $zamowienieId);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 

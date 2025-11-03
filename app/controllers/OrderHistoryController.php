@@ -1,29 +1,41 @@
 <?php
 include_once __DIR__ . '/BaseController.php';
 include_once __DIR__ . '/../models/OrderHistory.php';
-include_once __DIR__ . '/../repositories/OrderHistoryRepository.php';
 include_once __DIR__ . '/ClothingController.php';
 include_once __DIR__ . '/SizeController.php';
 include_once __DIR__ . '/WarehouseController.php';
 
 class OrderHistoryController extends BaseController {
-    private $repository;
 
     public function __construct(PDO $pdo) {
         parent::__construct($pdo);
-        $this->repository = new OrderHistoryRepository($pdo);
     }
 
     public function create(OrderHistory $zamowienie) {
-        return $this->repository->create($zamowienie);
+        $stmt = $this->pdo->prepare("INSERT INTO historia_zamowien (data_zamowienia, user_id, uwagi, status) VALUES (:data_zamowienia, :user_id, :uwagi, :status)");
+        $data_zamowienia = $zamowienie->getDataZamowienia()->format('Y-m-d H:i:s');
+        $stmt->bindValue(':data_zamowienia', $data_zamowienia);
+        $stmt->bindValue(':user_id', $zamowienie->getUserId());
+        $stmt->bindValue(':uwagi', $zamowienie->getUwagi());
+        $stmt->bindValue(':status', $zamowienie->getStatus());
+        return $stmt->execute();
     }
     
     public function getLastInsertId() {
-        return $this->repository->getLastInsertId();
+        return $this->pdo->lastInsertId();
     }
 
     public function getAll() {
-        return $this->repository->getAll();
+        $stmt = $this->pdo->query("SELECT h.id, h.data_zamowienia, h.user_id, h.uwagi, h.status, s.id AS szczegol_id, s.zamowienie_id, s.id_ubrania, s.id_rozmiaru, s.ilosc, s.firma, 
+                             u.nazwa_ubrania AS nazwa_ubrania, r.nazwa_rozmiaru AS rozmiar_ubrania, k.kod_nazwa AS kod, uz.nazwa AS nazwa_uzytkownika  
+                             FROM historia_zamowien h 
+                             JOIN szczegoly_zamowienia s ON h.id = s.zamowienie_id 
+                             JOIN ubranie u ON s.id_ubrania = u.id_ubranie 
+                             JOIN rozmiar r ON s.id_rozmiaru = r.id_rozmiar 
+                             LEFT JOIN kod k ON s.sz_kodID = k.id_kod 
+                             LEFT JOIN uzytkownicy uz ON h.user_id = uz.id
+                             ORDER BY h.data_zamowienia DESC");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function dodajDoMagazynu(OrderHistory $zamowienie) {
