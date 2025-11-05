@@ -13,7 +13,7 @@
   <h1 align="center">Company Workwear Management System</h3>
   <p align="center">
     <br />
-    <a href="https://workwear.infinityfreeapp.com/workwear/" target="_blank>View Demo</a>
+    <a href="https://workwear.infinityfreeapp.com/workwear/" target="_blank">View Demo</a>
     &middot;
     <a href="https://github.com/WojciechGalant1/Company-Workwear-Management-System/blob/master/README_PL.md">Polish version</a>
   </p>
