@@ -106,7 +106,6 @@ project/
 - **Additional Security Enhancements**:
   - Rate limiting to prevent brute-force form submissions
   - API request throttling to mitigate abuse and maintain performance
-  - Enhanced password hashing (upgrade from crypt() to password_hash())
 - **Performance Optimizations**:
   - Database query optimization and caching
   - Asset minification and compression
